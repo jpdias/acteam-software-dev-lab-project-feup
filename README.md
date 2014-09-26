@@ -22,6 +22,36 @@ C:\> @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-ob
 C:\> choco install Atom
 
 ```
+---------------------------------------------------------------------------------
+
+## UPDATE ##
+
+We gonna use a remote mongoDB for everyone can access to the same db, and just need to install a client to access to it.
+
+* Install Robomongo (best graphical interface for MongoDB)
+
+```
+#!cmd
+
+C:\> choco install robomongo
+
+```
+And to access to it you can use:
+
+```
+#!javascript
+
+//dbuser: acteam
+//dbpassword: acteamadmin
+//default db: acteam
+//db port: 31088
+//url to db: ds031088.mongolab.com
+
+mongodb://<dbuser>:<dbpassword>@ds031088.mongolab.com:31088/acteam
+
+```
+
+But if you want, you can still install your own mongodb instance:
 
 * Install MongoDB  
 ```
@@ -30,6 +60,10 @@ C:\> choco install Atom
 C:\> choco install mongodb 
 
 ```
+
+------------------------------------------------------------------------------------------------------
+
+
 * Install Node.js
 ```
 #!cmd
