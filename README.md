@@ -50,7 +50,7 @@ C:\> npm install -g nodemon
 ```
 #!cmd
 
-C:\> git clone https://jpdias@bitbucket.org/jpdias/acteam.git
+C:\> git clone https://jpdias@bitbucket.org/jpdias/acteam-t05g01.git
 
 ```
 * Open folder in cmd and execute (to install dependencies):
