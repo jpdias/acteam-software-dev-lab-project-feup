@@ -19,7 +19,7 @@ C:\> @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-ob
 ```
 #!cmd
 
-C:\> choco install atom
+C:\> choco install Atom
 
 ```
 
