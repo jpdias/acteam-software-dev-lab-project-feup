@@ -15,7 +15,7 @@ This README would normally document whatever steps are necessary to get your app
 
 C:\> @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
 ```
-*Install a really nice code editor
+* Install a really nice code editor
 ```
 #!cmd
 
