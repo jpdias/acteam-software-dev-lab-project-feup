@@ -10,7 +10,7 @@ var User = new Schema( { name: String ,
                         }
                    );
 
-mongoose.connect('mongodb://127.0.0.1:27017/Acteam');
+mongoose.connect('mongodb://acteam:acteamadmin@ds031088.mongolab.com:31088/acteam');
 
 var Users = mongoose.model('User', User);
 
