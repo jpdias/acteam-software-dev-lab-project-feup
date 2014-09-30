@@ -16,11 +16,11 @@ app.use(function(err, req, res, next){
 //End of error handling
 
 app.get('/', function(req, res) {
-    res.render('index');
+    res.render('index', {"pagetitle":"HEY"});
 });
 
-app.post('/user', function(req,res) {
-  var User = req.body;
+app.get('/user', function(req,res) {
+  var User = {"name":"hello"};
   var kitty = new models.Users(User);
 
   kitty.save(function (err) {
