@@ -16,7 +16,17 @@ app.use(function(err, req, res, next){
 //End of error handling
 
 app.get('/', function(req, res) {
-    res.render('index', {"pagetitle":"HEY"});
+  res.locals = {"pagetitle":"HEY"};
+  res.render(
+    'index',
+    {
+      partials:
+      {
+        header: 'header',
+        footer: 'footer'
+      }
+    }
+  );
 });
 
 app.get('/user', function(req,res) {

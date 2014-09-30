@@ -5,10 +5,10 @@
   "main": "app.js",
   "dependencies": {
     "express": "^3.1.0",
+    "hogan-express": "^0.5.2",
     "mongoose": "^3.8.16",
-    "passport-local": "^1.0.0",
     "passport": "^0.2.1",
-    "hjs": "^0.0.6"
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {},
   "scripts": {
@@ -21,6 +21,6 @@
   "keywords": [
     "ldso"
   ],
-  "author": "ldso",
+  "author": "acteam",
   "license": "ISC"
 }
