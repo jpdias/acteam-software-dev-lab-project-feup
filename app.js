@@ -3,6 +3,9 @@ var http = require('http');
 var path = require('path');
 var db = require('mongoose');
 
+var passport = require('passport'),
+LocalStrategy = require('passport-local').Strategy;
+
 var app = module.exports = express();
 
 db.connect('mongodb://acteam:acteamadmin@ds031088.mongolab.com:31088/acteam');
