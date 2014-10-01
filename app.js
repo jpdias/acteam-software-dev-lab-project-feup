@@ -2,8 +2,9 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var db = require('mongoose');
+var hoganexpress = require('hogan-express');
 var passport = require('passport'),
-LocalStrategy = require('passport-local').Strategy;
+  LocalStrategy = require('passport-local').Strategy;
 
 var app = module.exports = express();
 
@@ -11,8 +12,9 @@ db.connect('mongodb://acteam:acteamadmin@ds031088.mongolab.com:31088/acteam');
 
 module.exports.mongodb = db;
 
-app.engine('html', require('hogan-express'));
+app.engine('html', hoganexpress);
 app.enable('view cache');
+
 app.set('port', process.env.PORT || '3000');
 app.set('views', path.join(__dirname,'views'));
 app.set('view engine', 'html');
