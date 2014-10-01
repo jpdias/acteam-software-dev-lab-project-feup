@@ -116,7 +116,5 @@ C:\> nodemon
 
 
 ### Contribution guidelines ###
-
-* The ember part (front-end) is in the folder views and the dependencies in the folder public 
-* The other folders are part of server side (NodeJS)
+* The folders are part of NodeJS file structure
 * The folder node-modules is where the dependencies of the nodejs are installed after the command *npm install*
