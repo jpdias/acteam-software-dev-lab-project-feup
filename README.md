@@ -80,11 +80,11 @@ C:\> npm install -g nodemon
 
 ```
 
-* Get current repository version
+* Get current repository version (replace <your user name here> with your user name eg: jpdias)
 ```
 #!cmd
 
-C:\> git clone https://jpdias@bitbucket.org/jpdias/acteam-t05g01.git
+C:\> git clone https://<your user name here>@bitbucket.org/jpdias/acteam-t05g01.git
 
 ```
 * Open folder in cmd and execute (to install dependencies):
