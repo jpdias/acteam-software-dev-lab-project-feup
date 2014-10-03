@@ -135,7 +135,8 @@ Return value should be the path to your npm tools.
 
  
  * Then copy the return path given by the previous command and use it the following way:
-    *(the following line is just an example, the npm tools can be stored in a number of different locations)
+
+    (the following line is just an example, the npm tools can be stored in a number of different locations)
 
 ```
 #!cmd
