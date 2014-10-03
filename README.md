@@ -111,8 +111,46 @@ C:\> mongod --dbpath "C:/MongoDB"
 C:\> nodemon
 
 ```
+ 
 
 * ## And now the server is running on [http://localhost:3000](http://localhost:3000) ##
+
+------------------------------------------------------------------------------------------------------
+
+ In case you don't have the npm's tools variables path defined in your Path file on your windows system do so the following way:
+ 
+
+* Open cmd.exe as Administrator and execute the following lines:
+
+* First we need the path we are about to define, and we get it be typing the following line:
+
+```
+#!cmd
+
+C:\>npm config get prefix
+
+```
+
+Return value should be something like this:  ``` C:\Users\username\AppData\Roaming\npm ```
+
+ 
+ * Then copy the return path given by the previous command and use it the following way:
+
+```
+#!cmd
+C:\>set PATH=%PATH%;C:\Users\username\AppData\Roaming\npm;
+
+```
+
+After these three steps you should be able to execute commands like:
+
+```
+#!cmd
+C:\>nodemon
+
+```
+
+Anywhere on your system.
 
 
 ### Contribution guidelines ###
