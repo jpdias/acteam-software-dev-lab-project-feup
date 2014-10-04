@@ -1,6 +1,6 @@
 app = require('../app');
 models = require('../models/models');
-
+auth = require('./authenticate');
 //Error handling !
 app.use(function(req, res, next){
   res.status(404);
