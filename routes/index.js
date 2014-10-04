@@ -29,13 +29,15 @@ app.get('/', function(req, res) {
   );
 });
 
-app.get('/user', function(req,res) {
-  var User = {"name":"hello"};
-  var kitty = new models.Users(User);
-
-  kitty.save(function (err) {
-    if (err) // ...
-      console.log('meow');
-  });
-  res.send(200);
+app.get('/signin', function(req, res) {
+  res.render(
+    'signin',
+    {
+      partials:
+      {
+        header: 'header',
+        footer: 'footer'
+      }
+    }
+  );
 });
