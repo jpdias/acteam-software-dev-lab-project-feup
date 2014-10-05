@@ -19,6 +19,7 @@ app.enable('view cache');
 app.set('port', process.env.PORT || '3000');
 app.set('views', path.join(__dirname,'views'));
 app.set('view engine', 'html');
+app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
