@@ -4,6 +4,7 @@ var mongoose = require('../app').mongodb,
     passportLocalMongoose = require('passport-local-mongoose');
 
 var Account = new Schema({
+    name: String,
     email: String,
     password: String,
     address: {
@@ -11,12 +12,11 @@ var Account = new Schema({
       municipaly: String,
       district: String},
     birthdate: String,
-    employee: String,
-    university: String,
+    occupation: String,
+    workplace: String,
     gender: String,
     cv: String
 });
 
-Account.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('Account', Account);

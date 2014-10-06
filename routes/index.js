@@ -14,15 +14,17 @@ app.use(function(err, req, res, next){
 });
 //End of error handling
 
+app.post('/register',auth.reg);
+
 app.get('/', function(req, res) {
-  res.locals = {"pagetitle":"HEY"};
   res.render(
     'index',
     {
       partials:
       {
         header: 'header',
-        footer: 'footer'
+        footer: 'footer',
+        scripts: 'scripts'
       }
     }
   );
