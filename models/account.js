@@ -5,7 +5,16 @@ var mongoose = require('../app').mongodb,
 
 var Account = new Schema({
     email: String,
-    password: String
+    password: String,
+    address: {
+      address: String,
+      municipaly: String,
+      district: String},
+    birthdate: String,
+    employee: String,
+    university: String,
+    gender: String,
+    cv: String
 });
 
 Account.plugin(passportLocalMongoose);
