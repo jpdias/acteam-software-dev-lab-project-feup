@@ -1,4 +1,3 @@
-// passport config
 var passport = require('../app').auth;
 var Account = require('../models/account');
 var LocalStrategy = require('../app').localStr;
@@ -22,13 +21,29 @@ function register(req, res) {
     }
   });
 }
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    Account.findOne({ email: username }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (sha1(password)!=user.password ) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  Account.findOne({ email: user }, function(err, user) {
+    done(err, user);
+  });
+});
 
 module.exports.reg = register;
-
-app.post('/login', passport.authenticate('local'), function(req, res) {
-    res.redirect('/');
-});
-
-app.post('/login', passport.authenticate('local'), function(req, res) {
-    res.redirect('/');
-});

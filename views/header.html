@@ -18,15 +18,21 @@
     	  <a class="navbar-brand" href="/"><img src="img/acteam.png" class="navbar-brand"/></a>
     	</div>
     	<div class="collapse navbar-collapse">
-        <form class="navbar-form navbar-right" role="search">
-            <div class="form-group">
-                <input type="email" class="form-control" name="email" placeholder="Email" required>
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="password" placeholder="Password" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Sign In</button>
-        </form>
+        <div class="navbar-form navbar-right">
+          <form id="loginform" style="display:none">
+              <div class="form-group">
+                  <input type="email" class="form-control" name="email" placeholder="Email" required>
+              </div>
+              <div class="form-group">
+                  <input type="password" class="form-control" name="password" placeholder="Password" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Sign In</button>
+          </form>
+          <div id="loggedInShow" style="display:none">
+            <span id="loggedName"></span>
+             <a href="/logout" title=""><button class="btn btn-primary">Logout</button></a>
+          </div>
+        </div>
     	</div><!--/.nav-collapse -->
       </div>
     </div>

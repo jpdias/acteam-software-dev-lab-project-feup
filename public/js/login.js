@@ -15,14 +15,12 @@ $( "#registerform" ).submit( function(event){
       workplace: frmdata[10].value,
       gender: frmdata[8].value
   };
-  
+
   $.ajax({
       url: '/register',
       type: 'POST',
       data: account,
-      datatype: 'json',
-      success: function (data) { console.log({"suc":data}); },
-      error: function (jqXHR, textStatus, errorThrown) { console.log({"err":textStatus}); }
+      datatype: 'json'
   });
 
   event.preventDefault();
