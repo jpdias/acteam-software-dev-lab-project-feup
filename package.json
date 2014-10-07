@@ -1,13 +1,15 @@
 {
   "name": "acteam",
   "version": "1.0.0",
-  "description": "This README would normally document whatever steps are necessary to get your application up and running.",
+  "description": "LDSO",
   "main": "app.js",
   "dependencies": {
+    "connect-flash": "^0.1.1",
+    "express-session": "^1.8.2",
     "hogan-express": "^0.5.2",
-    "express": "^3.1.0",
-    "passport": "^0.2.1",
     "mongoose": "^3.8.16",
+    "passport": "^0.2.1",
+    "express": "^3.1.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^1.0.0",
     "sha1": "^1.1.0"
@@ -20,6 +22,9 @@
     "type": "git",
     "url": "https://jpdias@bitbucket.org/jpdias/acteam-t05g01.git"
   },
-  "author": "",
+  "keywords": [
+    "LDSO"
+  ],
+  "author": "LDSO, T5G01",
   "license": "ISC"
 }
