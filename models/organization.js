@@ -29,7 +29,9 @@ var Organization = new Schema({
         end:{type: Date, default: Date.now}
       },
       appliances:[Proposal]
-    }
+    },
+    isOrgApproved:{type: Boolean, default: false},
+    role: String
 });
 
 Organization.plugin(passportLocalMongoose);

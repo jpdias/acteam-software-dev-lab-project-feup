@@ -1,5 +1,7 @@
 var passport = require('../app').auth;
 var Account = require('../models/account');
+var Admin = require('../models/admin');
+var Organization = require('../models/organization');
 var LocalStrategy = require('../app').localStr;
 var sha1 = require('sha1');
 
@@ -23,16 +25,42 @@ function register(req, res) {
 }
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    Account.findOne({ email: username }, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (sha1(password)!=user.password ) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
+    if(Account.findOne({ email: username }).limit(1)!==null){
+      Account.findOne({ email: username }, function (err, user) {
+        if (err) { return done(err); }
+        if (!user) {
+          return done(null, false, { message: 'Incorrect username.' });
+        }
+        if (sha1(password)!=user.password ) {
+          return done(null, false, { message: 'Incorrect password.' });
+        }
+        return done(null, user);
+      });
+    }
+    else if(Organization.findOne({ email: username }).limit(1)!==null){
+      Organization.findOne({ email: username }, function (err, user) {
+        if (err) { return done(err); }
+        if (!user) {
+          return done(null, false, { message: 'Incorrect username.' });
+        }
+        if (sha1(password)!=user.password ) {
+          return done(null, false, { message: 'Incorrect password.' });
+        }
+        return done(null, user);
+      });
+    }
+    else {
+      Admin.findOne({ email: username }, function (err, user) {
+        if (err) { return done(err); }
+        if (!user) {
+          return done(null, false, { message: 'Incorrect username.' });
+        }
+        if (sha1(password)!=user.password ) {
+          return done(null, false, { message: 'Incorrect password.' });
+        }
+        return done(null, user);
+      });
+    }
   }
 ));
 

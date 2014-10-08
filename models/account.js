@@ -15,7 +15,8 @@ var Account = new Schema({
     occupation: String,
     workplace: String,
     gender: String,
-    cv: String
+    cv: String,
+    role:String
 });
 
 

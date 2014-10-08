@@ -20,9 +20,7 @@ app.use(function(err, req, res, next){
 //End of error handling
 
 //auth
-/*app.post('/login',
-  passport.authenticate('local', { successRedirect: '/',
-                                   failureRedirect: '/signin' }));*/
+
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) {
@@ -47,7 +45,10 @@ app.post('/register',auth.reg);
 
 app.get('/loggedIn', function(req, res) {
   if (req.session.user) {
-    res.send(req.session.user);
+    if(typeof req.session.user.role!=='undefined'){
+      res.send(req.session.user);}
+    else
+      res.send({"login":false});
   } else {
     res.send({"login":false});
   }
@@ -55,33 +56,74 @@ app.get('/loggedIn', function(req, res) {
 
 app.get('/', function(req, res) {
   if(req.session.user){
-    res.locals = req.session.user;
-    res.render(
-      'home',
-      {
-        partials:
+    if(req.session.user.role=="user"){
+      res.locals = req.session.user;
+      res.render(
+        'user/index',
         {
-          header: 'header',
-          footer: 'footer',
-          scripts: 'scripts'
+          partials:
+          {
+            header: 'common/header',
+            footer: 'common/footer',
+            scripts: 'common/scripts'
+          }
         }
-      }
-    );
-  }
-  else{
+      );
+    }
+    else if(req.session.user.role=="organization"){
+      res.locals = req.session.user;
+      res.render(
+        'organization/index',
+        {
+          partials:
+          {
+            header: 'common/header',
+            footer: 'common/footer',
+            scripts: 'common/scripts'
+          }
+        }
+      );
+    }
+    else if(req.session.user.role=="admin"){
+      res.locals = req.session.user;
+      res.render(
+        'admin/index',
+        {
+          partials:
+          {
+            header: 'common/header',
+            footer: 'common/footer',
+            scripts: 'common/scripts'
+          }
+        }
+      );
+    }
+    else{
+      res.render(
+        'index',
+        {
+          partials:
+          {
+            header: 'common/header',
+            footer: 'common/footer',
+            scripts: 'common/scripts'
+          }
+        }
+      );
+    }
+  }else{
     res.render(
       'index',
       {
         partials:
         {
-          header: 'header',
-          footer: 'footer',
-          scripts: 'scripts'
+          header: 'common/header',
+          footer: 'common/footer',
+          scripts: 'common/scripts'
         }
       }
     );
   }
-
 });
 
 app.get('/signin', function(req, res) {
@@ -90,9 +132,22 @@ app.get('/signin', function(req, res) {
     {
       partials:
       {
-        header: 'header',
-        footer: 'footer',
-        scripts: 'scripts'
+        header: 'common/header',
+        footer: 'common/footer',
+        scripts: 'common/scripts'
+      }
+    }
+  );
+});
+app.get('/registerorg', function(req, res) {
+  res.render(
+    'organization/register',
+    {
+      partials:
+      {
+        header: 'common/header',
+        footer: 'common/footer',
+        scripts: 'common/scripts'
       }
     }
   );
