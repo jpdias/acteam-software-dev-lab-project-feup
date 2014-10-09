@@ -1,3 +1,66 @@
 {{> header}}
-{{> sidebar}}
+<link rel="stylesheet" href="css/perfect-scrollbar.css" />
+<link rel="stylesheet" href="css/timeline.css">
+<div class="container">
+    <div class="row">
+      {{> sidebar}}
+     <div class="col-sm-6  col-md-offset-1 col-md-10  main">
+        <div class="bar"></div>
+        <div class="timeline">
+          <div class="entry">
+            <h1>Banco alimentar</h1>
+            <h2>11 Nov 2014</h2>
+            <h2> Continente, Matosinhos </h2>
+            <br>
+            <div class="buttonsEntry">
+              <a href="#" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span> Join</a>
+              <a href="#" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-tower"></span> Organization</a>
+            </div>
+          </div>
+          <div class="entry">
+              <h1>1995</h1>
+              <div class="buttonsEntry">
+                <a href="#" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span> Join</a>
+                <a href="#" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-tower"></span> Organization</a>
+              </div>
+          </div>
+          <div class="entry">
+              <h1>2000</h1>
+              <div class="buttonsEntry">
+                <a href="#" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span> Join</a>
+                <a href="#" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-tower"></span> Organization</a>
+              </div>
+          </div>
+          <div class="entry">
+              <h1>2005</h1>
+              <div class="buttonsEntry">
+                <a href="#" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span> Join</a>
+                <a href="#" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-tower"></span> Organization</a>
+              </div>
+          </div>
+          <div class="entry">
+              <h1>2010</h1>
+              <div class="buttonsEntry">
+                <a href="#" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span> Join</a>
+                <a href="#" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-tower"></span> Organization</a>
+              </div>
+          </div>
+          <div><br></div>
+        </div>
+	    </div>
+      <div class="col-sm-3 col-md-offset-10 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">My Profile</a></li>
+          <li><a href="#">History</a></li>
+          <li><a href="#">Search</a></li>
+        </ul>
+      </div>
+    </div>
+</div>
+
+{{> scripts}}
+<script src="js/jquery.mousewheel.min.js"></script>
+<script src="js/perfect-scrollbar.js"></script>
+<script src="js/timelineScrollBar.js"></script>
 {{> footer}}

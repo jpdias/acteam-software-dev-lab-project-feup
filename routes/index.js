@@ -65,6 +65,7 @@ app.get('/', function(req, res) {
           {
             header: 'common/header',
             footer: 'common/footer',
+            sidebar: 'user/sidebarUser',
             scripts: 'common/scripts'
           }
         }
