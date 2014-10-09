@@ -3,6 +3,7 @@
 var frmvalidator  = new Validator("registerForm");
 
 frmvalidator.addValidation("name","req","Please enter your Name");
+frmvalidator.addValidation("name","regexp=^[^0-9]*$","Name cannot contain numbers");
 frmvalidator.addValidation("name","maxlen=30",	"Name exceeded maximum number of characters (Max: 30)");
 
 frmvalidator.addValidation("email","maxlen=50", "Email exceeded maximum number of characters (Max: 50)");
@@ -26,6 +27,8 @@ frmvalidator.addValidation("district","req", "Please enter an District");
 frmvalidator.addValidation("district","maxlen=50", "District exceeded maximum number of characters (Max: 50)");
 
 frmvalidator.addValidation("birthdate","req", "Please enter a birthdate");
+
+frmvalidator.addValidation("gender","selone", "Please select a Gender");
 
 function DateValidation(){
   var today =new Date();
@@ -53,6 +56,10 @@ $( "#registerform" ).submit( function(event){
 
   var frm = $('#registerform');
   var frmdata = JSON.parse(JSON.stringify(frm.serializeArray()));
+
+  if (frmdata[9].value == ""){
+    frmdata[10].value = "";
+  }
 
   var account = {
       name: frmdata[0].value,
