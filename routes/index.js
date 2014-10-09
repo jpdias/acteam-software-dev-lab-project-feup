@@ -145,6 +145,7 @@ app.get('/profileorg', function(req,res){
     {
       partials:
       {
+        sidebar:'organization/sidebar',
         header: 'common/header',
         footer: 'common/footer',
         scripts:'common/scripts'

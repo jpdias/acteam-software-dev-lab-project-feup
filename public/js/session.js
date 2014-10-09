@@ -6,7 +6,7 @@ $( "#loginform" ).submit( function(event){
       username: frmdata[0].value,
       password: frmdata[1].value
   };
-
+  
   $.ajax({
       url: '/login',
       type: 'POST',
