@@ -2,6 +2,9 @@
 
 var frmvalidator  = new Validator("registerForm");
 
+frmvalidator.EnableOnPageErrorDisplay();
+frmvalidator.EnableMsgsTogether();
+
 frmvalidator.addValidation("name","req","Please enter your Name");
 frmvalidator.addValidation("name","regexp=^[^0-9]*$","Name cannot contain numbers");
 frmvalidator.addValidation("name","maxlen=30",	"Name exceeded maximum number of characters (Max: 30)");
