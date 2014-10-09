@@ -139,6 +139,20 @@ app.get('/signin', function(req, res) {
     }
   );
 });
+app.get('/profileorg', function(req,res){
+  res.render(
+    'organization/profile',
+    {
+      partials:
+      {
+        header: 'common/header',
+        footer: 'common/footer',
+        scripts:'common/scripts'
+      }
+    }
+  );
+});
+
 app.get('/registerorg', function(req, res) {
   res.render(
     'organization/register',
@@ -147,7 +161,7 @@ app.get('/registerorg', function(req, res) {
       {
         header: 'common/header',
         footer: 'common/footer',
-        scripts: 'common/scripts'
+        scripts:'common/scripts'
       }
     }
   );
