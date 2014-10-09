@@ -10,18 +10,36 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 */
 function register(req, res) {
-  var hash = sha1(req.body.password);
-  var temp = req.body;
-  temp.password=hash;
-  var person = new Account(temp);
-  person.save( function(error, data){
-    if(error){
-        res.json(error);
-    }
-    else{
-        res.json(data);
-    }
-  });
+  console.log(req.body.role);
+  var hash,temp;
+  if(req.body.role==="user"){
+    hash = sha1(req.body.password);
+    temp = req.body;
+    temp.password=hash;
+    var person = new Account(temp);
+    person.save( function(error, data){
+      if(error){
+          res.json(error);
+      }
+      else{
+          res.json(data);
+      }
+    });
+  }
+  else if(req.body.role==="organization"){
+    hash = sha1(req.body.password);
+    temp = req.body;
+    temp.password=hash;
+    var org = new Organization(temp);
+    org.save( function(error, data){
+      if(error){
+          res.json(error);
+      }
+      else{
+          res.json(data);
+      }
+    });
+  }
 }
 passport.use(new LocalStrategy(
   function(username, password, done) {

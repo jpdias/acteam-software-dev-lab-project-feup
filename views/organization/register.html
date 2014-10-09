@@ -15,6 +15,9 @@
         </div>
       </div>
       <div class="form-group">
+        <input type="text" name="website" id="website" class="form-control input-md" placeholder="Website Address" tabindex="4">
+      </div>
+      <div class="form-group">
         <input type="email" name="email" id="email" class="form-control input-md" placeholder="Email Address" tabindex="4">
       </div>
       <div class="row">
@@ -53,7 +56,7 @@
         <br>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-              <label for="birth" class="col-md-3 control-label input-md">Birthdate</label>
+              <label for="birth" class="col-md-3 control-label input-md">Founding Date</label>
               <div class="col-md-9">
                 <input type="date" name="birthdate" class="form-control input-md" id="birth" placeholder="mm/dd/yyyy">
               </div>
@@ -70,25 +73,25 @@
             <div class="row">
             <div class="col-md-6">
               <ul class="causes-list">
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="animalRights" id="animalRights-volunteeringInterestsParam-editVolunteeringForm" type="checkbox">Animal Welfare</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="artsAndCulture" id="artsAndCulture-volunteeringInterestsParam-editVolunteeringForm" type="checkbox">Arts and Culture</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="children" id="children-volunteeringInterestsParam-editVolunteeringForm" type="checkbox">Children</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="civilRights" id="civilRights-volunteeringInterestsParam-editVolunteeringForm" type="checkbox">Civil Rights and Social Action</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="humanitarianRelief" id="humanitarianRelief-volunteeringInterestsParam-editVolunteeringForm" type="checkbox">Disaster and Humanitarian Relief</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="economicEmpowerment" id="economicEmpowerment-volunteeringInterestsParam-editVolunteeringForm" type="checkbox">Economic Empowerment</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="education" id="education-volunteeringInterestsParam-editVolunteeringForm" type="checkbox">Education</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="environment" id="environment-volunteeringInterestsParam-editVolunteeringForm" type="checkbox">Environment</label></li>
+                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Animal Welfare"  type="checkbox">Animal Welfare</label></li>
+                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Arts and Culture" type="checkbox">Arts and Culture</label></li>
+                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Children" type="checkbox">Children</label></li>
+                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Civil Rights and Social Action"  type="checkbox">Civil Rights and Social Action</label></li>
+                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Disaster and Humanitarian Relief" type="checkbox">Disaster and Humanitarian Relief</label></li>
+                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Economic Empowerment"  type="checkbox">Economic Empowerment</label></li>
+                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Education"  type="checkbox">Education</label></li>
+                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Environment"  type="checkbox">Environment</label></li>
               </ul>
             </div>
             <div class="col-md-6">
               <ul class="causes-list">
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="health" id="health-volunteeringInterestsParam-editVolunteeringForm" type="checkbox">Health</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="humanRights" id="humanRights-volunteeringInterestsParam-editVolunteeringForm" type="checkbox">Human Rights</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="politics" id="politics-volunteeringInterestsParam-editVolunteeringForm" type="checkbox">Politics</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="povertyAlleviation" id="povertyAlleviation-volunteeringInterestsParam-editVolunteeringForm" type="checkbox">Poverty Alleviation</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="scienceAndTechnology" id="scienceAndTechnology-volunteeringInterestsParam-editVolunteeringForm" type="checkbox">Science and Technology</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="socialServices" id="socialServices-volunteeringInterestsParam-editVolunteeringForm" type="checkbox">Social Services</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="other" id="other-volunteeringInterestsParam-editVolunteeringForm" type="checkbox">Other</li>
+                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Health"  type="checkbox">Health</label></li>
+                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Human Rights"  type="checkbox">Human Rights</label></li>
+                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Politics" type="checkbox">Politics</label></li>
+                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Poverty Alleviation" type="checkbox">Poverty Alleviation</label></li>
+                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Science and Technology" type="checkbox">Science and Technology</label></li>
+                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Social Services"  type="checkbox">Social Services</label></li>
+                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Other" type="checkbox">Other</li>
               </ul>
             </div>
           </div>
@@ -106,4 +109,5 @@
   </div>
 </div>
 {{> scripts}}
+<script src="js/organization/register.js"></script>
 {{> footer}}

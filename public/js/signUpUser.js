@@ -60,7 +60,7 @@ $( "#registerform" ).submit( function(event){
   var frm = $('#registerform');
   var frmdata = JSON.parse(JSON.stringify(frm.serializeArray()));
 
-  if (frmdata[9].value == ""){
+  if (frmdata[9].value === ""){
     frmdata[10].value = "";
   }
 
@@ -72,11 +72,11 @@ $( "#registerform" ).submit( function(event){
         address: frmdata[4].value,
         municipaly: frmdata[5].value,
         district: frmdata[6].value},
-      birthdate: frmdata[7].value,
+      foundation: frmdata[7].value,
       occupation: frmdata[9].value,
       workplace: frmdata[10].value,
       gender: frmdata[8].value,
-      role:"user"
+      role:"organization"
   };
 
   $.ajax({
