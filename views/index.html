@@ -2,7 +2,34 @@
 <link rel="stylesheet" href="css/signin.css">
 <div class="container">
 	<div class="row clearfix">
-		<div class="col-md-6 column">
+		<div class="col-md-6 column" style="padding-top:9%">
+			<div class="row clearfix" >
+				<blockquote>
+				  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+				</blockquote>
+			</div>
+			<div class="row clearfix">
+				<ul id="autoplay" class="gallery content-slider list-unstyled clearfix lightSlider lSSlide">
+	          <li >
+	              <h3><img src="resources/img/1.png"></h3>
+	          </li>
+	          <li >
+	              <h3><img src="resources/img/2.png"></h3>
+	          </li>
+	          <li >
+	              <h3><img src="resources/img/3.png"></h3>
+	          </li>
+	          <li >
+	              <h3><img src="resources/img/1.png"></h3>
+	          </li>
+	          <li >
+	              <h3><img src="resources/img/3.png"></h3>
+	          </li>
+	          <li >
+	              <h3><img src="resources/img/4.png"></h3>
+	          </li>
+	      </ul>
+		</div>
 		</div>
 		<div class="col-md-6 column">
 			<form role="form" id="registerform">
@@ -111,4 +138,12 @@
 {{> scripts}}
 <script src="js/loginUser.js"></script>
 <script src="js/loginVerifications.js"></script>
+<script>
+$(document).ready(function() {
+  $('#autoplay').lightSlider({
+    auto:true,
+    loop:true
+  });
+});
+</script>
 {{> footer}}
