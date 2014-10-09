@@ -1,0 +1,16 @@
+.topimg {
+	 margin-top: -15px;
+     width: 100%;
+     height: 200px;
+     position: relative;
+     margin-left: auto;
+     margin-right: auto;
+     overflow: hidden;
+ }
+.topimg img {
+    margin: auto;
+    margin-top: -50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}

@@ -13,8 +13,13 @@ var Proposal = new Schema({
   letter: String,
   status: Boolean
 });
+var Cause = new Schema({
+  name:String
+});
 
 var Organization = new Schema({
+    name: String,
+    foundation: {type: Date, default: Date.now},
     email: String,
     password: String,
     address: {
@@ -22,6 +27,8 @@ var Organization = new Schema({
       municipaly: String,
       district: String},
     members:[Member],
+    about: String,
+    causes: [Cause],
     recruitment:{
       status: Boolean,
       time:{
