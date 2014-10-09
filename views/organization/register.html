@@ -1,4 +1,76 @@
 {{> header}}
-
+<div class="container">
+  <div class="row clearfix">
+    <div class="col-md-2 column">
+    </div>
+    <div class="col-md-8 column">
+      <form role="form" id="registerOrgform">
+      <h2>Register your organization<small>It's free and always will be.</small></h2>
+      <hr class="colorgraph">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+          <div class="form-group">
+            <input type="text" name="name" id="name" class="form-control input-md" placeholder="Name" tabindex="1">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="email" name="email" id="email" class="form-control input-md" placeholder="Email Address" tabindex="4">
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+          <div class="form-group">
+            <input type="password" name="password" id="password" class="form-control input-md" placeholder="Password" tabindex="5">
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6">
+          <div class="form-group">
+            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-md" placeholder="Confirm Password" tabindex="6">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" name="address" id="address" class="form-control input-md" placeholder="Address" tabindex="4">
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+          <div class="form-group">
+            <input type="text" name="municipality" id="municipality" class="form-control input-md" placeholder="Municipality" tabindex="5">
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6">
+          <div class="form-group">
+            <input type="text" name="district" id="district" class="form-control input-md" placeholder="District" tabindex="6">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-8">
+            <div class="form-group">
+              <label for="birth" class="col-md-3 control-label input-md">Birthdate</label>
+              <div class="col-md-9">
+                <input type="date" name="birthdate" class="form-control input-md" id="birth" placeholder="mm/dd/yyyy">
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+          <div class="form-group">
+            <input type="text" name="workplace" id="occupation" class="form-control input-md" placeholder="Where?" tabindex="6">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-md-12">
+          <input type="submit" value="Register" class="btn btn-primary btn-block btn-md" tabindex="7">
+        </div>
+      </div>
+    </form>
+    </div>
+    <div class="col-md-2 column">
+    </div>
+  </div>
+</div>
 {{> scripts}}
 {{> footer}}
