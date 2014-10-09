@@ -13,7 +13,8 @@ $( "#registerform" ).submit( function(event){
       birthdate: frmdata[7].value,
       occupation: frmdata[9].value,
       workplace: frmdata[10].value,
-      gender: frmdata[8].value
+      gender: frmdata[8].value,
+      role:"user"
   };
 
   $.ajax({
