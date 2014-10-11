@@ -41,6 +41,8 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
+
+
 app.post('/register',auth.reg);
 
 app.get('/loggedIn', function(req, res) {

@@ -277,7 +277,7 @@ $(document).ready(function() {
     })
         .on('success.form.bv', function(e) {
             // Prevent form submission
-            e.preventDefault(); 
+            e.preventDefault();
 
             // Get the form instance
             var $form = $(e.target);
@@ -327,7 +327,6 @@ $(document).ready(function() {
 
             // Use Ajax to submit form data
             $.post('/register', account, function(result) {
-
                 event.preventDefault();
             }, 'json');
         });

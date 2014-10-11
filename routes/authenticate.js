@@ -4,11 +4,34 @@ var Admin = require('../models/admin');
 var Organization = require('../models/organization');
 var LocalStrategy = require('../app').localStr;
 var sha1 = require('sha1');
+var mandrill = require('node-mandrill')('Kj-1SGPKFICoSgUIo9OEqw');
 
 /*passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 */
+
+function sendMail(who,title,msg){
+  mandrill('/messages/send', {
+      message: {
+          to: [{email: who, name: "Acteam Member"}],
+          from_email: "no-reply@acteam.com",
+          subject: title,
+          text: msg
+      }
+  }, function(error, response)
+  {   //uh oh, there was an error
+      if (error) console.log( JSON.stringify(error) );
+      //everything's good, lets see what mandrill said
+      else console.log(response);
+  });
+}
+
+
+function confirmaccount(req,res){
+  console.log("nothing");
+}
+
 function register(req, res) {
   console.log(req.body.role);
   var hash,temp;
@@ -40,47 +63,42 @@ function register(req, res) {
       }
     });
   }
+  sendMail(req.body.email,"Acteam Network","Hello, Confirmation Link: http://localhost:3000/confirmaccount?code=" + sha1(req.body.email+req.body.name)+"&email="+req.body.email+" /n Acteam Group");
 }
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    if(Account.findOne({ email: username }).limit(1)!==null){
       Account.findOne({ email: username }, function (err, user) {
         if (err) { return done(err); }
         if (!user) {
-          return done(null, false, { message: 'Incorrect username.' });
+          Organization.findOne({ email: username }, function (err, user) {
+            if (err) { return done(err); }
+            if (!user) {
+                Admin.findOne({ email: username }, function (err, user) {
+                  if (err) { return done(err); }
+                  if (!user) {
+                    return done(null, false, { message: 'Incorrect username.' });
+                  }
+                  else if (sha1(password)!=user.password ) {
+                    return done(null, false, { message: 'Incorrect password.' });
+                  }
+                  else
+                    return done(null, user);
+                });
+            }
+            else if (sha1(password)!=user.password ) {
+              return done(null, false, { message: 'Incorrect password.' });
+            }
+            else
+              return done(null, user);
+          });
         }
-        if (sha1(password)!=user.password ) {
+        else if (sha1(password)!=user.password ) {
           return done(null, false, { message: 'Incorrect password.' });
         }
-        return done(null, user);
+        else
+          return done(null, user);
       });
-    }
-    else if(Organization.findOne({ email: username }).limit(1)!==null){
-      Organization.findOne({ email: username }, function (err, user) {
-        if (err) { return done(err); }
-        if (!user) {
-          return done(null, false, { message: 'Incorrect username.' });
-        }
-        if (sha1(password)!=user.password ) {
-          return done(null, false, { message: 'Incorrect password.' });
-        }
-        return done(null, user);
-      });
-    }
-    else {
-      Admin.findOne({ email: username }, function (err, user) {
-        if (err) { return done(err); }
-        if (!user) {
-          return done(null, false, { message: 'Incorrect username.' });
-        }
-        if (sha1(password)!=user.password ) {
-          return done(null, false, { message: 'Incorrect password.' });
-        }
-        return done(null, user);
-      });
-    }
-  }
-));
+}));
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -93,3 +111,4 @@ passport.deserializeUser(function(user, done) {
 });
 
 module.exports.reg = register;
+module.exports.email = sendMail;

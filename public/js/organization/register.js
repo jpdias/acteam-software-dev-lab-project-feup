@@ -18,8 +18,8 @@ $( "#registerOrgform" ).submit( function(event){
   console.log(temp_causes);
   var account = {
       name: frmdata[0].value,
-      email: frmdata[1].value,
-      website: frmdata[2].value,
+      email: frmdata[2].value,
+      website: frmdata[1].value,
       password: frmdata[4].value,
       address: {
         address: frmdata[5].value,
