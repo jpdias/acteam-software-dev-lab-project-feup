@@ -1,0 +1,42 @@
+{{> header}}
+<link rel="stylesheet" type="text/css" href="css/profileorg.css">
+		
+<div class="container-fluid">
+    <div class="row">
+		{{> sidebar}}
+		<div class="main fill">
+        <!-- >Organization Board</!-->
+            <div class="row">
+                <h2>Organization's Board</h2>
+                <div class="col-sm-3">BoardMember0</div>
+                <div class="col-sm-3">BoardMember1</div>
+                <div class="col-sm-3">BoardMember2</div>
+            </div>
+        <!-- >Ordinary Members</!-->
+            <div class="row">
+                <h2>Organization's Members</h2>
+                <div class="col-sm-3">Member0</div>
+                <div class="col-sm-3">Member1</div>
+                <div class="col-sm-3">Member2</div>
+                <div class="col-sm-3">Member3</div>
+                <div class="col-sm-3">Member4</div>
+                <div class="col-sm-3">Member5</div>
+            </div>
+		</div>
+	</div>
+</div>
+
+{{> scripts}}
+<script>
+$(document).ready(function() {
+    $('#autoplay').lightSlider({
+		item:1,
+		verticalHeight:200,
+		vThumbWidth:50,
+		auto: true,
+		loop: true,
+		slideMargin:0
+    });
+});
+</script>
+{{> footer}}

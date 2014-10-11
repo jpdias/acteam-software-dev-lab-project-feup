@@ -15,41 +15,41 @@
         </div>
       </div>
       <div class="form-group">
-        <input type="text" name="website" id="website" class="form-control input-md" placeholder="Website Address" tabindex="4">
+        <input type="text" name="website" id="website" class="form-control input-md" placeholder="Website Address" tabindex="2">
       </div>
       <div class="form-group">
-        <input type="email" name="email" id="email" class="form-control input-md" placeholder="Email Address" tabindex="4">
+        <input type="email" name="email" id="email" class="form-control input-md" placeholder="Email Address" tabindex="3">
       </div>
       <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-6">
           <div class="form-group">
-            <input type="password" name="password" id="password" class="form-control input-md" placeholder="Password" tabindex="5">
+            <input type="password" name="password" id="password" class="form-control input-md" placeholder="Password" tabindex="4">
           </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-6">
           <div class="form-group">
-            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-md" placeholder="Confirm Password" tabindex="6">
+            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-md" placeholder="Confirm Password" tabindex="5">
           </div>
         </div>
       </div>
       <div class="form-group">
-        <input type="text" name="address" id="address" class="form-control input-md" placeholder="Address" tabindex="4">
+        <input type="text" name="address" id="address" class="form-control input-md" placeholder="Address" tabindex="6">
       </div>
       <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-6">
           <div class="form-group">
-            <input type="text" name="municipality" id="municipality" class="form-control input-md" placeholder="Municipality" tabindex="5">
+            <input type="text" name="municipality" id="municipality" class="form-control input-md" placeholder="Municipality" tabindex="7">
           </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-6">
           <div class="form-group">
-            <input type="text" name="district" id="district" class="form-control input-md" placeholder="District" tabindex="6">
+            <input type="text" name="district" id="district" class="form-control input-md" placeholder="District" tabindex="8">
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12 col-md-12">
-          <textarea style="resize: vertical" name="about" id="about" class="form-control input-md" placeholder="About Us" tabindex="7"></textarea>
+          <textarea style="resize: vertical" name="about" id="about" class="form-control input-md" placeholder="About Us" tabindex="9"></textarea>
         </div>
       </div>
       <div class="row">
@@ -58,7 +58,7 @@
             <div class="form-group">
               <label for="birth" class="col-md-3 control-label input-md">Founding Date</label>
               <div class="col-md-9">
-                <input type="date" name="birthdate" class="form-control input-md" id="birth" placeholder="dd/mm/yyyy">
+                <input type="date" name="birthdate" class="form-control input-md" id="birth" placeholder="dd/mm/yyyy" tabindex="10">
               </div>
             </div>
         </div>
@@ -68,11 +68,11 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
           <div class="form-group">
             <div class="row">
-              <label for="birth" class="col-md-3 control-label input-md">Causes you support?</label>
+              <label for="causes" class="col-md-3 control-label input-md">Causes you support?</label>
             </div>
             <div class="row">
             <div class="col-md-6">
-              <ul class="causes-list">
+              <ul class="causes-list" tabindex="11">
                 <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Animal Welfare"  type="checkbox">Animal Welfare</label></li>
                 <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Arts and Culture" type="checkbox">Arts and Culture</label></li>
                 <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Children" type="checkbox">Children</label></li>
@@ -84,7 +84,7 @@
               </ul>
             </div>
             <div class="col-md-6">
-              <ul class="causes-list">
+              <ul class="causes-list" tabindex="12">
                 <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Health"  type="checkbox">Health</label></li>
                 <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Human Rights"  type="checkbox">Human Rights</label></li>
                 <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Politics" type="checkbox">Politics</label></li>
@@ -99,7 +99,7 @@
       </div>
       <div class="row">
         <div class="col-xs-12 col-md-12">
-          <input type="submit" value="Register" class="btn btn-primary btn-block btn-md" tabindex="7">
+          <input type="submit" value="Register" class="btn btn-primary btn-block btn-md" tabindex="13">
         </div>
       </div>
         </div>
@@ -110,5 +110,5 @@
   </div>
 </div>
 {{> scripts}}
-<script src="js/organization/register.js"></script>
+<script src="js/organization/signUpOrg.js"></script>
 {{> footer}}
