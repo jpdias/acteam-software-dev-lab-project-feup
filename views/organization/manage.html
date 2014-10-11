@@ -1,0 +1,97 @@
+{{> header}}
+<link rel="stylesheet" type="text/css" href="css/profileorg.css">
+		
+<div class="container-fluid">
+    <div class="row">
+		{{> sidebar}}
+		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main fill">
+			
+			<!--Image Carousel-->
+			<div class="row clearfix">
+				<ul id="autoplay" class="gallery content-slider list-unstyled clearfix lightSlider lSSlide topimg">
+				  <li>
+					  <img src="http://www.freeartwallpapers.com/wp-content/uploads/2014/08/Wallpapers-abstract-awesome-1920-1080-196268-abstract.jpg">
+				  </li>
+				  <li>
+					  <img src="http://2.bp.blogspot.com/-XMuH18jxCEU/T6ePpwJLhZI/AAAAAAAAFmU/sQYDxdsK_74/s1600/3D-Abstract-Wallpapers%252B-%252Bgraphics.jpg">
+				  </li>
+				  <li>
+					  <img src="http://screenwallpapers.net/wp-content/uploads/2014/09/abstract_wallpaper_05.jpg">
+				  </li>
+				</ul>
+			</div>
+			
+			<div class="col-md-3 column">
+				<br>
+				<h3>Causes we defend:</h3><br>
+				<font size="3">
+					<ul>
+						<li>Arts and Culture</li>
+						<li>Environment</li>
+						<li>Human Rights</li>
+						<li>Oranges</li>
+						<li>Disater</li>
+						<li>Science and Technology</li>
+					</ul>
+				</font>
+			</div>
+			
+			<div class="col-md-9 column">
+				<div class="container">
+					<div class="row clearfix">
+						<div class="col-md-6 column">
+							<font size="10">XPTO Association</font>
+						</div>
+						<div class="col-md-3 column">
+						<br>
+							<button type="button" class="btn btn-primary"><font size="4">Open Recruitment</font></button><br>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="container">
+					<div class="row clearfix">
+						<div class="col-md-6 column">
+							<font size="4">
+								<b>Email: </b> alguem@hotmail.com<br>
+								<b>Telephone: </b> 229683988<br>
+								<b>Address: </b> Rua dos caracóis cozidos 410
+							</font>
+						</div>
+						<div class="col-md-3 column">
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="container">
+					<div class="row clearfix">
+						<div class="col-md-5 column btn btn-default">
+						Event XPTO
+						</div>
+						<div class="col-md-1 column">
+						</div>
+						<div class="col-md-2 column btn btn-default">
+						9/10/2014
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+{{> scripts}}
+<script>
+$(document).ready(function() {
+    $('#autoplay').lightSlider({
+		item:1,
+		verticalHeight:200,
+		vThumbWidth:50,
+		auto: true,
+		loop: true,
+		slideMargin:0
+    });
+});
+</script>
+{{> footer}}
