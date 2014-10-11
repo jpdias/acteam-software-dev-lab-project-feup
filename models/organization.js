@@ -37,6 +37,7 @@ var Organization = new Schema({
       appliances:[Proposal]
     },
     isOrgApproved:{type: Boolean, default: false},
+    confirmed:{type: Boolean, default: false},
     role: String
 });
 

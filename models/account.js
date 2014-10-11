@@ -16,7 +16,8 @@ var Account = new Schema({
     workplace: String,
     gender: String,
     cv: String,
-    role:String
+    role:String,
+    confirmed:{type: Boolean, default: false}
 });
 
 

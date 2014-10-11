@@ -27,9 +27,61 @@ function sendMail(who,title,msg){
   });
 }
 
+function errorLogin(err,req,res){
+  res.locals({"msg":err});
+  res.render(
+      'signin',
+      {
+        partials:
+        {
+          header: 'common/header',
+          footer: 'common/footer',
+          scripts: 'common/scripts'
+        }
+      }
+    );
+}
 
 function confirmaccount(req,res){
-  console.log("nothing");
+  Account.findOne({ email: req.query.email }, function (err, user) {
+    if(user){
+      if(sha1(user.email+user.name)===req.query.code){
+        user.confirmed = true;
+        user.save(function(err) {
+          if (err) {
+            errorLogin("Error with the account.",req,res);
+            return next(err);
+          }
+          else{
+              errorLogin("Account confirmed with success!",req,res);
+          }
+        });
+      }
+    }
+    else{
+      Organization.findOne({ email: req.query.email }, function (err, user) {
+        if(user){
+          if(sha1(user.email+user.name)===req.query.code){
+            user.confirmed = true;
+            user.save(function(err) {
+              if (err) {
+                errorLogin("Error with the account.",req,res);
+                return next(err);
+              }
+              else{
+                errorLogin("Account confirmed with success!",req,res);
+              }
+            });
+          }
+        }
+        else{
+          errorLogin("Account doesn't exists!",req,res);
+        }
+      });
+    }
+  });
+
+
 }
 
 function register(req, res) {
@@ -63,7 +115,7 @@ function register(req, res) {
       }
     });
   }
-  sendMail(req.body.email,"Acteam Network","Hello, Confirmation Link: http://localhost:3000/confirmaccount?code=" + sha1(req.body.email+req.body.name)+"&email="+req.body.email+" /n Acteam Group");
+  sendMail(req.body.email,"Acteam Network","Hello, Confirmation Link: http://localhost:3000/confirmaccount?code=" + sha1(req.body.email+req.body.name)+"&email="+req.body.email+" Acteam Group");
 }
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -85,14 +137,14 @@ passport.use(new LocalStrategy(
                     return done(null, user);
                 });
             }
-            else if (sha1(password)!=user.password ) {
+            else if (sha1(password)!=user.password || user.confirmed===false) {
               return done(null, false, { message: 'Incorrect password.' });
             }
             else
               return done(null, user);
           });
         }
-        else if (sha1(password)!=user.password ) {
+        else if (sha1(password)!=user.password || user.confirmed===false) {
           return done(null, false, { message: 'Incorrect password.' });
         }
         else
@@ -109,6 +161,6 @@ passport.deserializeUser(function(user, done) {
     done(err, user);
   });
 });
-
+module.exports.confirmuser = confirmaccount;
 module.exports.reg = register;
 module.exports.email = sendMail;

@@ -45,6 +45,8 @@ app.get('/logout', function(req, res){
 
 app.post('/register',auth.reg);
 
+app.get('/confirmaccount', auth.confirmuser);
+
 app.get('/loggedIn', function(req, res) {
   if (req.session.user) {
     if(typeof req.session.user.role!=='undefined'){
@@ -56,76 +58,45 @@ app.get('/loggedIn', function(req, res) {
   }
 });
 
+function getHome(type,req,res){
+  var page;
+  if(type!==""){
+    page = type+'/index';
+  }
+  else
+    page = "index";
+
+  res.locals = req.session.user;
+  res.render(
+    page,
+    {
+      partials:
+      {
+        header: 'common/header',
+        footer: 'common/footer',
+        sidebar: 'user/sidebarUser',
+        scripts: 'common/scripts'
+      }
+    }
+  );
+}
+
 app.get('/', function(req, res) {
   if(req.session.user){
     if(req.session.user.role=="user"){
-      res.locals = req.session.user;
-      res.render(
-        'user/index',
-        {
-          partials:
-          {
-            header: 'common/header',
-            footer: 'common/footer',
-            sidebar: 'user/sidebarUser',
-            scripts: 'common/scripts'
-          }
-        }
-      );
+      getHome("user",req,res);
     }
     else if(req.session.user.role=="organization"){
-      res.locals = req.session.user;
-      res.render(
-        'organization/index',
-        {
-          partials:
-          {
-            header: 'common/header',
-            footer: 'common/footer',
-            scripts: 'common/scripts'
-          }
-        }
-      );
+      getHome("organization",req,res);
     }
     else if(req.session.user.role=="admin"){
-      res.locals = req.session.user;
-      res.render(
-        'admin/index',
-        {
-          partials:
-          {
-            header: 'common/header',
-            footer: 'common/footer',
-            scripts: 'common/scripts'
-          }
-        }
-      );
+      getHome("admin",req,res);
     }
     else{
-      res.render(
-        'index',
-        {
-          partials:
-          {
-            header: 'common/header',
-            footer: 'common/footer',
-            scripts: 'common/scripts'
-          }
-        }
-      );
+        getHome("",req,res);
     }
   }else{
-    res.render(
-      'index',
-      {
-        partials:
-        {
-          header: 'common/header',
-          footer: 'common/footer',
-          scripts: 'common/scripts'
-        }
-      }
-    );
+    getHome("",req,res);
   }
 });
 
