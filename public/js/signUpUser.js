@@ -1,66 +1,132 @@
-/*Fields verifications for the register process using gen_validatorv4*/
+/*Fields verifications for the register process using Bootstrap validator*/
 
-var frmvalidator  = new Validator("registerForm");
+/*$(document).ready(function() {
 
-frmvalidator.EnableOnPageErrorDisplay();
-frmvalidator.EnableMsgsTogether();
-
-frmvalidator.addValidation("name","req","Please enter your Name");
-frmvalidator.addValidation("name","regexp=^[^0-9]*$","Name cannot contain numbers");
-frmvalidator.addValidation("name","maxlen=30",	"Name exceeded maximum number of characters (Max: 30)");
-
-frmvalidator.addValidation("email","maxlen=50", "Email exceeded maximum number of characters (Max: 50)");
-frmvalidator.addValidation("email","req", "Please enter an Email");
-frmvalidator.addValidation("email","email", "Email format is incorrect (eq: email@email.com)");
-
-frmvalidator.addValidation("password", "req", "Please enter a Password");
-frmvalidator.addValidation("password","neelmnt=name","The Password cannot be same as your Name");
-frmvalidator.addValidation("password","minlen=6","Password requires a minimum of 6 characters");
-
-frmvalidator.addValidation("password_confirmation","req", "Please confirm your Password");
-frmvalidator.addValidation("password_confirmation","eqelmnt=password","Confirmed password is not the same as your Password");
-
-frmvalidator.addValidation("address","req", "Please enter an Address");
-frmvalidator.addValidation("address","maxlen=50", "Address exceeded maximum number of characters (Max: 50)");
-
-frmvalidator.addValidation("municipality","req", "Please enter an Municipality");
-frmvalidator.addValidation("municipality","maxlen=50", "Municipality exceeded maximum number of characters (Max: 50)");
-
-frmvalidator.addValidation("district","req", "Please enter an District");
-frmvalidator.addValidation("district","maxlen=50", "District exceeded maximum number of characters (Max: 50)");
-
-frmvalidator.addValidation("birthdate","req", "Please enter a birthdate");
-
-frmvalidator.addValidation("gender","selone", "Please select a Gender");
-
-function DateValidation(){
-  var today =new Date();
-  var inputDate = new Date(document.forms["registerForm"]["birthdate"].value);
-  if (inputDate > today) {
-    sfm_show_error_msg('Date is invalid');
-    return false;
-  } else {
-    return true;
-  }
-}
-
-frmvalidator.setAddnlValidationFunction(DateValidation);
-
-/*MISSING VALIDATION FOR CHECK BOXES AND RADIO BUTTONS  */
-
-//frmvalidator.addValidation("Phone","maxlen=50");
-//frmvalidator.addValidation("Phone","numeric","THIS IS NOT NUMERIC BITCH");
-
-//frmvalidator.addValidation("Address","maxlen=50");
-//frmvalidator.addValidation("Country","dontselect=000");
-
+    $('#registerform').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            name: {
+                message: 'The username is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required and cannot be empty'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[^0-9]+$/,
+                        message: 'The username can only consist of alphabetical and number'
+                    },
+                    different: {
+                        field: 'password',
+                        message: 'The username and password cannot be the same as each other'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email is required and cannot be empty'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required and cannot be empty'
+                    },
+                    different: {
+                        field: 'username',
+                        message: 'The password cannot be the same as username'
+                    },
+                    stringLength: {
+                        min: 8,
+                        message: 'The password must have at least 8 characters'
+                    }
+                }
+            },
+            password_confirmation: {
+                validators: {
+                    notEmpty: {
+                        message: 'The confirmation password is required and cannot be empty'
+                    },
+                    identical: {
+                        field: 'password',
+                        message: 'The password confirmation must be the same as the password'
+                    }
+                }
+            },
+            address: {
+                message: 'The address is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The address is required and cannot be empty'
+                    },
+                    stringLength: {
+                        max: 350,
+                        message: 'The address must be less than 350 characters long'
+                    },
+                }
+            },
+            municipality: {
+                message: 'The municipality is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The municipality is required and cannot be empty'
+                    },
+                    stringLength: {
+                        max: 350,
+                        message: 'The municipality  less than 350 characters long'
+                    },
+                }
+            },
+            district: {
+                message: 'The district is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The district is required and cannot be empty'
+                    },
+                    stringLength: {
+                        max: 350,
+                        message: 'The district  less than 350 characters long'
+                    },
+                }
+            },
+            gender: {
+                validators: {
+                    notEmpty: {
+                        message: 'Gender selection is required'
+                    }
+                }
+            },
+            birthdate: {
+                validators: {
+                    notEmpty: {
+                        message: 'The birthdate is required and cannot be empty'
+                    }
+                }
+            }
+        }
+    });
+});
 
 $( "#registerform" ).submit( function(event){
 
   var frm = $('#registerform');
   var frmdata = JSON.parse(JSON.stringify(frm.serializeArray()));
 
-  if (frmdata[9].value === ""){
+  if (frmdata[9].value == ""){
     frmdata[10].value = "";
   }
 
@@ -72,11 +138,11 @@ $( "#registerform" ).submit( function(event){
         address: frmdata[4].value,
         municipaly: frmdata[5].value,
         district: frmdata[6].value},
-      foundation: frmdata[7].value,
+      birthdate: frmdata[7].value,
       occupation: frmdata[9].value,
       workplace: frmdata[10].value,
       gender: frmdata[8].value,
-      role:"organization"
+      role:"user"
   };
 
   $.ajax({
@@ -87,4 +153,182 @@ $( "#registerform" ).submit( function(event){
   });
 
   event.preventDefault();
+});*/
+
+
+$(document).ready(function() {
+    $( "#registerform").bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            name: {
+                message: 'The username is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required and cannot be empty'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[^0-9]+$/,
+                        message: 'The username can only consist of alphabetical and number'
+                    },
+                    different: {
+                        field: 'password',
+                        message: 'The username and password cannot be the same as each other'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email is required and cannot be empty'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required and cannot be empty'
+                    },
+                    different: {
+                        field: 'username',
+                        message: 'The password cannot be the same as username'
+                    },
+                    stringLength: {
+                        min: 8,
+                        message: 'The password must have at least 8 characters'
+                    }
+                }
+            },
+            password_confirmation: {
+              triger:'focus blur',
+                validators: {
+                    notEmpty: {
+                        message: 'The confirmation password is required and cannot be empty'
+                    },
+                    identical: {
+                        field: 'password',
+                        message: 'The password confirmation must be the same as the password'
+                    }
+                }
+            },
+            address: {
+                message: 'The address is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The address is required and cannot be empty'
+                    },
+                    stringLength: {
+                        max: 350,
+                        message: 'The address must be less than 350 characters long'
+                    },
+                }
+            },
+            municipality: {
+                message: 'The municipality is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The municipality is required and cannot be empty'
+                    },
+                    stringLength: {
+                        max: 350,
+                        message: 'The municipality  less than 350 characters long'
+                    },
+                }
+            },
+            district: {
+                message: 'The district is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The district is required and cannot be empty'
+                    },
+                    stringLength: {
+                        max: 350,
+                        message: 'The district  less than 350 characters long'
+                    },
+                }
+            },
+            gender: {
+                validators: {
+                    notEmpty: {
+                        message: 'Gender selection is required'
+                    }
+                }
+            },
+            birthdate: {
+                validators: {
+                    notEmpty: {
+                        message: 'The birthdate is required and cannot be empty'
+                    }
+                }
+            }
+        }
+    })
+        .on('success.form.bv', function(e) {
+            // Prevent form submission
+            e.preventDefault(); 
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            var frmdata = JSON.parse(JSON.stringify($form.serializeArray()));
+
+            console.log(frmdata);
+
+            var account;
+
+            if (frmdata[9].value === ""){
+              account = {
+                  name: frmdata[0].value,
+                  email: frmdata[1].value,
+                  password: frmdata[3].value,
+                  address: {
+                    address: frmdata[4].value,
+                    municipaly: frmdata[5].value,
+                    district: frmdata[6].value},
+                  birthdate: frmdata[7].value,
+                  occupation: frmdata[9].value,
+                  workplace: '',
+                  gender: frmdata[8].value,
+                  role:"user"
+              };
+            } else {
+
+              account = {
+                  name: frmdata[0].value,
+                  email: frmdata[1].value,
+                  password: frmdata[3].value,
+                  address: {
+                    address: frmdata[4].value,
+                    municipaly: frmdata[5].value,
+                    district: frmdata[6].value},
+                  birthdate: frmdata[7].value,
+                  occupation: frmdata[9].value,
+                  workplace: frmdata[10].value,
+                  gender: frmdata[8].value,
+                  role:"user"
+              };
+
+            }
+
+            // Get the BootstrapValidator instance
+            var bv = $form.data('bootstrapValidator');
+
+            // Use Ajax to submit form data
+            $.post('/register', account, function(result) {
+
+                event.preventDefault();
+            }, 'json');
+        });
 });
