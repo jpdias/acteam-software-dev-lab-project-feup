@@ -74,8 +74,8 @@ $(document).ready(function() {
                         message: 'The address is required and cannot be empty'
                     },
                     stringLength: {
-                        max: 350,
-                        message: 'The address must be less than 350 characters long'
+                        max: 150,
+                        message: 'The address must be less than 150 characters long'
                     },
                 }
             },
@@ -86,8 +86,8 @@ $(document).ready(function() {
                         message: 'The municipality is required and cannot be empty'
                     },
                     stringLength: {
-                        max: 350,
-                        message: 'The municipality  less than 350 characters long'
+                        max: 100,
+                        message: 'The municipality must be less than 100 characters long'
                     },
                 }
             },
@@ -98,8 +98,8 @@ $(document).ready(function() {
                         message: 'The district is required and cannot be empty'
                     },
                     stringLength: {
-                        max: 350,
-                        message: 'The district  less than 350 characters long'
+                        max: 100,
+                        message: 'The district must be less than 100 characters long'
                     },
                 }
             },
