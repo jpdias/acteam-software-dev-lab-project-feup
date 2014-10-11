@@ -2525,7 +2525,7 @@ select.input-lg {
 }
 textarea.input-lg,
 select[multiple].input-lg {
-  height: auto; 
+  height: auto;
 }
 .has-feedback {
   position: relative;
@@ -2535,7 +2535,7 @@ select[multiple].input-lg {
 }
 .form-control-feedback {
   position: absolute;
-  top: 25px;
+  top: 17px;
   right: 0;
   z-index: 2;
   display: block;

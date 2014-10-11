@@ -21,3 +21,5 @@ node_modules
 .lock-wscript
 # Webstorm
 .idea/
+# Windows
+Thumbs.db
