@@ -1,11 +1,9 @@
 {{> header}}
 <link rel="stylesheet" type="text/css" href="css/profileorg.css">
-		
 <div class="container-fluid">
-    <div class="row">
+  <div class="row">
 		{{> sidebar}}
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main fill">
-			
 			<!--Image Carousel-->
 			<div class="row clearfix">
 				<ul id="autoplay" class="gallery content-slider list-unstyled clearfix lightSlider lSSlide topimg">
@@ -20,9 +18,8 @@
 				  </li>
 				</ul>
 			</div>
-			
-			<div class="col-sm-3 col-md-3 column">
-				<br>
+		<div class="row clearfix">
+			<div class="col-sm-3 col-md-3">
 				<h3>Causes we defend:</h3>
 				<h4>
 					<ul>
@@ -35,53 +32,45 @@
 					</ul>
 				</h4>
 			</div>
-			
-			<div class="col-sm-9 col-md-9 column">
-				<div class="container">
-					<div class="row clearfix">
-						<div class="col-sm-6 col-md-6 column">
-							<h1>XPTO Association</h1>
-						</div>
-						<div class="col-sm-4 col-md-4 column">
-						</div>
-						<br>
-						<button type="button" class="col-sm-2 col-md-2 column btn btn-primary">Open Recruitment</button>
-					</div>
+			<div class="col-sm-6 col-md-6">
+				<div class="col-sm-12 col-md-12">
+					<h1>XPTO Association</h1>
 				</div>
-				<br>
-				<div class="container">
-					<div class="row clearfix">
-						<div class="col-sm-12 col-md-12 column">
-							<h4>
-								<b>Email: </b> alguem@hotmail.com<br>
-								<b>Telephone: </b> 229683988<br>
-								<b>Address: </b> Rua dos caracóis cozidos 410
-							</h4>
-						</div>
-					</div>
-				</div>
-				<br>
-				<div class="container">
-					<div class="row clearfix">
-						<div class="col-sm-8 col-md-8 column">
-							<div class="row">
-								<div class="col-sm-8 col-md-8 column btn btn-default">
-								Event XPTO
-								</div>
-								<div class="col-sm-1 col-md-1 column">
-								</div>
-								<div class="col-sm-3 col-md-3 column btn btn-default">
-								9/10/2014
-								</div>
-							</div>
-							<div class="row">
-								Some information about the organization.mmm mmmmmmm mmmmm mmmmmmmmmmmmmmm mmmmmmmmmm mmmmmmmmmmm.
-							</div>
-						</div>
-					</div>
+				<div class="col-sm-12 col-md-12">
+					<address>
+						<b>Email: </b> alguem@hotmail.com<br>
+						<b>Telephone: </b> 229683988<br>
+						<b>Address: </b> Rua dos caracóis cozidos 410
+					</address>
+					</h4>
 				</div>
 			</div>
-
+			<div class="col-sm-3 col-md-3">
+					<button class="btn btn-primary">
+						Open Recruitment
+					</button>
+			</div>
+			<div class="col-sm-9 col-md-9">
+				<hr>
+				<div class="event">
+					<div class="row">
+						<div class="col-sm-9 col-md-9">
+						<h3>Event XPTO</h3>
+						</div>
+						<div class="col-sm-3 col-md-3">
+						<h3>9/10/2014</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-9 col-md-9">
+						Some information about the event.mmm mmmmmmm mmmmm mmmmmmmmmmmmmmm mmmmmmmmmm mmmmmmmmmmm.
+						</div>
+						<div class="col-sm-3 col-md-3">
+							<button class="btn btn-primary btn-block">Apply!</div>
+						</div>
+				</div>
+			 </div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -90,13 +79,14 @@
 <script>
 $(document).ready(function() {
     $('#autoplay').lightSlider({
-		item:1,
-		verticalHeight:200,
-		vThumbWidth:50,
-		auto: true,
-		loop: true,
-		slideMargin:0
+			item:1,
+			verticalHeight:200,
+			vThumbWidth:50,
+			auto: true,
+			loop: true,
+			slideMargin:0
     });
 });
+
 </script>
 {{> footer}}
