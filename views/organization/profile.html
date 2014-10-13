@@ -20,7 +20,13 @@
 		</div>
 		<div class="row clearfix">
 			<div class="col-sm-3 col-md-3">
-        <div id="imgprof"></div>
+        <div class="text-center" id="imgprof">
+        </div>
+        <br>
+        <br>
+        <button class="btn btn-primary btn-block">
+          Open Recruitment
+        </button>
 				<h3>Causes we defend:</h3>
 				<h4>
 					<ul>
@@ -33,7 +39,7 @@
 					</ul>
 				</h4>
 			</div>
-			<div class="col-sm-6 col-md-6">
+			<div class="col-sm-5 col-md-5">
 				<div class="col-sm-12 col-md-12">
 					<h1>XPTO Association</h1>
 				</div>
@@ -46,10 +52,9 @@
 					</h4>
 				</div>
 			</div>
-			<div class="col-sm-3 col-md-3">
-					<button class="btn btn-primary">
-						Open Recruitment
-					</button>
+			<div class="col-sm-4 col-md-4">
+					<h3>About Us</h3>
+          <p>blablalblabla</p>
 			</div>
 			<div class="col-sm-9 col-md-9">
 				<hr>
@@ -75,7 +80,6 @@
 		</div>
 	</div>
 </div>
-
 {{> scripts}}
 <script>
 
@@ -89,6 +93,6 @@ $(document).ready(function() {
 			slideMargin:0
     });
 });
-
+$('#imgprof').html('<img class="img-thumbnail" src="' + get_gravatar("jpdias@live.com", 180)+'">');
 </script>
 {{> footer}}
