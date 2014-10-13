@@ -4,7 +4,7 @@ var Admin = require('../models/admin');
 var Organization = require('../models/organization');
 var LocalStrategy = require('../app').localStr;
 var sha1 = require('sha1');
-var mandrill = require('node-mandrill')('Kj-1SGPKFICoSgUIo9OEqw');
+//var mandrill = require('node-mandrill')('Kj-1SGPKFICoSgUIo9OEqw');
 
 /*passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());

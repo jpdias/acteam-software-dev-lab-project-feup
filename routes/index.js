@@ -100,6 +100,22 @@ app.get('/', function(req, res) {
   }
 });
 
+app.get('/profileuser', function(req, res) {
+  res.render(
+    'user/index',
+    {
+      partials:
+      {
+        header: 'common/header',
+        footer: 'common/footer',
+        sidebar: 'user/sidebarUser',
+        suggestedSidebar: 'user/suggestedSidebar',
+        scripts: 'common/scripts'
+      }
+    }
+  );
+});
+
 app.get('/signin', function(req, res) {
   res.render(
     'signin',
