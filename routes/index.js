@@ -113,19 +113,48 @@ app.get('/signin', function(req, res) {
     }
   );
 });
-app.get('/profileorg', function(req,res){
-  res.render(
-    'organization/profile',
-    {
-      partials:
+
+function showOrg(page,req,res){
+  if(page=="organization"){
+    res.render(
+      'organization/profile',
       {
-        sidebar:'organization/sidebar',
-        header: 'common/header',
-        footer: 'common/footer',
-        scripts:'common/scripts'
+        partials:
+        {
+          sidebar:'organization/sidebar',
+          header: 'common/header',
+          footer: 'common/footer',
+          scripts:'common/scripts'
+        }
       }
+    );
+  }
+  else{
+    res.render(
+      'user/profileorg',
+      {
+        partials:
+        {
+          sidebar:'user/sidebarUser',
+          header: 'common/header',
+          footer: 'common/footer',
+          scripts:'common/scripts'
+        }
+      }
+    );
+  }
+}
+app.get('/profileorg', function(req,res){
+  if(req.session.user){
+    if(req.session.user.role=="user" || (req.session.user.role=="admin")){
+      showOrg("user",req,res);
     }
-  );
+    else if(req.session.user.role=="organization"){
+      showOrg("user",req,res);
+    }
+    else
+      res.send(404);
+  }
 });
 
 app.get('/registerorg', function(req, res) {
