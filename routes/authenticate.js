@@ -6,6 +6,7 @@ var LocalStrategy = require('../app').localStr;
 var sha1 = require('sha1');
 var mandrill = require('node-mandrill')('Kj-1SGPKFICoSgUIo9OEqw');
 var fs = require('fs');
+var mandrill = require('node-mandrill')('Kj-1SGPKFICoSgUIo9OEqw');
 
 
 function saveImage(webmail,img,role){
