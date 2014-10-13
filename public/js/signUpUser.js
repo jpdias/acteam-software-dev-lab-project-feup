@@ -1,5 +1,16 @@
 /*Fields verifications for the register process using Bootstrap validator*/
 
+/*function DateValidation(){
+  var today =new Date();
+  var inputDate = new Date(document.forms["registerForm"]["birthdate"].value);
+  if (inputDate > today) {
+    sfm_show_error_msg('Date is invalid');
+    return false;
+  } else {
+    return true;
+  }
+}*/
+
 $(document).ready(function() {
     $( "#registerform").bootstrapValidator({
         message: 'This value is not valid',
@@ -13,7 +24,7 @@ $(document).ready(function() {
                 message: 'The username is not valid',
                 validators: {
                     notEmpty: {
-                        message: 'The username is required and cannot be empty'
+                        message: 'The username is required '
                     },
                     stringLength: {
                         min: 6,
@@ -33,7 +44,7 @@ $(document).ready(function() {
             email: {
                 validators: {
                     notEmpty: {
-                        message: 'The email is required and cannot be empty'
+                        message: 'The email is required'
                     },
                     emailAddress: {
                         message: 'The input is not a valid email address'
@@ -43,7 +54,7 @@ $(document).ready(function() {
             password: {
                 validators: {
                     notEmpty: {
-                        message: 'The password is required and cannot be empty'
+                        message: 'The password is required'
                     },
                     different: {
                         field: 'username',
@@ -59,7 +70,7 @@ $(document).ready(function() {
               triger:'focus blur',
                 validators: {
                     notEmpty: {
-                        message: 'The confirmation password is required and cannot be empty'
+                        message: 'The confirmation password is required'
                     },
                     identical: {
                         field: 'password',
@@ -71,7 +82,7 @@ $(document).ready(function() {
                 message: 'The address is not valid',
                 validators: {
                     notEmpty: {
-                        message: 'The address is required and cannot be empty'
+                        message: 'The address is required'
                     },
                     stringLength: {
                         max: 150,
@@ -83,7 +94,7 @@ $(document).ready(function() {
                 message: 'The municipality is not valid',
                 validators: {
                     notEmpty: {
-                        message: 'The municipality is required and cannot be empty'
+                        message: 'The municipality is required'
                     },
                     stringLength: {
                         max: 100,
@@ -95,7 +106,7 @@ $(document).ready(function() {
                 message: 'The district is not valid',
                 validators: {
                     notEmpty: {
-                        message: 'The district is required and cannot be empty'
+                        message: 'The district is required'
                     },
                     stringLength: {
                         max: 100,
@@ -113,7 +124,25 @@ $(document).ready(function() {
             birthdate: {
                 validators: {
                     notEmpty: {
-                        message: 'The birthdate is required and cannot be empty'
+                        message: 'The birthdate is required'
+                    }
+                }
+            },
+            birthdate: {
+                validators: {
+                    notEmpty: {
+                        message: 'The birthdate is required'
+                    },
+                    callback: {
+                        message: 'The birthdate is not in the range',
+                        callback: function(value, validator) {
+                            var m = new moment(value, 'DD/MM/YYYY', true);
+                            if (!m.isValid()) {
+                                return false;
+                            }
+                            // Check if the date in our range
+                            return m.isAfter('01/01/1000') && m.isBefore(moment().format('L'));
+                        }
                     }
                 }
             }
