@@ -6,15 +6,11 @@
       <!--Image Carousel-->
       <div class="row clearfix">
         <ul id="autoplay" class="gallery content-slider list-unstyled clearfix lightSlider lSSlide topimg">
+          {{#org.images}}
           <li>
-            <img src="http://www.freeartwallpapers.com/wp-content/uploads/2014/08/Wallpapers-abstract-awesome-1920-1080-196268-abstract.jpg">
+            <img src="{{.}}">
           </li>
-          <li>
-            <img src="http://2.bp.blogspot.com/-XMuH18jxCEU/T6ePpwJLhZI/AAAAAAAAFmU/sQYDxdsK_74/s1600/3D-Abstract-Wallpapers%252B-%252Bgraphics.jpg">
-          </li>
-          <li>
-            <img src="http://screenwallpapers.net/wp-content/uploads/2014/09/abstract_wallpaper_05.jpg">
-          </li>
+          {{/org.images}}
         </ul>
       </div>
      <div class="row clearfix">
@@ -25,31 +21,28 @@
         <h3>Causes we defend:</h3>
         <h4>
           <ul>
-            <li>Arts and Culture</li>
-            <li>Environment</li>
-            <li>Human Rights</li>
-            <li>Oranges</li>
-            <li>Disater</li>
-            <li>Science and Technology</li>
+            {{#org.causes}}
+            <li>{{.}}</li>
+            {{/org.causes}}
           </ul>
         </h4>
       </div>
       <div class="col-sm-5 col-md-5">
         <div class="col-sm-12 col-md-12">
-          <h1>XPTO Association</h1>
+          <h1>{{org.name}}</h1>
         </div>
         <div class="col-sm-12 col-md-12">
           <address>
-            <b>Email: </b> alguem@hotmail.com<br>
-            <b>Telephone: </b> 229683988<br>
-            <b>Address: </b> Rua dos caracóis cozidos 410
+            <b>Email: </b> {{org.email}}<br>
+            <b>Address: </b> {{org.address.address}}, {{org.address.municipality}},  {{org.address.district}}<br>
+            <b>Website: </b> {{org.website}}
           </address>
           </h4>
         </div>
       </div>
       <div class="col-sm-4 col-md-4">
         <h3>About Us</h3>
-        <p>blablalblabla</p>
+        <p>{{org.about}}</p>
       </div>
       <div class="col-sm-9 col-md-9">
         <hr>
@@ -67,7 +60,7 @@
             Some information about the event.mmm mmmmmmm mmmmm mmmmmmmmmmmmmmm mmmmmmmmmm mmmmmmmmmmm.
             </div>
             <div class="col-sm-3 col-md-3">
-              
+
             </div>
         </div>
        </div>
@@ -88,6 +81,6 @@ $(document).ready(function() {
       slideMargin:0
     });
 });
-$('#imgprof').html('<img class="img-thumbnail" src="' + get_gravatar("jpdias@live.com", 180)+'">');
+$('#imgprof').html('<img class="img-thumbnail" src="' + get_gravatar("{{org.email}}", 180)+'">');
 </script>
 {{> footer}}

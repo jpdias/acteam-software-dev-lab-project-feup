@@ -119,49 +119,55 @@ app.get('/signin', function(req, res) {
 });
 
 function showOrg(page,req,res,org){
-  res.locals={};
-  if(page=="organization"){
-    res.render(
-      'organization/profile',
-      {
-        partials:
-        {
-          sidebar:'organization/sidebar',
-          header: 'common/header',
-          footer: 'common/footer',
-          scripts:'common/scripts'
-        }
+  dbop.getOrganization(org,function(err,organization){
+    if(!err){
+      var data= {};
+      data.org=organization;
+      res.locals=data;
+
+      if(page=="organization"){
+        res.render(
+          'organization/profile',
+          {
+            partials:
+            {
+              sidebar:'organization/sidebar',
+              header: 'common/header',
+              footer: 'common/footer',
+              scripts:'common/scripts'
+            }
+          }
+        );
       }
-    );
-  }
-  else if(page=="user"){
-    res.render(
-      'user/profileorg',
-      {
-        partials:
-        {
-          sidebar:'user/sidebarUser',
-          header: 'common/header',
-          footer: 'common/footer',
-          scripts:'common/scripts',
-          suggestedSidebar  : 'user/suggestedSidebar'
-        }
+      else if(page=="user"){
+        res.render(
+          'user/profileorg',
+          {
+            partials:
+            {
+              sidebar:'user/sidebarUser',
+              header: 'common/header',
+              footer: 'common/footer',
+              scripts:'common/scripts',
+              suggestedSidebar  : 'user/suggestedSidebar'
+            }
+          }
+        );
       }
-    );
-  }
-  else{
-    res.render(
-      'visitor/profileorg',
-      {
-        partials:
+    else{
+      res.render(
+        'visitor/profileorg',
         {
-          header: 'common/header',
-          footer: 'common/footer',
-          scripts:'common/scripts'
-        }
-      }
-    );
-  }
+          partials:
+          {
+            header: 'common/header',
+            footer: 'common/footer',
+            scripts:'common/scripts'
+          }
+        });
+     }
+   }
+  });
 }
 
 app.get('/profileorg', function(req,res,next){
