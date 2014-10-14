@@ -63,7 +63,8 @@ function getHome(type,req,res){
         header: 'common/header',
         footer: 'common/footer',
         sidebar: 'user/sidebarUser',
-        scripts: 'common/scripts'
+        scripts: 'common/scripts',
+        suggestedSidebar  : 'user/suggestedSidebar'
       }
     }
   );
@@ -97,7 +98,6 @@ app.get('/profileuser', function(req, res) {
         header: 'common/header',
         footer: 'common/footer',
         sidebar: 'user/sidebarUser',
-        suggestedSidebar: 'user/suggestedSidebar',
         scripts: 'common/scripts'
       }
     }
@@ -148,8 +148,7 @@ function showOrg(page,req,res,org){
               sidebar:'user/sidebarUser',
               header: 'common/header',
               footer: 'common/footer',
-              scripts:'common/scripts',
-              suggestedSidebar  : 'user/suggestedSidebar'
+              scripts:'common/scripts'
             }
           }
         );
