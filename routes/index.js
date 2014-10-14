@@ -4,28 +4,12 @@ var passport = require('../app').auth;
 var Account = require('../models/account');
 var LocalStrategy = require('../app').localStr;
 var sha1 = require('sha1');
+var common = require('./common');
+var dbop = require('./dbops');
 
-//Error handling !
 app.use(function(req, res, next){
-  res.status(404);
-  res.send({"Error":"Not Found"});
-  return;
+  common.errNotFound(req,res);
 });
-
-app.use(function(err, req, res, next){
-  res.status(err.status || 500);
-  res.send({"Error":"Permission fault"});
-  return;
-});
-
-function errPermissions(req,res){
-  res.status(500);
-  res.send({"Error":"Permission fault"});
-  return;
-}
-//End of error handling
-
-//auth
 
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
@@ -46,8 +30,6 @@ app.get('/logout', function(req, res){
   req.session.destroy();
   res.redirect('/');
 });
-
-
 
 app.post('/register',auth.reg);
 
@@ -136,7 +118,8 @@ app.get('/signin', function(req, res) {
   );
 });
 
-function showOrg(page,req,res){
+function showOrg(page,req,res,org){
+  res.locals={};
   if(page=="organization"){
     res.render(
       'organization/profile',
@@ -151,13 +134,27 @@ function showOrg(page,req,res){
       }
     );
   }
-  else{
+  else if(page=="user"){
     res.render(
       'user/profileorg',
       {
         partials:
         {
           sidebar:'user/sidebarUser',
+          header: 'common/header',
+          footer: 'common/footer',
+          scripts:'common/scripts',
+          suggestedSidebar  : 'user/suggestedSidebar'
+        }
+      }
+    );
+  }
+  else{
+    res.render(
+      'user/profileorg',
+      {
+        partials:
+        {
           header: 'common/header',
           footer: 'common/footer',
           scripts:'common/scripts'
@@ -167,20 +164,23 @@ function showOrg(page,req,res){
   }
 }
 app.get('/profileorg', function(req,res,next){
-  if(req.session.user){
+  if(req.session.user && req.query.org!==""){
     if(req.session.user.role=="user" || (req.session.user.role=="admin")){
-      showOrg("user",req,res);
+      showOrg("user",req,res,req.query.org);
     }
     else if(req.session.user.role=="organization"){
-      showOrg("user",req,res);
+      showOrg("organization",req,res,req.query.org);
     }
     else{
       errPermissions(req,res);
       }
   }
-  else{
-    errPermissions(req,res);
-    }
+  else if(req.query.org!==""){
+    showOrg("",req,res,req.query.org);
+  }
+  else
+    common.errNotFound(req,res);
+
 });
 
 app.get('/registerorg', function(req, res) {
