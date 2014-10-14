@@ -33,13 +33,10 @@ $(document).ready(function() {
             website: {
                 message: 'The website is not valid',
                 validators: {
-                    notEmpty: {
-                        message: 'The website address is required'
-                    },
                     regexp: {
                         regexp: /^.+\.[a-zA-Z]+(\.[a-zA-Z]+)*(\\[a-zA-Z]+)*$/,
                         message: 'The input is not a valid website address'
-                    },
+                    }
                 }
             },
             email: {
