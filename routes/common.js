@@ -7,12 +7,32 @@ var sha1 = require('sha1');
 
 function ErrPermissions(req,res){
   res.status(500);
-  res.send({"Error":"Permission fault"});
+  res.render(
+    'errors/500',
+    {
+      partials:
+      {
+        header: 'common/header',
+        footer: 'common/footer',
+        scripts:'common/scripts',
+      }
+    }
+  );
   return;
 }
 function ErrNotFound(req,res){
   res.status(404);
-  res.send({"Error":"Not Found"});
+  res.render(
+    'errors/404',
+    {
+      partials:
+      {
+        header: 'common/header',
+        footer: 'common/footer',
+        scripts:'common/scripts',
+      }
+    }
+  );
   return;
 }
 
