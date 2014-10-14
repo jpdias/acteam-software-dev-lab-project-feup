@@ -8,15 +8,21 @@ var sha1 = require('sha1');
 //Error handling !
 app.use(function(req, res, next){
   res.status(404);
-  res.send({ error: 'Not found' });
+  res.send({"Error":"Not Found"});
   return;
 });
 
 app.use(function(err, req, res, next){
   res.status(err.status || 500);
-  res.send({ error: err.message });
+  res.send({"Error":"Permission fault"});
   return;
 });
+
+function errPermissions(req,res){
+  res.status(500);
+  res.send({"Error":"Permission fault"});
+  return;
+}
 //End of error handling
 
 //auth
@@ -160,7 +166,7 @@ function showOrg(page,req,res){
     );
   }
 }
-app.get('/profileorg', function(req,res){
+app.get('/profileorg', function(req,res,next){
   if(req.session.user){
     if(req.session.user.role=="user" || (req.session.user.role=="admin")){
       showOrg("user",req,res);
@@ -168,9 +174,13 @@ app.get('/profileorg', function(req,res){
     else if(req.session.user.role=="organization"){
       showOrg("user",req,res);
     }
-    else
-      res.send(404);
+    else{
+      errPermissions(req,res);
+      }
   }
+  else{
+    errPermissions(req,res);
+    }
 });
 
 app.get('/registerorg', function(req, res) {
