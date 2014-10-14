@@ -151,7 +151,7 @@ function showOrg(page,req,res,org){
   }
   else{
     res.render(
-      'user/profileorg',
+      'visitor/profileorg',
       {
         partials:
         {
@@ -163,8 +163,9 @@ function showOrg(page,req,res,org){
     );
   }
 }
+
 app.get('/profileorg', function(req,res,next){
-  if(req.session.user && req.query.org!==""){
+  if(req.session.user && (typeof req.query.org!=="undefined")){
     if(req.session.user.role=="user" || (req.session.user.role=="admin")){
       showOrg("user",req,res,req.query.org);
     }
@@ -175,7 +176,7 @@ app.get('/profileorg', function(req,res,next){
       errPermissions(req,res);
       }
   }
-  else if(req.query.org!==""){
+  else if(typeof req.query.org!=="undefined"){
     showOrg("",req,res,req.query.org);
   }
   else
