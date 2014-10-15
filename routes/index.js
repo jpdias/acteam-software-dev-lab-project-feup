@@ -54,18 +54,25 @@ function getHome(type,req,res){
   else
     page = "index";
 
+  var partial =
+  {
+    header: 'common/header',
+    footer: 'common/footer',
+    scripts: 'common/scripts'
+  };
+  if(type=="organization"){
+    partial.sidebar = 'organization/sidebar';
+  }
+  else if(type=="user"){
+    partials.suggestedSidebar = 'user/suggestedSidebar';
+    partial.sidebar = 'user/sidebarUser';
+  }
+
   res.locals = req.session.user;
   res.render(
     page,
     {
-      partials:
-      {
-        header: 'common/header',
-        footer: 'common/footer',
-        sidebar: 'user/sidebarUser',
-        scripts: 'common/scripts',
-        suggestedSidebar  : 'user/suggestedSidebar'
-      }
+      partials:partial
     }
   );
 }
