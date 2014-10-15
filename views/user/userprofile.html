@@ -1,0 +1,83 @@
+{{> header}}
+
+<link rel="stylesheet" href="css/bootstrap-editable.css">
+<link rel="stylesheet" href="css/profileuser.css">
+<div class="container">
+  <div class="row">
+    {{> sidebar}}
+    <div class="col-sm-6 col-md-offset-1 col-md-10 main">
+      <div class="profilePic">
+        <img src="img/organization1.png" height="200" width="240">
+      </div>
+      <br></br><br>
+      <div class="profileParamContainer">
+        <div class="profileParam">
+          <span>Username:</span>
+          <a href="#" id="username" data-type="text" data-placement="right"
+           data-title="Enter username">superuser</a>
+       </div>
+      </div>
+
+      <div class="profileParamContainer">
+        <div class="profileParam">
+          <span>Gender:</span>
+          <a href="#" id="gender" data-type="text" data-placement="right" data-title="Enter gender">supergender</a>
+        </div>
+      </div>
+
+      <div class="profileParamContainer">
+        <div class="profileParam">
+          <span>Date of birth:</span>
+          <a href="#" id="datebirth" data-type="text" data-placement="right" data-title="Enter datebirth">superdatebirth</a>
+      </div>
+      </div>
+
+      <div class="profileParamContainer">
+        <div class="profileParam">
+          <span>Zip-Code:</span>
+          <a href="#" id="zip" data-type="text" data-placement="right" data-title="Enter zip">superzip</a>
+      </div>
+      </div>
+
+      <div class="profileParamContainer">
+        <div class="profileParam">
+          <span>Address:</span>
+          <a href="#" id="address" data-type="text" data-placement="right" data-title="Enter address">superaddress</a>
+      </div>
+      </div>
+
+      <div class="profileParamContainer">
+        <div class="profileParam">
+          <span>Email:</span>
+          <a href="#" id="email" data-type="text" data-placement="right" data-title="Enter email">superemail</a>
+      </div>
+      </div>
+
+      <div class="profileParamContainer">
+        <div class="profileParam">
+          <span>Work/School:</span>
+          <a href="#" id="work" data-type="text" data-placement="right" data-title="Enter work">superwork</a>
+        </div>
+      </div>
+      <br>
+
+      <div class="curriculum">
+        <a href="#"> Curriculum Vitae </a>
+        <div>
+          <h3> Causes you care about: </h3>
+          <br>
+          <p>Arts and Culture</p>
+          <p>Environment</p>
+          <p>Human Rights</p>
+        </div>
+      </div>
+
+    </div>
+    {{> suggestedSidebar}}
+  </div>
+</div>
+
+{{> scripts}}
+<script src="js/bootstrap-editable.min.js"></script>
+<script src="js/x-editable.js"></script>
+{{> footer}}
