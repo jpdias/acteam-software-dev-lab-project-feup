@@ -24,7 +24,9 @@ var Organization = new Schema({
     address: {
       address: String,
       municipaly: String,
-      district: String},
+      district: String
+    },
+    images:[String],
     members:[Member],
     about: String,
     causes: [String],

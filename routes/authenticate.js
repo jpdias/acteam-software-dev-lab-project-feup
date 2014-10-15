@@ -4,12 +4,12 @@ var Admin = require('../models/admin');
 var Organization = require('../models/organization');
 var LocalStrategy = require('../app').localStr;
 var sha1 = require('sha1');
-//var mandrill = require('node-mandrill')('Kj-1SGPKFICoSgUIo9OEqw');
+var mandrill = require('node-mandrill')('Kj-1SGPKFICoSgUIo9OEqw');
+var fs = require('fs');
 
-/*passport.use(new LocalStrategy(Account.authenticate()));
-passport.serializeUser(Account.serializeUser());
-passport.deserializeUser(Account.deserializeUser());
-*/
+
+function saveImage(webmail,img,role){
+}
 
 function sendMail(who,title,msg){
   mandrill('/messages/send', {
@@ -161,6 +161,7 @@ passport.deserializeUser(function(user, done) {
     done(err, user);
   });
 });
+module.exports.saveimg = saveImage;
 module.exports.confirmuser = confirmaccount;
 module.exports.reg = register;
 module.exports.email = sendMail;

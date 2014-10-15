@@ -1,14 +1,22 @@
 {{> header}}
 <link rel="stylesheet" href="css/signin.css">
 <div class="container">
-  <div class="form-signin alert alert-info" role="alert"><b>{{msg}}</b></div>
-  <form class="form-signin" role="form" id="loginform">
-    <h2 class="form-signin-heading">Please sign in</h2>
-    <input type="email" class="form-control" placeholder="Email address" required autofocus>
-    <input type="password" class="form-control" placeholder="Password" required>
-    <br>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  <br>
+  {{#msg}}
+  <div class="form-signin alert alert-info" role="alert"><b>{{.}}</b></div>
+  {{/msg}}
+  <h2 class="form-signin-heading text-center">Please sign in</h2>
+  <form class="form-signin" id="signinform">
+      <div class="form-group">
+          <input type="email" class="form-control" name="email" placeholder="Email" required>
+      </div>
+      <div class="form-group">
+          <input type="password" class="form-control" name="password" placeholder="Password" required>
+      </div>
+      <button type="submit" class="btn btn-lg btn-primary btn-block">Sign In</button>
   </form>
+
 </div> <!-- /container -->
 {{> scripts}}
+
 {{> footer}}

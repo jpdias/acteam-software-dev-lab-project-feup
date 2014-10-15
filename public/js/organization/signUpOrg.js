@@ -33,13 +33,10 @@ $(document).ready(function() {
             website: {
                 message: 'The website is not valid',
                 validators: {
-                    notEmpty: {
-                        message: 'The website address is required'
-                    },
                     regexp: {
                         regexp: /^.+\.[a-zA-Z]+(\.[a-zA-Z]+)*(\\[a-zA-Z]+)*$/,
                         message: 'The input is not a valid website address'
-                    },
+                    }
                 }
             },
             email: {
@@ -162,8 +159,8 @@ $(document).ready(function() {
 
             account = {
                 name: frmdata[0].value,
-                email: frmdata[1].value,
-                website: frmdata[2].value,
+                email: frmdata[2].value,
+                website: frmdata[1].value,
                 password: frmdata[4].value,
                 address: {
                   address: frmdata[5].value,
@@ -181,8 +178,8 @@ $(document).ready(function() {
 
             // Use Ajax to submit form data
             $.post('/register', account, function(result) {
-                event.preventDefault();
-                location.reload();
+                swal({allowOutsideClick:true,title: "Account created with success!",text:"Please confirm your account.", type:"success"});
+                $( "#registerOrgform").find("input[type=text], textarea").val("");
             }, 'json');
         });
 });

@@ -1,0 +1,86 @@
+{{> header}}
+<link rel="stylesheet" type="text/css" href="css/profileorg.css">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <!--Image Carousel-->
+      <div class="row clearfix">
+        <ul id="autoplay" class="gallery content-slider list-unstyled clearfix lightSlider lSSlide topimg">
+          {{#org.images}}
+          <li>
+            <img src="{{.}}">
+          </li>
+          {{/org.images}}
+        </ul>
+      </div>
+     <div class="row clearfix">
+      <div class="col-sm-3 col-md-3">
+        <div class="text-center" id="imgprof">
+        </div>
+        <br>
+        <h3>Causes we defend:</h3>
+        <h4>
+          <ul>
+            {{#org.causes}}
+            <li>{{.}}</li>
+            {{/org.causes}}
+          </ul>
+        </h4>
+      </div>
+      <div class="col-sm-5 col-md-5">
+        <div class="col-sm-12 col-md-12">
+          <h1>{{org.name}}</h1>
+        </div>
+        <div class="col-sm-12 col-md-12">
+          <address>
+            <b>Email: </b> {{org.email}}<br>
+            <b>Address: </b> {{org.address.address}}, {{org.address.municipality}},  {{org.address.district}}<br>
+            <b>Website: </b> {{org.website}}
+          </address>
+          </h4>
+        </div>
+      </div>
+      <div class="col-sm-4 col-md-4">
+        <h3>About Us</h3>
+        <p>{{org.about}}</p>
+      </div>
+      <div class="col-sm-9 col-md-9">
+        <hr>
+        <div class="event">
+          <div class="row">
+            <div class="col-sm-9 col-md-9">
+            <h3>Event XPTO</h3>
+            </div>
+            <div class="col-sm-3 col-md-3">
+            <h3>9/10/2014</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-9 col-md-9">
+            Some information about the event.mmm mmmmmmm mmmmm mmmmmmmmmmmmmmm mmmmmmmmmm mmmmmmmmmmm.
+            </div>
+            <div class="col-sm-3 col-md-3">
+
+            </div>
+        </div>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{> scripts}}
+<script>
+$(document).ready(function() {
+    $('#autoplay').lightSlider({
+      item:1,
+      verticalHeight:200,
+      vThumbWidth:50,
+      auto: true,
+      loop: true,
+      slideMargin:0
+    });
+});
+$('#imgprof').html('<img class="img-thumbnail" src="' + get_gravatar("{{org.email}}", 180)+'">');
+</script>
+{{> footer}}
