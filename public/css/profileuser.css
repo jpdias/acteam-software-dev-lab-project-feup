@@ -1,0 +1,29 @@
+.profileParamContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  left: 60%;
+}
+
+.profilePic {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 125px;
+  top: 35px;
+}
+
+.curriculum {
+  width: 100%;
+  height: 100%;
+}
+
+.curriculum a {
+  position: relative;
+  left:145px;
+}
+
+.curriculum div {
+  position: relative;
+  left:65px;
+}

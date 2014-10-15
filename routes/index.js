@@ -98,7 +98,7 @@ app.get('/', function(req, res) {
 
 app.get('/profileuser', function(req, res) {
   res.render(
-    'user/index',
+    'user/userprofile',
     {
       partials:
       {
