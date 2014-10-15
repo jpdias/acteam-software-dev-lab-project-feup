@@ -64,7 +64,7 @@ function getHome(type,req,res){
     partial.sidebar = 'organization/sidebar';
   }
   else if(type=="user"){
-    partials.suggestedSidebar = 'user/suggestedSidebar';
+    partial.suggestedSidebar = 'user/suggestedSidebar';
     partial.sidebar = 'user/sidebarUser';
   }
 
@@ -105,6 +105,7 @@ app.get('/profileuser', function(req, res) {
         header: 'common/header',
         footer: 'common/footer',
         sidebar: 'user/sidebarUser',
+        suggestedSidebar: 'user/suggestedSidebar',
         scripts: 'common/scripts'
       }
     }
