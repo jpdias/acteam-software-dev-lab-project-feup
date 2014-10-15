@@ -125,13 +125,6 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'The birthdate is required'
-                    }
-                }
-            },
-            birthdate: {
-                validators: {
-                    notEmpty: {
-                        message: 'The birthdate is required'
                     },
                     callback: {
                         message: 'The birthdate is not in the range',
@@ -200,8 +193,8 @@ $(document).ready(function() {
 
             // Use Ajax to submit form data
             $.post('/register', account, function(result) {
-                event.preventDefault();
-                location.reload();
+                swal({allowOutsideClick:true,title: "Account created with success!",text:"Please confirm your account.", type:"success"});
+                $( "#registerform").find("input[type=text], textarea").val("");
             }, 'json');
         });
 });

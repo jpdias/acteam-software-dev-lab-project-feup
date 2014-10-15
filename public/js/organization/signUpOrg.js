@@ -178,8 +178,8 @@ $(document).ready(function() {
 
             // Use Ajax to submit form data
             $.post('/register', account, function(result) {
-                event.preventDefault();
-                location.reload();
+                swal({allowOutsideClick:true,title: "Account created with success!",text:"Please confirm your account.", type:"success"});
+                $( "#registerOrgform").find("input[type=text], textarea").val("");
             }, 'json');
         });
 });
