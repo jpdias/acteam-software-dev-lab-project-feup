@@ -48,26 +48,27 @@ app.get('/loggedIn', function(req, res) {
 
 function getHome(type,req,res){
   var page;
+  var partial;
   if(type!==""){
     page = type+'/index';
+    partial =
+    {
+      header: 'common/header',
+      footer: 'common/footer',
+      scripts: 'common/scripts',
+      suggestedSidebar: 'user/suggestedSidebar',
+      sidebar: 'user/sidebarUser'
+    };
   }
-  else
+  else{
+    partial =
+    {
+      header: 'common/header',
+      footer: 'common/footer',
+      scripts: 'common/scripts'
+    };
     page = "index";
-
-  var partial =
-  {
-    header: 'common/header',
-    footer: 'common/footer',
-    scripts: 'common/scripts'
-  };
-  if(type=="organization"){
-    partial.sidebar = 'organization/sidebar';
   }
-  else if(type=="user"){
-    partial.suggestedSidebar = 'user/suggestedSidebar';
-    partial.sidebar = 'user/sidebarUser';
-  }
-
   res.locals = req.session.user;
   res.render(
     page,
@@ -83,7 +84,7 @@ app.get('/', function(req, res) {
       getHome("user",req,res);
     }
     else if(req.session.user.role=="organization"){
-      getHome("organization",req,res);
+      dashboard(req,res);
     }
     else if(req.session.user.role=="admin"){
       getHome("admin",req,res);
@@ -234,7 +235,7 @@ app.get('/registerorg', function(req, res) {
   );
 });
 
-app.get('/dashboardorg', function(req, res) {
+function dashboard(req, res) {
     res.render(
         'organization/dashboard',
         {
@@ -242,9 +243,10 @@ app.get('/dashboardorg', function(req, res) {
             {
                 header: 'common/header',
                 sidebar:'organization/sidebar',
-                footer: 'common/footer',
+                events: 'organization/partialEvents',
+                recruitments: 'organization/partialRecruitments',
                 scripts:'common/scripts'
             }
         }
     );
-});
+}
