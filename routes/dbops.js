@@ -32,24 +32,25 @@ function getUser(userName, callback){
 
 module.exports.getUser = getUser;
 
-/*
-Organization.findOne({ email: req.query.email }, function (err, user) {
-  if(user){
-    if(sha1(user.email+user.name)===req.query.code){
-      user.confirmed = true;
-      user.save(function(err) {
-        if (err) {
-          errorLogin("Error with the account.",req,res);
-          return next(err);
-        }
-        else{
-          errorLogin("Account confirmed with success!",req,res);
-        }
-      });
+function addEventToOrganization(event, orgName, callback){
+  Organization.findOne({ "name": orgName }, function (err, org) {
+    if(org){
+        Event.findOne({ "name": event.name }, function (err2, duplicateEvent){
+          if(!duplicateEvent){
+            console.log(event);
+            var newEvent = new Event(event);
+            console.log(newEvent);
+            newEvent.save(function(err3){
+              callback(err3);
+            });
+            callback(err2, event);
+          } else {
+            callback(err2, duplicateEvent);
+          }
+        });
     }
-  }
-  else{
-    errorLogin("Account doesn't exists!",req,res);
-  }
-});
-*/
+    else{
+      callback(err, org);
+    }
+  });
+}
