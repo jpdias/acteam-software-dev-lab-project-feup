@@ -32,7 +32,7 @@ function getUser(userName, callback){
 
 module.exports.getUser = getUser;
 
-function addEventToOrganization(event, orgName, callback){
+function addEventToOrg(event, orgName, callback){
   Organization.findOne({ "name": orgName }, function (err, org) {
     if(org){
         Event.findOne({ "name": event.name }, function (err2, duplicateEvent){
@@ -41,7 +41,7 @@ function addEventToOrganization(event, orgName, callback){
             var newEvent = new Event(event);
             console.log(newEvent);
             newEvent.save(function(err3){
-              callback(err3);
+              callback(err3, newEvent);
             });
             callback(err2, event);
           } else {
@@ -54,3 +54,23 @@ function addEventToOrganization(event, orgName, callback){
     }
   });
 }
+
+module.exports.addEventToOrganization = addEventToOrg;
+
+function addNewMember(member, orgName, callback){
+    Organization.findOne({ "name": orgName }, function (err, org) {
+      if(org){
+        if(!org.members.hasOwnProperty(member.email)){
+          org.members.push(member);
+          org.save(function(err2){
+            callback(err2, org);
+          });
+        }
+      }
+      else{
+        callback(err, org);
+      }
+    });
+}
+
+module.exports.addNewMember = addNewMember;
