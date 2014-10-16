@@ -233,3 +233,18 @@ app.get('/registerorg', function(req, res) {
     }
   );
 });
+
+app.get('/dashboardorg', function(req, res) {
+    res.render(
+        'organization/dashboard',
+        {
+            partials:
+            {
+                header: 'common/header',
+                sidebar:'organization/sidebar',
+                footer: 'common/footer',
+                scripts:'common/scripts'
+            }
+        }
+    );
+});
