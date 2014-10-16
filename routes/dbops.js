@@ -41,11 +41,11 @@ function addEventToOrg(event, orgName, callback){
             var newEvent = new Event(event);
             console.log(newEvent);
             newEvent.save(function(err3){
-              callback(err3, newEvent);
+              callback(err3, event);
             });
             callback(err2, event);
           } else {
-            callback(err2, duplicateEvent);
+            callback(err2, event);
           }
         });
     }
@@ -74,3 +74,20 @@ function addNewMember(member, orgName, callback){
 }
 
 module.exports.addNewMember = addNewMember;
+
+function removeMemberFromOrganization(member, orgName, callback){
+  Organization.findOne({ "name": orgName }, function (err, org) {
+    if(org){
+      vay i = org.members.indexOf(member);
+      if(i != 1){
+        org.members.splice(i);
+        org.save(function(err2){
+          callback(err2, org);
+        });
+      }
+    }
+    else{
+      callback(err, org);
+    }
+  });
+}
