@@ -35,6 +35,20 @@ function ErrNotFound(req,res){
   );
   return;
 }
+function ErrServiceUnavailable(req,res){
+  res.status(503);
+  res.render(
+    'errors/503',
+    {
+      partials:
+      {
+        footer: 'common/footer',
+        scripts:'common/scripts',
+      }
+    }
+  );
+  return;
+}
 
 module.exports.errPermission = ErrPermissions;
 module.exports.errNotFound =  ErrNotFound;
