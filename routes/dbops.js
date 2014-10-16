@@ -91,3 +91,9 @@ function removeMemberFromOrganization(member, orgName, callback){
     }
   });
 }
+
+function removeAccount(name, callback){
+  Account.findOneAndRemove({"name":name}, function(err){
+    callback(err);
+  });
+}
