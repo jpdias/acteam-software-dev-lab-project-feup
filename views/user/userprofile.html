@@ -9,58 +9,68 @@
       <div class="col-md-4">
         <img class="img-thumbnail" src="img/organization1.png" width="100%">
         <hr>
-        <div>
-          <a href="#"> Curriculum Vitae </a>
+        <div class="col-md-12">
+          <center> <a href="#"> <span class="glyphicon glyphicon-file"></span>Curriculum Vitae </a></center>
           <div>
-            <h3> Causes you care about: </h3>
-            <br>
-            <p>Arts and Culture</p>
-            <p>Environment</p>
-            <p>Human Rights</p>
+
+            <center> <h4> Causes you care about: </h4> </center>
+
+            <div class="col-md-offset-3">
+              <li>Arts and Culture</li>
+              <li>Environment</li>
+              <li>Human Rights</li>
+            </div>
+
           </div>
         </div>
       </div>
 
       <div class="col-md-8 text-left">
-        <div class="col-md-6 text-right">
-          <span>Username:</span>
+        <div class="col-md-3">
+          <br>
+          <span> <span class="glyphicon glyphicon-user"></span> Personal Information </span>
         </div>
-
-        <div class="col-md-6 text-left">
+        <div class="col-md-8 well">
+          <span>Username:</span>
           <a href="#" id="username" data-type="text" data-placement="right"
            data-title="Enter username">superuser</a>
-        </div>
+           <span style="display:block" >Gender:
+             <a href="#" id="gender" data-type="text" data-placement="right" data-title="Enter gender">supergender</a>
+           </span>
 
-        <div class="">
-          <span>Gender:</span>
-          <a href="#" id="gender" data-type="text" data-placement="right" data-title="Enter gender">supergender</a>
-        </div>
-
-
-        <div class="">
-          <span>Date of birth:</span>
-          <a href="#" id="datebirth" data-type="text" data-placement="right" data-title="Enter datebirth">superdatebirth</a>
-        </div>
-
-        <div class="">
-          <address>
-            123 XPTO Ave<br>
-            Porto, Portugal<br>
-            <abbr title="Phone">P:</abbr> (123) 456-7890
-          </address>
-        </div>
-
-        <div class="">
-          <span>Email:</span>
-          <a href="#" id="email" data-type="text" data-placement="right" data-title="Enter email">superemail</a>
-        </div>
-
-        <div class="">
-          <span>Work/School:</span>
-          <a href="#" id="work" data-type="text" data-placement="right" data-title="Enter work">superwork</a>
+           <span>Date of birth:</span>
+           <a href="#" id="datebirth" data-type="text" data-placement="right" data-title="Enter datebirth">superdatebirth</a>
         </div>
       </div>
 
+      <div class="col-md-8 text-left">
+        <div class="col-md-3">
+          <br>
+          <span> <span class="glyphicon glyphicon-pushpin"></span> Address </span>
+        </div>
+        <div class="col-md-8 well">
+            123 XPTO Ave<br>
+            Porto, Portugal<br>
+            <abbr title="Phone">P:</abbr> 123456789
+        </div>
+      </div>
+
+      <div class="col-md-8 text-left">
+        <div class="col-md-3">
+          <br>
+          <span> <span class="glyphicon glyphicon-user"></span> Contacts </span>
+        </div>
+        <div class="col-md-8 well">
+
+          <span>Email:</span>
+          <a href="#" id="email" data-type="text" data-placement="right" data-title="Enter email">superemail</a>
+
+          <span style="display:block" >Work/School:
+            <a href="#" id="work" data-type="text" data-placement="right" data-title="Enter work">superwork</a>
+          </span>
+
+        </div>
+      </div>
     </div>
     {{> suggestedSidebar}}
   </div>

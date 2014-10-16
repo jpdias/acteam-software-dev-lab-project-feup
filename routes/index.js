@@ -97,6 +97,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/profileuser', function(req, res) {
+  res.status(200);
   res.render(
     'user/userprofile',
     {
