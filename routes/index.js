@@ -97,20 +97,42 @@ app.get('/', function(req, res) {
 });
 
 app.get('/profileuser', function(req, res) {
-  res.status(200);
-  res.render(
-    'user/userprofile',
-    {
-      partials:
-      {
-        header: 'common/header',
-        footer: 'common/footer',
-        sidebar: 'user/sidebarUser',
-        suggestedSidebar: 'user/suggestedSidebar',
-        scripts: 'common/scripts'
-      }
+  if(req.session.user){
+    res.status(200);
+    if(req.session.user.role==="user" && (typeof req.query.username==="undefined")){
+      res.render(
+        'user/userprofile',
+        {
+          partials:
+          {
+            header: 'common/header',
+            footer: 'common/footer',
+            sidebar: 'user/sidebarUser',
+            suggestedSidebar: 'user/suggestedSidebar',
+            scripts: 'common/scripts'
+          }
+        }
+      );
     }
-  );
+    else if(req.session.user.role==="organization"){ //&& (typeof req.query.username!=="undefined")){
+      //res.locals=
+      res.render(
+        'organization/userprofile',
+        {
+          partials:
+          {
+            header: 'common/header',
+            footer: 'common/footer',
+            sidebar: 'organization/sidebar',
+            scripts: 'common/scripts'
+          }
+        }
+      );
+    }
+    else
+      common.errNotFound(req,res);
+  }else
+      common.errNotFound(req,res);
 });
 
 app.get('/signin', function(req, res) {
