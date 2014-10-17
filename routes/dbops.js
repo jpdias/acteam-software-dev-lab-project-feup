@@ -78,7 +78,7 @@ module.exports.addNewMember = addNewMember;
 function removeMemberFromOrganization(member, orgName, callback){
   Organization.findOne({ "name": orgName }, function (err, org) {
     if(org){
-      vay i = org.members.indexOf(member);
+      var i = org.members.indexOf(member);
       if(i != 1){
         org.members.splice(i);
         org.save(function(err2){
