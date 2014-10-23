@@ -1,0 +1,43 @@
+{{> header}}
+<link rel="stylesheet" type="text/css" href="css/sb-admin-2.css">
+<div class="container">
+    <div class="row">
+        {{> sidebar}}
+        <div class="col-sm-6 col-md-offset-1 col-md-10 main">
+            <!-- 10 spaces left -->
+            <div class="col-md-12">
+                <!-- Modal -->
+                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newEventModal">
+                    New Event
+                </button>
+
+                <div class="modal fade" id="newEventModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title">New event</h4>
+                            </div>
+
+                            <div class="modal-body">
+                                <p>Damn thats one fine body&hellip;</p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary">Create event</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+            </div>
+        </div>
+    </div>
+</div>
+{{> scripts}}
+<script>
+    $('#details');
+</script>
+
+{{> footer}}
