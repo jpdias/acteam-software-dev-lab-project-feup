@@ -16,7 +16,7 @@ var Event =  new Schema({
   },
   description: String,
   address: {address: String,
-            municipaly: String,
+            municipality: String,
             district: String
            },
   people:[People]
