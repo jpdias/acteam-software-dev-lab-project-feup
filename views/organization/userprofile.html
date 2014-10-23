@@ -59,4 +59,7 @@
 </div>
 
 {{> scripts}}
+<script>
+$('#imgprof').html('<img class="img-thumbnail" src="' + get_gravatar("{{user.email}}", 180)+'">');
+</script>
 {{> footer}}

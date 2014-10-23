@@ -118,24 +118,24 @@ app.get('/profileuser', function(req, res) {
       );
     }
     else if(req.session.user.role==="organization" && (typeof req.query.email!=="undefined")){
-      console.log(req.query.email);
-      res.locals.user=dbop.getUser(req.query.email,function(err,user){
-        console.log(user);
-          return user;
+      //console.log(req.query.email);
+      dbop.getUser(req.query.email,function(err,user){
+        res.locals.user=user;
+        res.render(
+          'organization/userprofile',
+          {
+            partials:
+            {
+              header: 'common/header',
+              footer: 'common/footer',
+              sidebar: 'organization/sidebar',
+              scripts: 'common/scripts'
+            }
+          }
+        );
       });
 
-      res.render(
-        'organization/userprofile',
-        {
-          partials:
-          {
-            header: 'common/header',
-            footer: 'common/footer',
-            sidebar: 'organization/sidebar',
-            scripts: 'common/scripts'
-          }
-        }
-      );
+
     }
     else
       common.errNotFound(req,res);
