@@ -24,8 +24,8 @@ function getOrgEvents(orgEmail, callback){
 
 module.exports.getOrganizationEvents = getOrgEvents;
 
-function getUser(userName, callback){
-  Account.find({"name":userName},function(err, user){
+function getUser(userEmail, callback){
+  Account.find({"email":userEmail},function(err, user){
     callback(err, user);
   });
 }
@@ -75,7 +75,7 @@ function addNewMember(member, orgName, callback){
 
 module.exports.addNewMember = addNewMember;
 
-function removeMemberFromOrganization(member, orgName, callback){
+function rmMemberFromOrg(member, orgName, callback){
   Organization.findOne({ "name": orgName }, function (err, org) {
     if(org){
       var i = org.members.indexOf(member);
@@ -92,8 +92,12 @@ function removeMemberFromOrganization(member, orgName, callback){
   });
 }
 
-function removeAccount(name, callback){
+module.exports.removeMemberFromOrganization = rmMemberFromOrg;
+
+function rmAcc(name, callback){
   Account.findOneAndRemove({"name":name}, function(err){
     callback(err);
   });
 }
+
+module.exports.removeAccount = rmAcc;
