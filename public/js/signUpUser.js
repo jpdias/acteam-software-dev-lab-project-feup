@@ -161,7 +161,7 @@ $(document).ready(function() {
                   password: frmdata[3].value,
                   address: {
                     address: frmdata[4].value,
-                    municipaly: frmdata[5].value,
+                    municipality: frmdata[5].value,
                     district: frmdata[6].value},
                   birthdate: frmdata[7].value,
                   occupation: frmdata[9].value,
