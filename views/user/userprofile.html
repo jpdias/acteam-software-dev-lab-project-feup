@@ -4,64 +4,53 @@
     {{> sidebar}}
     <div class="col-sm-6 col-md-offset-1 col-md-10 main">
       <div class="col-md-4">
-        <img class="img-thumbnail" src="img/organization1.png" width="100%">
+        <div class="text-center" id="imgprof">
+        </div>
         <hr>
         <div class="col-md-12">
           <center> <a href="#"> <span class="glyphicon glyphicon-file"></span>Curriculum Vitae </a></center>
           <div>
             <center> <h4> Causes you care about: </h4> </center>
             <div class="col-md-offset-3">
-              <li>Arts and Culture</li>
-              <li>Environment</li>
-              <li>Human Rights</li>
+              {{#causes}}
+              <li>{{.}}</li>
+              {{/causes}}
             </div>
           </div>
         </div>
       </div>
+
       <div class="col-md-8 text-left">
         <div class="col-md-3">
           <br>
           <span> <span class="glyphicon glyphicon-user"></span> Personal Information </span>
         </div>
         <div class="col-md-8 well">
-          <span>Username:</span>
-          <a href="#" id="username" data-type="text" data-placement="right"
-           data-title="Enter username">superuser</a>
-           <span style="display:block" >Gender:
-             <a href="#" id="gender" data-type="text" data-placement="right" data-title="Enter gender">supergender</a>
-           </span>
+          <span>Name: {{name}} </span>
+          <span style="display:block" >Gender: {{gender}} </span>
+          <span>Date of birth: {{birthdate}}</span>
 
-           <span>Date of birth:</span>
-           <a href="#" id="datebirth" data-type="text" data-placement="right" data-title="Enter datebirth">superdatebirth</a>
         </div>
       </div>
-
       <div class="col-md-8 text-left">
         <div class="col-md-3">
           <br>
           <span> <span class="glyphicon glyphicon-pushpin"></span> Address </span>
         </div>
         <div class="col-md-8 well">
-            123 XPTO Ave<br>
-            Porto, Portugal<br>
-            <abbr title="Phone">P:</abbr> 123456789
+            Address:{{address.address}}<br>
+            Municipality:{{address.municipality}}<br>
+            District: {{address.district}}<br>
         </div>
       </div>
-
       <div class="col-md-8 text-left">
         <div class="col-md-3">
           <br>
           <span> <span class="glyphicon glyphicon-user"></span> Contacts </span>
         </div>
         <div class="col-md-8 well">
-
-          <span>Email:</span>
-          <a href="#" id="email" data-type="text" data-placement="right" data-title="Enter email">superemail</a>
-
-          <span style="display:block" >Work/School:
-            <a href="#" id="work" data-type="text" data-placement="right" data-title="Enter work">superwork</a>
-          </span>
-
+          <span>Email: {{email}}</span>
+          <span style="display:block" >School/Workplace: {{workplace}} </span>
         </div>
       </div>
     </div>
@@ -70,6 +59,7 @@
 </div>
 
 {{> scripts}}
-<script src="js/bootstrap-editable.min.js"></script>
-<script src="js/x-editable.js"></script>
+<script>
+$('#imgprof').html('<img class="img-thumbnail" src="' + get_gravatar("{{org.email}}", 180)+'">');
+</script>
 {{> footer}}

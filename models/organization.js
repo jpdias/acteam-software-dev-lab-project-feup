@@ -23,20 +23,30 @@ var Organization = new Schema({
     password: String,
     address: {
       address: String,
-      municipaly: String,
+      municipality: String,
       district: String
     },
     images:[String],
     members:[Member],
     about: String,
     causes: [String],
-    recruitment:{
+    recruitment:[{
       status: Boolean,
       time:{
         start:{type: Date, default: Date.now},
         end:{type: Date, default: Date.now}
       },
       appliances:[Proposal]
+    }],
+    networks:{
+      skype: String,
+      facebook: String,
+      flickr: String,
+      instagram: String,
+      linkedin: String,
+      twitter: String,
+      github: String,
+      gplus:String
     },
     isOrgApproved:{type: Boolean, default: false},
     confirmed:{type: Boolean, default: false},

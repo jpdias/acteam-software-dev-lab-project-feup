@@ -99,6 +99,8 @@ app.get('/', function(req, res) {
 
 app.get('/profileuser', function(req, res) {
   if(req.session.user){
+    res.locals= req.session.user;
+    console.log(res.partials);
     res.status(200);
     if(req.session.user.role==="user" && (typeof req.query.username==="undefined")){
       res.render(
@@ -116,7 +118,7 @@ app.get('/profileuser', function(req, res) {
       );
     }
     else if(req.session.user.role==="organization"){ //&& (typeof req.query.username!=="undefined")){
-      //res.locals=
+      res.locals=
       res.render(
         'organization/userprofile',
         {
@@ -244,7 +246,7 @@ function dashboard(req, res) {
                 header: 'common/header',
                 sidebar:'organization/sidebar',
                 events: 'organization/partialEvents',
-                recruitments: 'organization/partialRecruitments',
+                recruitment: 'organization/partialRecruitments',
                 scripts:'common/scripts'
             }
         }

@@ -3,57 +3,59 @@
   <div class="row">
     {{> sidebar}}
     <div class="col-sm-6 col-md-offset-1 col-md-10 main">
-      <div class="col-md-4">
-        <img class="img-thumbnail" src="img/organization1.png" width="100%">
-        <hr>
-        <div class="col-md-12">
-          <center> <a href="#"> <span class="glyphicon glyphicon-file"></span>Curriculum Vitae </a></center>
-          <div>
-            <center> <h4> Causes you care about: </h4> </center>
-            <div class="col-md-offset-3">
-              <li>Arts and Culture</li>
-              <li>Environment</li>
-              <li>Human Rights</li>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-8 text-left">
-        <div class="col-md-3">
-          <br>
-          <span> <span class="glyphicon glyphicon-user"></span> Personal Information </span>
-        </div>
-        <div class="col-md-8 well">
-          <span>Username: superuser </span>
-          <span style="display:block" >Gender: supergender </span>
-          <span>Date of birth: superdatebirth</span>
-
-        </div>
-      </div>
-      <div class="col-md-8 text-left">
-        <div class="col-md-3">
-          <br>
-          <span> <span class="glyphicon glyphicon-pushpin"></span> Address </span>
-        </div>
-        <div class="col-md-8 well">
-            123 XPTO Ave<br>
-            Porto, Portugal<br>
-            <abbr title="Phone">P:</abbr> 123456789
-        </div>
-      </div>
-      <div class="col-md-8 text-left">
-        <div class="col-md-3">
-          <br>
-          <span> <span class="glyphicon glyphicon-user"></span> Contacts </span>
-        </div>
-        <div class="col-md-8 well">
-          <span>Email: superemail</span>
-          <span style="display:block" >Work/School: superwork </span>
+  <div class="col-md-4">
+    <div class="text-center" id="imgprof">
+    </div>
+    <hr>
+    <div class="col-md-12">
+      <center> <a href="{{user.cv}}"> <span class="glyphicon glyphicon-file"></span>Curriculum Vitae </a></center>
+      <div>
+        <center> <h4> Causes you care about: </h4> </center>
+        <div class="col-md-offset-3">
+          {{#user.causes}}
+          <li>{{.}}</li>
+          {{/user.causes}}
         </div>
       </div>
     </div>
   </div>
+
+  <div class="col-md-8 text-left">
+    <div class="col-md-3">
+      <br>
+      <span> <span class="glyphicon glyphicon-user"></span> Personal Information </span>
+    </div>
+    <div class="col-md-8 well">
+      <span>Name: {{user.name}} </span>
+      <span style="display:block" >Gender: {{user.gender}} </span>
+      <span>Date of birth: {{user.birthdate}}</span>
+
+    </div>
+  </div>
+  <div class="col-md-8 text-left">
+    <div class="col-md-3">
+      <br>
+      <span> <span class="glyphicon glyphicon-pushpin"></span> Address </span>
+    </div>
+    <div class="col-md-8 well">
+        Address:{{user.address.address}}<br>
+        Municipality:{{user.address.municipality}}<br>
+        District: {{user.address.district}}<br>
+    </div>
+  </div>
+  <div class="col-md-8 text-left">
+    <div class="col-md-3">
+      <br>
+      <span> <span class="glyphicon glyphicon-user"></span> Contacts </span>
+    </div>
+    <div class="col-md-8 well">
+      <span>Email: {{user.email}}</span>
+      <span style="display:block" >School/Workplace: {{user.workplace}} </span>
+    </div>
+  </div>
+</div>
+{{> suggestedSidebar}}
+</div>
 </div>
 
 {{> scripts}}
