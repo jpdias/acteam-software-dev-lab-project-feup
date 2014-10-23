@@ -9,7 +9,7 @@ var Account = new Schema({
     password: String,
     address: {
       address: String,
-      municipaly: String,
+      municipality: String,
       district: String},
     birthdate: String,
     occupation: String,
@@ -17,6 +17,17 @@ var Account = new Schema({
     gender: String,
     cv: String,
     role:String,
+    networks:{
+      skype: String,
+      facebook: String,
+      flickr: String,
+      instagram: String,
+      linkedin: String,
+      twitter: String,
+      github: String,
+      gplus:String
+    },
+    causes: [String],
     confirmed:{type: Boolean, default: false}
 });
 
