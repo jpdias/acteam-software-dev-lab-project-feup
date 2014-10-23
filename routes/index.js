@@ -117,8 +117,13 @@ app.get('/profileuser', function(req, res) {
         }
       );
     }
-    else if(req.session.user.role==="organization"){ //&& (typeof req.query.username!=="undefined")){
-      res.locals=
+    else if(req.session.user.role==="organization" && (typeof req.query.email!=="undefined")){
+      console.log(req.query.email);
+      res.locals.user=dbop.getUser(req.query.email,function(err,user){
+        console.log(user);
+          return user;
+      });
+
       res.render(
         'organization/userprofile',
         {
