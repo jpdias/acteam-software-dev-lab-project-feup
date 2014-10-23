@@ -8,6 +8,14 @@ var sha1 = require('sha1');
 var mandrill = require('node-mandrill')('Kj-1SGPKFICoSgUIo9OEqw');
 var fs = require('fs');
 
+function getUser(userEmail, callback){
+  Account.findOne({"email":userEmail},function(err, user){
+    callback(err, user);
+  });
+}
+
+module.exports.getUser = getUser;
+
 function getOrg(orgname, callback){
   Organization.findOne({"name":orgname},function(err,org){
     callback(err, org);
@@ -16,6 +24,43 @@ function getOrg(orgname, callback){
 
 module.exports.getOrganization = getOrg;
 
+function addNewMemberToOrg(member, orgName, callback){
+    Organization.findOne({ "name": orgName }, function (err, org) {
+      if(org){
+        if(!org.members.hasOwnProperty(member.email)){
+          org.members.push(member);
+          org.save(function(err2){
+            callback(err2, org);
+          });
+        }
+      }
+      else{
+        callback(err, org);
+      }
+    });
+}
+
+module.exports.addNewMemberToOrganization = addNewMemberToOrg;
+
+function rmMemberFromOrg(member, orgName, callback){
+  Organization.findOne({ "name": orgName }, function (err, org) {
+    if(org){
+      var i = org.members.indexOf(member);
+      if(i != 1){
+        org.members.splice(i);
+        org.save(function(err2){
+          callback(err2, org);
+        });
+      }
+    }
+    else{
+      callback(err, org);
+    }
+  });
+}
+
+module.exports.removeMemberFromOrganization = rmMemberFromOrg;
+
 function getOrgEvents(orgEmail, callback){
   Event.find({"org_email":orgEmail},function(err,events){
     callback(err, events);
@@ -23,14 +68,6 @@ function getOrgEvents(orgEmail, callback){
 }
 
 module.exports.getOrganizationEvents = getOrgEvents;
-
-function getUser(userName, callback){
-  Account.find({"name":userName},function(err, user){
-    callback(err, user);
-  });
-}
-
-module.exports.getUser = getUser;
 
 function addEventToOrg(event, orgName, callback){
   Organization.findOne({ "name": orgName }, function (err, org) {
@@ -57,43 +94,10 @@ function addEventToOrg(event, orgName, callback){
 
 module.exports.addEventToOrganization = addEventToOrg;
 
-function addNewMember(member, orgName, callback){
-    Organization.findOne({ "name": orgName }, function (err, org) {
-      if(org){
-        if(!org.members.hasOwnProperty(member.email)){
-          org.members.push(member);
-          org.save(function(err2){
-            callback(err2, org);
-          });
-        }
-      }
-      else{
-        callback(err, org);
-      }
-    });
-}
-
-module.exports.addNewMember = addNewMember;
-
-function removeMemberFromOrganization(member, orgName, callback){
-  Organization.findOne({ "name": orgName }, function (err, org) {
-    if(org){
-      var i = org.members.indexOf(member);
-      if(i != 1){
-        org.members.splice(i);
-        org.save(function(err2){
-          callback(err2, org);
-        });
-      }
-    }
-    else{
-      callback(err, org);
-    }
-  });
-}
-
-function removeAccount(name, callback){
+function rmAcc(name, callback){
   Account.findOneAndRemove({"name":name}, function(err){
     callback(err);
   });
 }
+
+module.exports.removeAccount = rmAcc;
