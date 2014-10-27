@@ -70,7 +70,8 @@ function getOrgEvents(orgEmail, callback){
 module.exports.getOrganizationEvents = getOrgEvents;
 
 function addEventToOrg(event, orgName, callback){
-  Organization.findOne({ "name": orgName }, function (err, org) {
+  Organization.findOne({ "email": orgName }, function (err, org) {
+    //console.log(org);
     if(org){
         Event.findOne({ "name": event.name }, function (err2, duplicateEvent){
           if(!duplicateEvent){

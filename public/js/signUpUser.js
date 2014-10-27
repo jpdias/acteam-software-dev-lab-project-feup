@@ -1,15 +1,3 @@
-/*Fields verifications for the register process using Bootstrap validator*/
-
-/*function DateValidation(){
-  var today =new Date();
-  var inputDate = new Date(document.forms["registerForm"]["birthdate"].value);
-  if (inputDate > today) {
-    sfm_show_error_msg('Date is invalid');
-    return false;
-  } else {
-    return true;
-  }
-}*/
 
 $(document).ready(function() {
     $( "#registerform").bootstrapValidator({
@@ -140,8 +128,7 @@ $(document).ready(function() {
                 }
             }
         }
-    })
-        .on('success.form.bv', function(e) {
+    }).on('success.form.bv', function(e) {
             // Prevent form submission
             e.preventDefault();
 

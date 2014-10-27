@@ -243,9 +243,9 @@ app.get('/registerorg', function(req, res) {
 });
 
 app.get('/events', function(req, res) {
-  if(req.session.user){
+  //if(req.session.user){
     res.status(200);
-    if(req.session.user.role==="organization"){
+    //if(req.session.user.role==="organization"){
       res.render(
         'organization/myevents',
         {
@@ -257,10 +257,10 @@ app.get('/events', function(req, res) {
             scripts: 'common/scripts'
           }
         });
-    } else
-      common.errNotFound(req,res);
-  } else
-      common.errNotFound(req,res);
+  //  } else
+  //    common.errNotFound(req,res);
+  //} else
+  //    common.errNotFound(req,res);
 });
 
 
@@ -279,3 +279,16 @@ function dashboard(req, res) {
         }
     );
 }
+
+
+//events
+app.post('/newevent',function(req,res){
+  //console.log(req.body.eventinfo);
+  var temp = req.body.eventinfo;
+  temp.org_email = req.session.user.email;
+  console.log(req.session.user.email);
+  dbop.addEventToOrganization(temp,req.body.email,function(err,events){
+    console.log(err);
+  });
+
+});
