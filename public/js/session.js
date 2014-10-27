@@ -28,6 +28,7 @@ $(document).ready(function(){
       $("#loggedInShow").show();
       $("#loggedName").text("Hello, "+data.name+"!");
     }
+    
     else{
       $("#loginform").show();
       $("#loggedInShow").hide();
