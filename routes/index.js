@@ -143,6 +143,47 @@ app.get('/profileuser', function(req, res) {
       common.errNotFound(req,res);
 });
 
+app.get('/userhistory', function(req, res) {
+  res.render(
+    'user/history',
+    {
+      partials:
+      {
+        header: 'common/header',
+        footer: 'common/footer',
+        sidebar: 'user/sidebarUser',
+        suggestedSidebar: 'user/suggestedSidebar',
+        scripts: 'common/scripts'
+      }
+    }
+  );
+});
+
+app.get('/configureuser', function(req, res) {
+  if(req.session.user){
+    res.locals= req.session.user;
+    res.status(200);
+    if(req.session.user.role==="user" && (typeof req.query.username==="undefined")){
+      res.render(
+        'user/configureuser',
+        {
+          partials:
+          {
+            header: 'common/header',
+            footer: 'common/footer',
+            sidebar: 'user/sidebarUser',
+            suggestedSidebar: 'user/suggestedSidebar',
+            scripts: 'common/scripts'
+          }
+        }
+      );
+    }
+    else
+      common.errNotFound(req,res);
+  }else
+    common.errNotFound(req,res);
+});
+
 app.get('/signin', function(req, res) {
   res.render(
     'signin',
