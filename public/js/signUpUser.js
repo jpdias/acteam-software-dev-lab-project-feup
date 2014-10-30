@@ -137,7 +137,7 @@ $(document).ready(function() {
 
             var frmdata = JSON.parse(JSON.stringify($form.serializeArray()));
 
-            console.log(frmdata);
+          //  console.log(frmdata);
 
             var account;
 
