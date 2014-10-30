@@ -1,5 +1,4 @@
 {{> header}}
-<link rel="stylesheet" href="css/bootstrap-editable.css">
 <link rel="stylesheet" type="text/css" href="css/profileorg.css">
 <div class="container-fluid">
   <div class="row">
@@ -19,10 +18,6 @@
 				  </li>
 				</ul>
 			</div>
-		
-			<div class="row clearfix">
-				<button id="enable" class="btn btn-link">Edit Organization Page</button>
-			</div>
 			
 			<div class="row clearfix">
 				<div class="col-sm-3 col-md-3">
@@ -35,43 +30,45 @@
 					
 					<!-- causes organization defend -->
 					<h3>Causes we defend:</h3>
-					<a href="#" class="editable" id="causes" data-type="checklist" data-pk="1" data-title="Causes we defend:"></a>
+					Animal Welfare<br>
+					Arts and Culture<br>
+					Children<br>
 					
 				</div>
 				<div class="col-sm-5 col-md-5">
 					<div class="col-sm-12 col-md-12">
-						<h1><a href="#" class="editable" id="title" data-type="text" data-placement="right" data-title="Organization Title">XPTO Association</a></h1>
+						<h1>XPTO Association</h1>
 					</div>
 					<div class="col-sm-12 col-md-12">
 						<address>
-							<b>Email: </b>{{org.email}}
-								<a href="#" class="editable" id="email" data-type="text" data-placement="right" data-title="Email">{{org.email}}</a><br>
+							<b>Email: </b>
+								alguem@hotmail.com<br>
 							<b>Telephone: </b>
-								<a href="#" class="editable" id="telephone" data-type="text" data-placement="right" data-title="Telephone">229683988</a><br>
+								229683988<br>
 							<b>Address: </b>
-								<a href="#" class="editable" id="address" data-type="text" data-placement="right" data-title="Address">Rua dos caracóis cozidos 410</a><br>
+								Rua dos caracóis cozidos 410
 						</address>
 						</h4>
 					</div>
 				</div>
 				<div class="col-sm-4 col-md-4">
 					<h3>About Us</h3>
-					<p><a href="#" class="editable" id="aboutus" data-type="textarea" data-placement="right" data-title="About us">blablalblabla</a></p>
+					<p>blablalblabla</p>
 				</div>
 				<div class="col-sm-9 col-md-9">
 					<hr>
 					<div class="event">
 						<div class="row">
 							<div class="col-sm-9 col-md-9">
-							<h3><a href="#" class="editable" id="eventTitle" data-type="text" data-placement="right" data-title="Title of Event">Event XPTO</a></h3>
+							<h3>Event XPTO</h3>
 							</div>
 							<div class="col-sm-3 col-md-3">
-							<h3><a href="#" class="editable" id="eventDate" data-type="text" data-placement="right" data-title="Event Date">9/10/2014</a></h3>
+							<h3>9/10/2014</h3>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-9 col-md-9">
-							<a href="#" class="editable" id="eventInfo" data-type="text" data-placement="right" data-title="Event Information">Some information about the event.mmm mmmmmmm mmmmm mmmmmmmmmmmmmmm mmmmmmmmmm mmmmmmmmmmm.</a>
+							Some information about the event.mmm mmmmmmm mmmmm mmmmmmmmmmmmmmm mmmmmmmmmm mmmmmmmmmmm.
 							</div>
 							<div class="col-sm-3 col-md-3">
 								<button class="btn btn-primary btn-block">Apply!</button>
@@ -86,29 +83,6 @@
 {{> scripts}}
 
 <script>
-$(function(){
-    $('#causes').editable({
-		value: [1,2,3],
-        source: [
-              {value: 1, text: 'Animal Welfare'},
-              {value: 2, text: 'Arts and Culture'},
-              {value: 3, text: 'Children'},
-              {value: 4, text: 'Civil Rights and Social Action'},
-              {value: 5, text: 'Disaster and Humanitarian Relief'},
-              {value: 6, text: 'Economic Empowerment'},
-              {value: 7, text: 'Education'},
-              {value: 8, text: 'Environment'},
-              {value: 9, text: 'Health'},
-              {value: 10, text: 'Human Rights'},
-              {value: 11, text: 'Poverty Alleviation'},
-              {value: 12, text: 'Science and Technology'},
-              {value: 13, text: 'Social Services'}
-           ]
-    });
-});
-</script>
-
-<script>
 $(document).ready(function() {
     $('#autoplay').lightSlider({
 			item:1,
@@ -121,6 +95,4 @@ $(document).ready(function() {
 });
 $('#imgprof').html('<img class="img-thumbnail" src="' + get_gravatar("jpdias@live.com", 180)+'">');
 </script>
-<script src="js/bootstrap-editable.min.js"></script>
-<script src="js/x-editable.js"></script>
 {{> footer}}

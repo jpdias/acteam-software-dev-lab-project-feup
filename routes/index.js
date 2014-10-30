@@ -333,3 +333,19 @@ app.post('/newevent',function(req,res){
   });
 
 });
+
+
+app.get('/configureorg', function(req, res) {
+  res.render(
+    'organization/configureorg',
+    {
+      partials:
+      {
+        header: 'common/header',
+        footer: 'common/footer',
+        sidebar: 'organization/sidebar',
+        scripts: 'common/scripts'
+      }
+    }
+  );
+});
