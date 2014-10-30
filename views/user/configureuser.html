@@ -3,8 +3,9 @@
   <div class="row">
     {{> sidebar}}
       <div class="col-sm-6 col-md-offset-1 col-md-10 main">
-        <div class="col-md-offset-1 col-md-7">
-          <form class="form-horizontal editInfo">
+        <form class="form-horizontal editInfo">
+          <div class="col-md-offset-1 col-md-5">
+
 
             <!-- Form Name -->
             <legend>Configure</legend>
@@ -38,75 +39,85 @@
               <label for="workplace">School/Workplace</label>
               <input type="text" name="inWorkplace" class="form-control" value={{workplace}}>
             </div>
-
+          </div>
+          <div class="col-md-offset-1 col-md-4">
+            <br></br><br></br>
             <div class="form-group">
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-skype"></i></div>
-                <input class="form-control" type="email" placeholder="skype">
+                <input class="form-control" name="skype" type="email" placeholder="skype">
               </div>
+              <br>
               <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-facebook"></i></div>
-                <input class="form-control" type="email" placeholder="facebook">
+                <div class="input-group-addon"><i class="fa fa-facebook">&nbsp;</i></div>
+                <input class="form-control" name="facebook" type="email" placeholder="facebook">
               </div>
+              <br>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-flickr"></i></div>
-                <input class="form-control" type="email" placeholder="flickr">
+                <input class="form-control" name="flickr" type="email" placeholder="flickr">
               </div>
+              <br>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-instagram"></i></div>
-                <input class="form-control" type="email" placeholder="instagram">
+                <input class="form-control" name="instagram" type="email" placeholder="instagram">
               </div>
+              <br>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-linkedin"></i></div>
-                <input class="form-control" type="email" placeholder="linkedin">
+                <input class="form-control" name="linkedin" type="email" placeholder="linkedin">
               </div>
+              <br>
               <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-skype"></i></div>
-                <input class="form-control" type="email" placeholder="twitter">
+                <div class="input-group-addon"><i class="fa fa-twitter"></i></div>
+                <input class="form-control" name="twitter" type="email" placeholder="twitter">
               </div>
+              <br>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-github"></i></div>
-                <input class="form-control" type="email" placeholder="github">
+                <input class="form-control" name="github" type="email" placeholder="github">
               </div>
+              <br>
               <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-git"></i></div>
-                <input class="form-control" type="email" placeholder="gplus">
+                <div class="input-group-addon"><i class="fa fa-google-plus"></i></div>
+                <input class="form-control" name="gplus" type="email" placeholder="gplus">
               </div>
             </div>
+          </div>
+          <div class="col-md-12"><hr></div>
+          <div class="col-md-offset-1 col-md-11">
 
-            <div>
-              <hr>
-              <label for="areasInterest">Areas of interest</label>
-            </div>
-
+            <label for="areasInterest">Areas of interest</label>
+            <br>
             <div class="col-md-6">
               <ul class="causes-list">
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Animal Welfare"  type="checkbox" tabindex="11">Animal Welfare</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Arts and Culture" type="checkbox" tabindex="12">Arts and Culture</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Children" type="checkbox" tabindex="13">Children</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Civil Rights and Social Action"  type="checkbox" tabindex="14">Civil Rights and Social Action</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Disaster and Humanitarian Relief" type="checkbox" tabindex="15">Disaster and Humanitarian Relief</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Economic Empowerment"  type="checkbox" tabindex="16">Economic Empowerment</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Education"  type="checkbox" tabindex="17">Education</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Environment"  type="checkbox" tabindex="18">Environment</label></li>
+                <li><label class="checkbox"><input name="interestField" value="Animal Welfare"  type="checkbox" tabindex="11">Animal Welfare</label></li>
+                <li><label class="checkbox"><input name="interestField" value="Arts and Culture" type="checkbox" tabindex="12">Arts and Culture</label></li>
+                <li><label class="checkbox"><input name="interestField" value="Children" type="checkbox" tabindex="13">Children</label></li>
+                <li><label class="checkbox"><input name="interestField" value="Civil Rights and Social Action"  type="checkbox" tabindex="14">Civil Rights and Social Action</label></li>
+                <li><label class="checkbox"><input name="interestField" value="Disaster and Humanitarian Relief" type="checkbox" tabindex="15">Disaster and Humanitarian Relief</label></li>
+                <li><label class="checkbox"><input name="interestField" value="Economic Empowerment"  type="checkbox" tabindex="16">Economic Empowerment</label></li>
+                <li><label class="checkbox"><input name="interestField" value="Education"  type="checkbox" tabindex="17">Education</label></li>
+                <li><label class="checkbox"><input name="interestField" value="Environment"  type="checkbox" tabindex="18">Environment</label></li>
               </ul>
             </div>
             <div class="col-md-6">
               <ul class="causes-list">
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Health"  type="checkbox" tabindex="19">Health</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Human Rights"  type="checkbox" tabindex="20">Human Rights</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Politics" type="checkbox" tabindex="21" >Politics</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Poverty Alleviation" type="checkbox" tabindex="22">Poverty Alleviation</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Science and Technology" type="checkbox" tabindex="23">Science and Technology</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Social Services"  type="checkbox" tabindex="24">Social Services</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Other" type="checkbox" tabindex="25">Other</label></li>
+                <li><label class="checkbox"><input name="interestField" value="Health"  type="checkbox" tabindex="19">Health</label></li>
+                <li><label class="checkbox"><input name="interestField" value="Human Rights"  type="checkbox" tabindex="20">Human Rights</label></li>
+                <li><label class="checkbox"><input name="interestField" value="Politics" type="checkbox" tabindex="21" >Politics</label></li>
+                <li><label class="checkbox"><input name="interestField" value="Poverty Alleviation" type="checkbox" tabindex="22">Poverty Alleviation</label></li>
+                <li><label class="checkbox"><input name="interestField" value="Science and Technology" type="checkbox" tabindex="23">Science and Technology</label></li>
+                <li><label class="checkbox"><input name="interestField" value="Social Services"  type="checkbox" tabindex="24">Social Services</label></li>
+                <li><label class="checkbox"><input name="interestField" value="Other" type="checkbox" tabindex="25">Other</label></li>
               </ul>
             </div>
-
-            <div><input type="submit"/></div>
-
-          </form>
-        </div>
+            <div class="col-md-12">
+              <br>
+              <button style="float:right" type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </form>
       </div>
     {{> suggestedSidebar}}
   </div>
