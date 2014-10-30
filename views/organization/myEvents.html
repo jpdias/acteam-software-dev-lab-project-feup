@@ -7,10 +7,45 @@
             <!-- 10 spaces left -->
             <div class="col-md-12">
                 <!-- Modal -->
-                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newEventModal">
-                    New Event
-                </button>
-
+              <div class="col-md-12">
+                <h3>
+                  Want to create a new event?
+                  <button class="btn btn-primary btn-md" data-toggle="modal" data-target="#newEventModal">
+                      New Event
+                  </button>
+                </h3>
+              </div>
+              <div class="col-md-12">
+              </hr>
+                <div class="currentevents" id="currentevents">
+                    <div class="list-group">
+                      {{#events}}
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                          <div class="col-md-8">
+                            <h3>{{name}}</h3>
+                          </div>
+                          <div class="col-md-4 text-center">
+                            <h5>Start Date:<br>
+                              {{date.end}}</h5>
+                            <h5>End Date:<br>
+                              {{date.end}}</h5>
+                          </div>
+                          <div class="col-md-8">
+                            <p>{{description}}</p>
+                            <p>{{address.address}},{{address.municipality}},{{address.district}}</p>
+                          </div>
+                          <div class="col-md-4">
+                            <button type="button" class="btn btn-primary btn-block btn-md">
+                              <h5>Applications</h5>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      {{/events}}
+                  </div>
+                </div>
+              </div>
                 <div class="modal fade" id="newEventModal">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -63,7 +98,7 @@
                     district: frmdata[6].value,
                    },
       };
-//console.log(events);
+
       $.ajax({
           url: '/newevent',
           type: 'POST',
@@ -71,14 +106,10 @@
             email: user,
             eventinfo:events
           },
-          datatype: 'json',
-          success: function(){
-             alert("done");
-          },
-          error: function(XMLHttpRequest, textStatus, errorThrown) {
-             alert("error");
-          }
+          datatype: 'json'
       });
+      $('#newEventModal').modal('hide');
+      swal({allowOutsideClick:true,title: "Event created with success!", type:"success"});
       event.preventDefault();
     });
 
