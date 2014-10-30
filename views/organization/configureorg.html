@@ -1,4 +1,4 @@
-{{> header}}
+﻿{{> header}}
 <div class="container">
   <div class="row">
     {{> sidebar}}
@@ -11,34 +11,35 @@
             <legend>Configure</legend>
 
             <div class="form-group">
-              <label for="newEmail">New Email</label>
-              <input type="email" name="inNewEmail" class="form-control">
+              <label for="name">Organization Name</label>
+              <input type="text" name="orgName" class="form-control" value="XPTO Association">
             </div>
 
             <div class="form-group">
-              <label for="confirmEmail">Confirm New Email</label>
-              <input type="email" name="inConfirmEmail" class="form-control">
+              <label for="email">Email</label>
+              <input type="email" name="email" class="form-control" value="alguem@hotmail.com">
+            </div>
+
+            <div class="form-group">
+              <label for="telephone">Telephone</label>
+              <input type="text" name="telephone" class="form-control" value="229999999">
             </div>
 
             <div class="form-group">
               <label for="address">Address</label>
-              <input type="text" name="inAddress" class="form-control" value={{address.address}}>
+              <input type="text" name="address" class="form-control" value="Rua dos caracóis cozidos 410">
             </div>
 
             <div class="form-group">
-              <label for="municipality">Municipality</label>
-              <input type="text" name="inMunicipality" class="form-control">
+              <label for="aboutus">About Us</label>
+              <textarea style="resize: vertical" name="about" id="about" class="form-control input-md" placeholder="blablablabla" tabindex="9"></textarea>
             </div>
 
             <div class="form-group">
-              <label for="district">District</label>
-              <input type="text" name="inDistrict" class="form-control" value={{address.district}}>
+              <label for="images">Images</label>
+              <input type="image" name="images" class="form-control">
             </div>
-
-            <div class="form-group">
-              <label for="workplace">School/Workplace</label>
-              <input type="text" name="inWorkplace" class="form-control" value={{workplace}}>
-            </div>
+			
           </div>
           <div class="col-md-offset-1 col-md-4">
             <br></br><br></br>

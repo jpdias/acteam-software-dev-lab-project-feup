@@ -41,7 +41,6 @@ app.use('development', function(){
 try{
   db.createConnection('mongodb://acteam:acteamadmin@ds031088.mongolab.com:31088/acteam');
 }catch(ex){
-  console.log(ex);
   app.get('/', function(req, res){
     res.render('errors/503');
   });
