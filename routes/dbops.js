@@ -102,3 +102,20 @@ function rmAcc(name, callback){
 }
 
 module.exports.removeAccount = rmAcc;
+
+function updateUserAcc(dataupdate, email, callback){
+  Account.findOne({ "email": email }, function (err, user) {
+    if(user){
+        Account.findOneAndUpdate({ "email": email }, dataupdate, {}, function(err, user) {
+          if(err){}
+          else{}
+
+        });
+    }
+    else{
+      callback(err, org);
+    }
+  });
+}
+
+module.exports.updateUserAccount = updateUserAcc;
