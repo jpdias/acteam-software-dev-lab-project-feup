@@ -73,6 +73,9 @@ $(document).ready(function(){
         address: {
             message: 'The address is not valid',
             validators: {
+                notEmpty: {
+                    message: 'The address is required'
+                  },
                 stringLength: {
                     max: 150,
                     message: 'The address must be  less than 150 characters long'
@@ -82,6 +85,9 @@ $(document).ready(function(){
         municipality: {
             message: 'The municipality is not valid',
             validators: {
+                notEmpty: {
+                  message: 'The municipality is required'
+                },
                 stringLength: {
                     max: 100,
                     message: 'The municipality must be less than 100 characters long'
@@ -91,13 +97,48 @@ $(document).ready(function(){
         district: {
           message: 'The district is not valid',
           validators: {
+              notEmpty: {
+                  message: 'The district is required'
+                },
               stringLength: {
                   max: 100,
                   message: 'The district must be less than 100 characters long'
-              },
+                },
           }
         }
       }
-    }
-  );
+    })
+      .on('success.form.bv', function(e){
+        // Prevent form submission
+        e.preventDefault();
+
+        var frm = $(e.target);
+        var frmdata = frm.serializeArray();
+        console.log(frmdata);
+        var events = {
+            name: frmdata[0].value,
+            date:{
+              start: frmdata[1].value,
+              end: frmdata[2].value,
+            },
+            description: frmdata[3].value,
+            address: {address: frmdata[4].value,
+                      municipality: frmdata[5].value,
+                      district: frmdata[6].value,
+                     },
+        };
+
+        $.ajax({
+            url: '/newevent',
+            type: 'POST',
+            data: {
+              email: user,
+              eventinfo:events
+            },
+            datatype: 'json'
+        });
+        $('#newEventModal').modal('hide');
+        swal({allowOutsideClick:true,title: "Event created with success!", type:"success"});
+        event.preventDefault();
+    });
 });

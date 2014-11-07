@@ -122,38 +122,4 @@
 </div>
 {{> scripts}}
 <script src="js/organization/createEvent.js"></script>
-<script>
-    $( "#new_event" ).submit( function(event){
-      var frm = $('#new_event');
-      var frmdata = frm.serializeArray();
-      console.log(frmdata);
-      var events = {
-          name: frmdata[0].value,
-          date:{
-            start: frmdata[1].value,
-            end: frmdata[2].value,
-          },
-          description: frmdata[3].value,
-          address: {address: frmdata[4].value,
-                    municipality: frmdata[5].value,
-                    district: frmdata[6].value,
-                   },
-      };
-
-      $.ajax({
-          url: '/newevent',
-          type: 'POST',
-          data: {
-            email: user,
-            eventinfo:events
-          },
-          datatype: 'json'
-      });
-      $('#newEventModal').modal('hide');
-      swal({allowOutsideClick:true,title: "Event created with success!", type:"success"});
-      event.preventDefault();
-    });
-
-</script>
-
 {{> footer}}
