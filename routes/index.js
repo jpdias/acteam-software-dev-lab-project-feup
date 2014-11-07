@@ -357,16 +357,29 @@ app.post('/configuser',function(req,res){
 
 
 app.get('/configureorg', function(req, res) {
-  res.render(
-    'organization/configureorg',
-    {
-      partials:
-      {
-        header: 'common/header',
-        footer: 'common/footer',
-        sidebar: 'organization/sidebar',
-        scripts: 'common/scripts'
-      }
-    }
-  );
+	if(req.session.user && (typeof req.query.org!=="undefined")){
+		if(req.session.user.role=="organization"){
+			dbop.getOrganization(req.session.user.name,function(err,organization){
+				if(!err){
+					var data= {};
+					//console.log("Org name: " + org);
+					data.org=organization;
+					res.locals=data;
+
+					res.render(
+						'organization/configureorg',
+						{
+							partials:
+							{
+								header: 'common/header',
+								footer: 'common/footer',
+								sidebar: 'organization/sidebar',
+								scripts: 'common/scripts'
+							}
+						}
+					);
+				}
+			});
+		}
+	}
 });
