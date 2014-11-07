@@ -107,13 +107,16 @@ function updateUserAcc(dataupdate, email, callback){
   Account.findOne({ "email": email }, function (err, user) {
     if(user){
         Account.findOneAndUpdate({ "email": email }, dataupdate, {}, function(err, user) {
-          if(err){}
-          else{}
-
+          if(err){
+            callback(err, user);
+          }
+          else{
+            callback(err, user);
+          }
         });
     }
     else{
-      callback(err, org);
+      callback(err, user);
     }
   });
 }

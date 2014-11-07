@@ -253,10 +253,10 @@ function showOrg(page,req,res,org){
 app.get('/profileorg', function(req,res,next){
   if(req.session.user && (typeof req.query.org!=="undefined")){
     if(req.session.user.role=="user" || (req.session.user.role=="admin")){
-      showOrg("user",req,res,req.session.user.name);
+      showOrg("user",req,res,req.query.org);
     }
     else if(req.session.user.role=="organization"){
-      showOrg("organization",req,res,req.session.user.name);
+      showOrg("organization",req,res,req.query.org);
     }
     else{
       errPermissions(req,res);
@@ -313,19 +313,25 @@ app.get('/events', function(req, res) {
 
 
 function dashboard(req, res) {
-    res.render(
-        'organization/dashboard',
-        {
-            partials:
-            {
-                header: 'common/header',
-                sidebar:'organization/sidebar',
-                events: 'organization/partialEvents',
-                recruitment: 'organization/partialRecruitments',
-                scripts:'common/scripts'
-            }
-        }
-    );
+  if(req.session.user){
+    res.status(200);
+    res.locals.org=req.session.user;
+      if(req.session.user.role==="organization"){
+      res.render(
+          'organization/dashboard',
+          {
+              partials:
+              {
+                  header: 'common/header',
+                  sidebar:'organization/sidebar',
+                  events: 'organization/partialEvents',
+                  recruitment: 'organization/partialRecruitments',
+                  scripts:'common/scripts'
+              }
+          }
+      );
+    }
+  }
 }
 
 
