@@ -22,12 +22,15 @@ $( "#loginform" ).submit( function(event){
   event.preventDefault();
 });
 
+var user;
 $(document).ready(function(){
   $.get("/loggedIn", function( data ) {
     if(data.login!==false){
       $("#loggedInShow").show();
+      user=  data.email;
       $("#loggedName").text("Hello, "+data.name+"!");
     }
+
     else{
       $("#loginform").show();
       $("#loggedInShow").hide();

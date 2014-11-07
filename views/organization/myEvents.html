@@ -7,10 +7,45 @@
             <!-- 10 spaces left -->
             <div class="col-md-12">
                 <!-- Modal -->
-                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newEventModal">
-                    New Event
-                </button>
-
+              <div class="col-md-12">
+                <h3>
+                  Want to create a new event?
+                  <button class="btn btn-primary btn-md" data-toggle="modal" data-target="#newEventModal">
+                      New Event
+                  </button>
+                </h3>
+              </div>
+              <div class="col-md-12">
+              </hr>
+                <div class="currentevents" id="currentevents">
+                    <div class="list-group">
+                      {{#events}}
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                          <div class="col-md-8">
+                            <h3>{{name}}</h3>
+                          </div>
+                          <div class="col-md-4 text-center">
+                            <h5>Start Date:<br>
+                              {{date.end}}</h5>
+                            <h5>End Date:<br>
+                              {{date.end}}</h5>
+                          </div>
+                          <div class="col-md-8">
+                            <p>{{description}}</p>
+                            <p>{{address.address}},{{address.municipality}},{{address.district}}</p>
+                          </div>
+                          <div class="col-md-4">
+                            <button type="button" class="btn btn-primary btn-block btn-md">
+                              <h5>Applications</h5>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      {{/events}}
+                  </div>
+                </div>
+              </div>
                 <div class="modal fade" id="newEventModal">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -19,21 +54,22 @@
                                 <h4 class="modal-title">New event</h4>
                             </div>
 
-                             <form>
+                             <form id="new_event">
                                  <div class="modal-body">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Name">
-                                        <input type="datetime" class="form-control" placeholder="Start Date">
-                                        <input type="datetime" class="form-control" placeholder="End Date">
-                                        <input type="text" class="form-control" placeholder="Description">
-                                        <input type="text" class="form-control" placeholder="Address">
-                                        <input type="text" class="form-control" placeholder="Municipality">
-                                        <input type="text" class="form-control" placeholder="District">
+                                        <input name="name" type="text" class="form-control" placeholder="Name"><br>
+                                        <input name="startdate" type="text" class="form-control" placeholder="Start Date"><br>
+                                        <input name="enddate" type="text" class="form-control" placeholder="End Date"><br>
+                                        <input name="description" type="text" class="form-control" placeholder="Description"><br>
+                                        <h5>Where?</h5>
+                                        <input name="address" type="address" class="form-control" placeholder="Address"><br>
+                                        <input name="municipality" class="form-control" placeholder="Municipality"><br>
+                                        <input name="district" class="form-control" placeholder="District"><br>
                                     </div>
                                  </div>
                                  <div class="modal-footer">
                                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                     <button type="submit" class="btn btn-primary">Create event</button>
+                                     <button id="#submit" type="submit" class="btn btn-primary">Create event</button>
                                  </div>
                             </form>
                         </div>
@@ -46,7 +82,37 @@
 </div>
 {{> scripts}}
 <script>
-    $('#details');
+    $( "#new_event" ).submit( function(event){
+      var frm = $('#new_event');
+      var frmdata = frm.serializeArray();
+      console.log(frmdata);
+      var events = {
+          name: frmdata[0].value,
+          date:{
+            start: frmdata[1].value,
+            end: frmdata[2].value,
+          },
+          description: frmdata[3].value,
+          address: {address: frmdata[4].value,
+                    municipality: frmdata[5].value,
+                    district: frmdata[6].value,
+                   },
+      };
+
+      $.ajax({
+          url: '/newevent',
+          type: 'POST',
+          data: {
+            email: user,
+            eventinfo:events
+          },
+          datatype: 'json'
+      });
+      $('#newEventModal').modal('hide');
+      swal({allowOutsideClick:true,title: "Event created with success!", type:"success"});
+      event.preventDefault();
+    });
+
 </script>
 
 {{> footer}}

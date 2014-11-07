@@ -70,7 +70,8 @@ function getOrgEvents(orgEmail, callback){
 module.exports.getOrganizationEvents = getOrgEvents;
 
 function addEventToOrg(event, orgName, callback){
-  Organization.findOne({ "name": orgName }, function (err, org) {
+  Organization.findOne({ "email": orgName }, function (err, org) {
+    //console.log(org);
     if(org){
         Event.findOne({ "name": event.name }, function (err2, duplicateEvent){
           if(!duplicateEvent){
@@ -101,3 +102,20 @@ function rmAcc(name, callback){
 }
 
 module.exports.removeAccount = rmAcc;
+
+function updateUserAcc(dataupdate, email, callback){
+  Account.findOne({ "email": email }, function (err, user) {
+    if(user){
+        Account.findOneAndUpdate({ "email": email }, dataupdate, {}, function(err, user) {
+          if(err){}
+          else{}
+
+        });
+    }
+    else{
+      callback(err, org);
+    }
+  });
+}
+
+module.exports.updateUserAccount = updateUserAcc;

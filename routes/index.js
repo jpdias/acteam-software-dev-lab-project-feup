@@ -143,6 +143,47 @@ app.get('/profileuser', function(req, res) {
       common.errNotFound(req,res);
 });
 
+app.get('/userhistory', function(req, res) {
+  res.render(
+    'user/history',
+    {
+      partials:
+      {
+        header: 'common/header',
+        footer: 'common/footer',
+        sidebar: 'user/sidebarUser',
+        suggestedSidebar: 'user/suggestedSidebar',
+        scripts: 'common/scripts'
+      }
+    }
+  );
+});
+
+app.get('/configureuser', function(req, res) {
+  if(req.session.user){
+    res.locals= req.session.user;
+    res.status(200);
+    if(req.session.user.role==="user" && (typeof req.query.username==="undefined")){
+      res.render(
+        'user/configureuser',
+        {
+          partials:
+          {
+            header: 'common/header',
+            footer: 'common/footer',
+            sidebar: 'user/sidebarUser',
+            suggestedSidebar: 'user/suggestedSidebar',
+            scripts: 'common/scripts'
+          }
+        }
+      );
+    }
+    else
+      common.errNotFound(req,res);
+  }else
+    common.errNotFound(req,res);
+});
+
 app.get('/signin', function(req, res) {
   res.render(
     'signin',
@@ -246,21 +287,27 @@ app.get('/events', function(req, res) {
   if(req.session.user){
     res.status(200);
     if(req.session.user.role==="organization"){
-      res.render(
-        'organization/myevents',
-        {
-          partials:
-          {
-            header: 'common/header',
-            footer: 'common/footer',
-            sidebar: 'organization/sidebar',
-            scripts: 'common/scripts'
-          }
-        });
+      dbop.getOrganizationEvents(req.session.user.email, function(err,data){
+        if(!err){
+          res.locals.events= data;
+          res.render(
+            'organization/myevents',
+            {
+              partials:
+              {
+                header: 'common/header',
+                footer: 'common/footer',
+                sidebar: 'organization/sidebar',
+                scripts: 'common/scripts'
+              }
+            });
+        }
+      });
+
     } else
       common.errNotFound(req,res);
   } else
-      common.errNotFound(req,res);
+  common.errNotFound(req,res);
 });
 
 
@@ -279,3 +326,46 @@ function dashboard(req, res) {
         }
     );
 }
+
+
+//events
+app.post('/newevent',function(req,res){
+  //console.log(req.body.eventinfo);
+  var temp = req.body.eventinfo;
+  temp.org_email = req.session.user.email;
+  console.log(req.session.user.email);
+  dbop.addEventToOrganization(temp,req.body.email,function(err,events){
+    console.log(err);
+  });
+
+});
+
+//Edit user
+app.post('/configuser',function(req,res){
+  //console.log(req.body.eventinfo);
+  console.log(req.body.account);
+  var temp = req.body.account;
+
+  temp.email = req.session.user.email;
+  console.log(req.session.user.email);
+  dbop.updateUserAccount(temp,req.body.email,function(err,data){
+    console.log(err);
+  });
+
+});
+
+
+app.get('/configureorg', function(req, res) {
+  res.render(
+    'organization/configureorg',
+    {
+      partials:
+      {
+        header: 'common/header',
+        footer: 'common/footer',
+        sidebar: 'organization/sidebar',
+        scripts: 'common/scripts'
+      }
+    }
+  );
+});
