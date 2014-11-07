@@ -119,3 +119,18 @@ function updateUserAcc(dataupdate, email, callback){
 }
 
 module.exports.updateUserAccount = updateUserAcc;
+
+function editOrgImages(images, orgName, callback){
+  Organization.findOne({"name": orgName}, function(err, org){
+    if(org){
+      org.images.save(images,function(err){
+        callback(err, org);
+      });
+    }
+    else{
+      callback(err, org);
+    }
+  });
+}
+
+module.exports.editOrgImages = editOrgImages;
