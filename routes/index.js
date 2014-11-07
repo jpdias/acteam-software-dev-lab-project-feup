@@ -312,19 +312,25 @@ app.get('/events', function(req, res) {
 
 
 function dashboard(req, res) {
-    res.render(
-        'organization/dashboard',
-        {
-            partials:
-            {
-                header: 'common/header',
-                sidebar:'organization/sidebar',
-                events: 'organization/partialEvents',
-                recruitment: 'organization/partialRecruitments',
-                scripts:'common/scripts'
-            }
-        }
-    );
+  if(req.session.user){
+    res.status(200);
+    res.locals.org=req.session.user;
+      if(req.session.user.role==="organization"){
+      res.render(
+          'organization/dashboard',
+          {
+              partials:
+              {
+                  header: 'common/header',
+                  sidebar:'organization/sidebar',
+                  events: 'organization/partialEvents',
+                  recruitment: 'organization/partialRecruitments',
+                  scripts:'common/scripts'
+              }
+          }
+      );
+    }
+  }
 }
 
 
