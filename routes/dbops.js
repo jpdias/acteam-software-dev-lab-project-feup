@@ -102,3 +102,38 @@ function rmAcc(name, callback){
 }
 
 module.exports.removeAccount = rmAcc;
+
+function updateUserAcc(dataupdate, email, callback){
+  Account.findOne({ "email": email }, function (err, user) {
+    if(user){
+        Account.findOneAndUpdate({ "email": email }, dataupdate, {}, function(err, user) {
+          if(err){
+            callback(err, user);
+          }
+          else{
+            callback(err, user);
+          }
+        });
+    }
+    else{
+      callback(err, user);
+    }
+  });
+}
+
+module.exports.updateUserAccount = updateUserAcc;
+
+function editOrgImages(images, orgName, callback){
+  Organization.findOne({"name": orgName}, function(err, org){
+    if(org){
+      org.images.save(images,function(err){
+        callback(err, org);
+      });
+    }
+    else{
+      callback(err, org);
+    }
+  });
+}
+
+module.exports.editOrgImages = editOrgImages;

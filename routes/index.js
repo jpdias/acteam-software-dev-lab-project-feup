@@ -202,6 +202,7 @@ function showOrg(page,req,res,org){
   dbop.getOrganization(org,function(err,organization){
     if(!err){
       var data= {};
+      //console.log("Org name: " + org);
       data.org=organization;
       res.locals=data;
 
@@ -346,18 +347,45 @@ app.post('/newevent',function(req,res){
 
 });
 
+//Edit user
+app.post('/configuser',function(req,res){
+  //console.log(req.body.eventinfo);
+  console.log(req.body.account);
+  var temp = req.body.account;
+
+  temp.email = req.session.user.email;
+  console.log(req.session.user.email);
+  dbop.updateUserAccount(temp,req.body.email,function(err,data){
+    console.log(err);
+  });
+
+});
+
 
 app.get('/configureorg', function(req, res) {
-  res.render(
-    'organization/configureorg',
-    {
-      partials:
-      {
-        header: 'common/header',
-        footer: 'common/footer',
-        sidebar: 'organization/sidebar',
-        scripts: 'common/scripts'
-      }
-    }
-  );
+	if(req.session.user && (typeof req.query.org!=="undefined")){
+		if(req.session.user.role=="organization"){
+			dbop.getOrganization(req.session.user.name,function(err,organization){
+				if(!err){
+					var data= {};
+					//console.log("Org name: " + org);
+					data.org=organization;
+					res.locals=data;
+
+					res.render(
+						'organization/configureorg',
+						{
+							partials:
+							{
+								header: 'common/header',
+								footer: 'common/footer',
+								sidebar: 'organization/sidebar',
+								scripts: 'common/scripts'
+							}
+						}
+					);
+				}
+			});
+		}
+	}
 });

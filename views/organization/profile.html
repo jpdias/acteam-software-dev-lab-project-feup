@@ -30,30 +30,34 @@
 					
 					<!-- causes organization defend -->
 					<h3>Causes we defend:</h3>
-					Animal Welfare<br>
-					Arts and Culture<br>
-					Children<br>
+					<h4>
+            <ul>
+              {{#org.causes}}
+              <li>{{.}}</li>
+              {{/org.causes}}
+            </ul>
+          </h4>
 					
 				</div>
 				<div class="col-sm-5 col-md-5">
 					<div class="col-sm-12 col-md-12">
-						<h1>XPTO Association</h1>
+						<h1>{{org.name}}</h1>
 					</div>
 					<div class="col-sm-12 col-md-12">
 						<address>
 							<b>Email: </b>
-								alguem@hotmail.com<br>
+								{{org.email}}<br>
 							<b>Telephone: </b>
-								229683988<br>
+								{{org.telephone}}<br>
 							<b>Address: </b>
-								Rua dos caracóis cozidos 410
+								{{org.address.address}}, {{org.address.municipality}},  {{org.address.district}}
 						</address>
 						</h4>
 					</div>
 				</div>
 				<div class="col-sm-4 col-md-4">
 					<h3>About Us</h3>
-					<p>blablalblabla</p>
+					<p>{{org.about}}</p>
 				</div>
 				<div class="col-sm-9 col-md-9">
 					<hr>

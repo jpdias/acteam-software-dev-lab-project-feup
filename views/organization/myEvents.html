@@ -54,22 +54,62 @@
                                 <h4 class="modal-title">New event</h4>
                             </div>
 
-                             <form id="new_event">
+                             <form id="createEvent" name="createEvent">
                                  <div class="modal-body">
                                     <div class="form-group">
-                                        <input name="name" type="text" class="form-control" placeholder="Name"><br>
-                                        <input name="startdate" type="text" class="form-control" placeholder="Start Date"><br>
-                                        <input name="enddate" type="text" class="form-control" placeholder="End Date"><br>
-                                        <input name="description" type="text" class="form-control" placeholder="Description"><br>
-                                        <h5>Where?</h5>
-                                        <input name="address" type="address" class="form-control" placeholder="Address"><br>
-                                        <input name="municipality" class="form-control" placeholder="Municipality"><br>
-                                        <input name="district" class="form-control" placeholder="District"><br>
+                                      <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                          <input name="name" type="text" class="form-control input-md" placeholder="Event Name">
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                          <input name="startDate" type="datetime" class="form-control input-md" placeholder="Start Date - dd/mm/yyyy">
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                          <input name="endDate" type="datetime" class="form-control input-md" placeholder="End Date - dd/mm/yyyy">
+                                        </div>
+                                      </div>
+                                    </div>
+                                      <div class="form-group">
+                                        <div class="row">
+                                          <div class="col-xs-12 col-sm-12 col-md-12">
+                                            <textarea style="resize: none" rows="3" name="description" type="text" class="form-control input-md" placeholder="Description"></textarea>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    <h3>Where?</h3>
+                                    <div class="form-group">
+                                      <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                          <input name="address" type="text" class="form-control input-md" placeholder="Address">
+                                        </div>
+                                      </div>
+                                    </div>
+                                      <div class="form-group">
+                                        <div class="row">
+                                          <div class="col-xs-12 col-sm-12 col-md-12">
+                                            <input name="municipality" type="text" class="form-control input-md" placeholder="Municipality">
+                                          </div>
+                                        </div>
+                                    </div>
+                                      <div class="form-group">
+                                        <div class="row">
+                                          <div class="col-xs-12 col-sm-12 col-md-12">
+                                            <input name="district" type="text" class="form-control input-md" placeholder="District">
+                                          </div>
+                                        </div>
                                     </div>
                                  </div>
                                  <div class="modal-footer">
                                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                     <button id="#submit" type="submit" class="btn btn-primary">Create event</button>
+                                     <button type="submit" class="btn btn-primary">Create event</button>
                                  </div>
                             </form>
                         </div>
@@ -81,38 +121,5 @@
     </div>
 </div>
 {{> scripts}}
-<script>
-    $( "#new_event" ).submit( function(event){
-      var frm = $('#new_event');
-      var frmdata = frm.serializeArray();
-      console.log(frmdata);
-      var events = {
-          name: frmdata[0].value,
-          date:{
-            start: frmdata[1].value,
-            end: frmdata[2].value,
-          },
-          description: frmdata[3].value,
-          address: {address: frmdata[4].value,
-                    municipality: frmdata[5].value,
-                    district: frmdata[6].value,
-                   },
-      };
-
-      $.ajax({
-          url: '/newevent',
-          type: 'POST',
-          data: {
-            email: user,
-            eventinfo:events
-          },
-          datatype: 'json'
-      });
-      $('#newEventModal').modal('hide');
-      swal({allowOutsideClick:true,title: "Event created with success!", type:"success"});
-      event.preventDefault();
-    });
-
-</script>
-
+<script src="js/organization/createEvent.js"></script>
 {{> footer}}
