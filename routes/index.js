@@ -202,6 +202,7 @@ function showOrg(page,req,res,org){
   dbop.getOrganization(org,function(err,organization){
     if(!err){
       var data= {};
+      //console.log("Org name: " + org);
       data.org=organization;
       res.locals=data;
 
@@ -252,10 +253,10 @@ function showOrg(page,req,res,org){
 app.get('/profileorg', function(req,res,next){
   if(req.session.user && (typeof req.query.org!=="undefined")){
     if(req.session.user.role=="user" || (req.session.user.role=="admin")){
-      showOrg("user",req,res,req.query.org);
+      showOrg("user",req,res,req.session.user.name);
     }
     else if(req.session.user.role=="organization"){
-      showOrg("organization",req,res,req.query.org);
+      showOrg("organization",req,res,req.session.user.name);
     }
     else{
       errPermissions(req,res);
