@@ -3,7 +3,7 @@
   <div class="row">
     {{> sidebar}}
       <div class="col-sm-6 col-md-offset-1 col-md-10 main">
-        <form class="form-horizontal" id="editInfo">
+        <form id="editInfo">
           <div class="col-md-offset-1 col-md-5">
 
 
@@ -20,34 +20,54 @@
               <input type="email" name="inConfirmEmail" class="form-control">
             </div>
 -->
+            <label for="address">Address</label>
             <div class="form-group">
-              <label for="address">Address</label>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
               <input type="text" name="address" class="form-control" value={{address.address}}>
             </div>
+            </div>
+            </div>
 
-            <div class="form-group">
               <label for="municipality">Municipality</label>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
               <input type="text" name="municipality" class="form-control" value={{address.municipality}}>
             </div>
+          </div>
+            </div>
 
-            <div class="form-group">
               <label for="district">District</label>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
               <input type="text" name="district" class="form-control" value={{address.district}}>
             </div>
-
-            <div class="form-group">
-              <label for="workplace">School/Workplace</label>
-              <input type="text" name="workplace" class="form-control" value={{workplace}}>
+          </div>
             </div>
 
+              <label for="workplace">School/Workplace</label>
             <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+              <input type="text" name="workplace" class="form-control" value={{workplace}}>
+            </div>
+          </div>
+            </div>
+
               <label for="cv">Link to CV</label>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
               <input type="text" name="cv" class="form-control" value={{cv}}>
+              </div>
+            </div>
             </div>
 
           </div>
+          <br></br><br>
           <div class="col-md-offset-1 col-md-4">
-            <br></br><br></br>
             <div class="form-group">
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-skype"></i></div>
@@ -130,7 +150,8 @@
 </div>
 
 {{> scripts}}
-<script>
+<script src="js/user/editConfigs.js">
+
 
   $( document ).ready(function() {
     var oldCauses = "{{causes}}".split(",");
@@ -138,7 +159,7 @@
       document.getElementById(oldCauses[j]).checked = true;
   });
 
-  $("#editInfo").submit(function(e) {
+/*  $("#editInfo").submit(function(e) {
 
     var frm = $("#editInfo");
     var frmdata = frm.serializeArray();
@@ -187,6 +208,6 @@
     //location.reload();
 
   });
-
+*/
 </script>
 {{> footer}}
