@@ -11,7 +11,7 @@
 	overflow: hidden;
 }
 .lSSlideWrapper{
-	max-width: 100%;
+	  max-width: 100%;
     overflow: hidden;
     position: relative
 }
@@ -129,7 +129,8 @@
 .lSSlideOuter .lSPager.lSGallery img {
 	display: block;
 	height: auto;
-	max-width: 100%;
+	
+	/*max-width: 100%;*/
 }
 .lSSlideOuter .lSPager.lSGallery:before, .lSSlideOuter .lSPager.lSGallery:after {
 	content: " ";

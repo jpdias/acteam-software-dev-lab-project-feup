@@ -363,7 +363,7 @@ app.post('/configuser',function(req,res){
 
 
 app.get('/configureorg', function(req, res) {
-	if(req.session.user && (typeof req.query.org!=="undefined")){
+	if(req.session.user){
 		if(req.session.user.role=="organization"){
 			dbop.getOrganization(req.session.user.name,function(err,organization){
 				if(!err){

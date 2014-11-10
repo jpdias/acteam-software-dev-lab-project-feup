@@ -7,18 +7,14 @@
 			<!--Image Carousel-->
 			<div class="row clearfix">
 				<ul id="autoplay" class="gallery content-slider list-unstyled clearfix lightSlider lSSlide topimg">
-				  <li>
-					  <img src="http://www.freeartwallpapers.com/wp-content/uploads/2014/08/Wallpapers-abstract-awesome-1920-1080-196268-abstract.jpg">
-				  </li>
-				  <li>
-					  <img src="http://2.bp.blogspot.com/-XMuH18jxCEU/T6ePpwJLhZI/AAAAAAAAFmU/sQYDxdsK_74/s1600/3D-Abstract-Wallpapers%252B-%252Bgraphics.jpg">
-				  </li>
-				  <li>
-					  <img src="http://screenwallpapers.net/wp-content/uploads/2014/09/abstract_wallpaper_05.jpg">
-				  </li>
+				  {{#org.images}}
+          <li>
+            <img src="{{.}}">
+          </li>
+          {{/org.images}}
 				</ul>
 			</div>
-			
+
 			<div class="row clearfix">
 				<div class="col-sm-3 col-md-3">
 					<div class="text-center" id="imgprof"></div>
@@ -27,7 +23,7 @@
 					<button class="btn btn-primary btn-block">
 						Open Recruitment
 					</button>
-					
+
 					<!-- causes organization defend -->
 					<h3>Causes we defend:</h3>
 					<h4>
@@ -37,7 +33,7 @@
               {{/org.causes}}
             </ul>
           </h4>
-					
+
 				</div>
 				<div class="col-sm-5 col-md-5">
 					<div class="col-sm-12 col-md-12">
@@ -47,11 +43,35 @@
 						<address>
 							<b>Email: </b>
 								{{org.email}}<br>
-							<b>Telephone: </b>
-								{{org.telephone}}<br>
 							<b>Address: </b>
-								{{org.address.address}}, {{org.address.municipality}},  {{org.address.district}}
-						</address>
+								{{org.address.address}}, {{org.address.municipality}},  {{org.address.district}}<br>
+						  <b>Website: </b> {{org.website}}<br>
+              <h4>
+
+               {{#org.networks.linkedin}}
+                 <a title="LinkedIn" target="_blank" href="{{org.networks.linkedin}}"><i class="fa fa-linkedin"></i></a>&nbsp;
+               {{/org.networks.linkedin}}
+
+               {{#org.networks.facebook}}
+                 <a title="Facebook" target="_blank" href="{{org.networks.facebook}}"><i class="fa fa-facebook"></i></a>&nbsp;
+               {{/org.networks.facebook}}
+               {{#org.networks.twitter}}
+                 <a title="Twitter" target="_blank" href="{{org.networks.twitter}}"><i class="fa fa-twitter"></i></a>&nbsp;
+               {{/org.networks.twitter}}
+               {{#org.networks.github}}
+                 <a title="GitHub" target="_blank" href="{{org.networks.github}}"><i class="fa fa-github"></i></a>&nbsp;
+               {{/org.networks.github}}
+               {{#org.networks.gplus}}
+                 <a title="Google Plus" target="_blank" href="{{org.networks.gplus}}"><i class="fa fa-google-plus"></i></a>&nbsp;
+               {{/org.networks.gplus}}
+               {{#org.networks.flickr}}
+                 <a title="Flickr" target="_blank" href="{{org.networks.flickr}}"><i class="fa fa-flickr"></i></a>&nbsp;
+               {{/org.networks.flickr}}
+               {{#org.networks.instagram}}
+                 <a title="Instagram" target="_blank" href="{{org.networks.instagram}}"><i class="fa fa-instagram"></i></a>
+               {{/org.networks.instagram}}
+             </h4>
+            </address>
 						</h4>
 					</div>
 				</div>
@@ -97,6 +117,6 @@ $(document).ready(function() {
 			slideMargin:0
     });
 });
-$('#imgprof').html('<img class="img-thumbnail" src="' + get_gravatar("jpdias@live.com", 180)+'">');
+$('#imgprof').html('<img class="img-thumbnail" src="' + get_gravatar("{{org.email}}", 180)+'">');
 </script>
 {{> footer}}

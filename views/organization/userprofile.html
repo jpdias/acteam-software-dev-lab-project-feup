@@ -51,8 +51,42 @@
     <div class="col-md-8 well">
       <span>Email: {{user.email}}</span>
       <span style="display:block" >School/Workplace: {{user.workplace}} </span>
+      {{#user.networks.skype}}
+        <span style="display:block" >Skype: {{user.networks.skype}} </span>
+      {{/user.networks.skype}}
     </div>
   </div>
+  <div class="col-md-8 text-left">
+    <div class="col-md-3">
+      <br>
+      <span> <span class="glyphicon glyphicon-globe"></span> Other Places</span>
+    </div>
+    <div class="col-md-8">
+       <h3>
+         &nbsp;
+        {{#user.networks.linkedin}}
+          <a title="LinkedIn" target="_blank" href="{{user.networks.linkedin}}"><i class="fa fa-linkedin"></i></a>&nbsp;
+        {{/user.networks.linkedin}}
+        {{#user.networks.facebook}}
+          <a title="Facebook" target="_blank" href="{{user.networks.facebook}}"><i class="fa fa-facebook"></i></a>&nbsp;
+        {{/user.networks.facebook}}
+        {{#user.networks.twitter}}
+          <a title="Twitter" target="_blank" href="{{user.networks.twitter}}"><i class="fa fa-twitter"></i></a>&nbsp;
+        {{/user.networks.twitter}}
+        {{#user.networks.github}}
+          <a title="GitHub" target="_blank" href="{{user.networks.github}}"><i class="fa fa-github"></i></a>&nbsp;
+        {{/user.networks.github}}
+        {{#user.networks.gplus}}
+          <a title="Google Plus" target="_blank" href="{{user.networks.gplus}}"><i class="fa fa-google-plus"></i></a>&nbsp;
+        {{/user.networks.gplus}}
+        {{#user.networks.flickr}}
+          <a title="Flickr" target="_blank" href="{{user.networks.flickr}}"><i class="fa fa-flickr"></i></a>&nbsp;
+        {{/user.networks.flickr}}
+        {{#user.networks.instagram}}
+          <a title="Instagram" target="_blank" href="{{user.networks.instagram}}"><i class="fa fa-instagram"></i></a>
+        {{/user.networks.instagram}}
+      </h3>
+    </div>
 </div>
 {{> suggestedSidebar}}
 </div>
