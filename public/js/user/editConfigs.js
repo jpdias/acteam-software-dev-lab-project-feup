@@ -138,11 +138,11 @@ $(document).ready(function(){
         // Prevent form submission
         e.preventDefault();
 
-        var frm = $(target.e);
+        var frm = $('#editInfo');
         var frmdata = frm.serializeArray();
         //console.log(frmdata);
         var boxes = $(":checkbox:checked");
-        var causes = new Array();
+        var causes = [];
 
         for(var i=0;i < boxes.length; i++)
             causes.push(boxes[i].defaultValue);

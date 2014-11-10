@@ -5,8 +5,6 @@
       <div class="col-sm-6 col-md-offset-1 col-md-10 main">
         <form id="editInfo">
           <div class="col-md-offset-1 col-md-5">
-
-
             <!-- Form Name -->
             <legend>Configure</legend>
 <!--
@@ -151,63 +149,12 @@
 
 {{> scripts}}
 <script src="js/user/editConfigs.js">
-
-
+</script>
+<script>
   $( document ).ready(function() {
     var oldCauses = "{{causes}}".split(",");
     for(var j=0;j < oldCauses.length; j++)
       document.getElementById(oldCauses[j]).checked = true;
   });
-
-/*  $("#editInfo").submit(function(e) {
-
-    var frm = $("#editInfo");
-    var frmdata = frm.serializeArray();
-    //console.log(frmdata);
-    var boxes = $(":checkbox:checked");
-    var causes = new Array();
-
-    for(var i=0;i < boxes.length; i++)
-        causes.push(boxes[i].defaultValue);
-    //console.log(causes);
-    var acc = {
-        address: {
-          address: frmdata[0].value,
-          municipality: frmdata[1].value,
-          district: frmdata[2].value
-        },
-        workplace: frmdata[3].value,
-        cv: frmdata[4].value,
-        networks:{
-          skype: frmdata[5].value,
-          facebook: frmdata[6].value,
-          flickr: frmdata[7].value,
-          instagram: frmdata[8].value,
-          linkedin: frmdata[9].value,
-          twitter: frmdata[10].value,
-          github: frmdata[11].value,
-          gplus:frmdata[12].value
-        },
-        causes: causes
-    };
-
-    //console.log(acc);
-      $.ajax({
-          url: '/configuser',
-          type: 'POST',
-          data: {
-            email: user,
-            account: acc
-          },
-          datatype: 'json'
-      });
-
-    e.preventDefault();
-
-    //TODO alterar os checks na checkbox logo(aceder directamente a bd antes de usar a session)
-    //location.reload();
-
-  });
-*/
 </script>
 {{> footer}}

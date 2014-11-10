@@ -23,11 +23,12 @@ $( "#loginform" ).submit( function(event){
 });
 
 var user;
+
 $(document).ready(function(){
   $.get("/loggedIn", function( data ) {
     if(data.login!==false){
       $("#loggedInShow").show();
-      user=  data.email;
+      user=data.email;
       $("#loggedName").text("Hello, "+data.name+"!");
     }
 
