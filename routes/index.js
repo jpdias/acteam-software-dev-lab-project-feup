@@ -160,10 +160,11 @@ app.get('/userhistory', function(req, res) {
 });
 
 app.get('/configureuser', function(req, res) {
+
   if(req.session.user){
     res.locals=req.session.user;
     res.status(200);
-    if(req.session.user.role==="user" && (typeof req.query.username==="undefined")){
+    if(req.session.user.role==="user"){
       res.render(
         'user/configureuser',
         {
@@ -350,18 +351,22 @@ app.post('/newevent',function(req,res){
 //Edit user
 app.post('/configuser',function(req,res){
   //console.log(req.body.eventinfo);
-  var temp = req.body.account;
-  temp.email = req.session.user.email;
-  dbop.updateUserAccount(temp,req.session.user.email,function(err,data){
-    if(err)
-      console.log(err);
-    else{
-      console.log(req.session.user);
-      req.session.user = data;
-      console.log(req.session.user);
-    }
-  });
+  if(req.session.user){
+    var temp = req.body.account;
+    temp.email = req.session.user.email;
+    dbop.updateUserAccount(temp,req.session.user.email,function(err,data){
+      if(err)
+        console.log(err);
+      else{
+         req.session.user = data;
+         req.session.save(function(err){
+           if(err)
+             console.log(err);
+         });
 
+      }
+    });
+  }
 });
 
 

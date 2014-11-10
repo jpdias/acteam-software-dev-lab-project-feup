@@ -180,8 +180,7 @@ $(document).ready(function(){
           });
 
         e.preventDefault();
-
-        //TODO alterar os checks na checkbox logo(aceder directamente a bd antes de usar a session)
-        //location.reload();
+        swal({allowOutsideClick:true,title: "Done!",text:"Account updated with success.", type:"success"});
+      //location.reload();
     });
 });

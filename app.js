@@ -12,9 +12,7 @@ var methodOverride = require('method-override');
 
 var app = module.exports = express();
 
-db.connect('mongodb://acteam:acteamadmin@ds031088.mongolab.com:31088/acteam');
 
-module.exports.mongodb = db;
 
 app.engine('html', hoganexpress);
 app.enable('view cache');
@@ -45,6 +43,9 @@ try{
     res.render('errors/503');
   });
 }
+
+db.connect('mongodb://acteam:acteamadmin@ds031088.mongolab.com:31088/acteam');
+
 module.exports.mongodb = db;
 module.exports.auth = passport;
 module.exports.localStr = LocalStrategy;
