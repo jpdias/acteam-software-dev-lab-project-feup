@@ -123,6 +123,26 @@ function updateUserAcc(dataupdate, email, callback){
 
 module.exports.updateUserAccount = updateUserAcc;
 
+function updateOrgAcc(dataupdate, email, callback){
+  Organization.findOne({ "email": email }, function (err, user) {
+    if(user){
+        Organization.findOneAndUpdate({ "email": email }, dataupdate, {}, function(err, user) {
+          if(err){
+            callback(err, user);
+          }
+          else{
+            callback(err, user);
+          }
+        });
+    }
+    else{
+      callback(err, user);
+    }
+  });
+}
+
+module.exports.updateOrganizationAccount = updateOrgAcc;
+
 function editOrgImages(images, orgName, callback){
   Organization.findOne({"name": orgName}, function(err, org){
     if(org){

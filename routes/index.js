@@ -369,6 +369,24 @@ app.post('/configuser',function(req,res){
   }
 });
 
+app.post('/configorg',function(req,res){
+  //console.log(req.body.account);
+  if(req.session.user){
+    var temp = req.body.account;
+    temp.email = req.session.user.email;
+    dbop.updateOrganizationAccount(temp,req.session.user.email,function(err,data){
+      if(err)
+        console.log(err);
+      else{
+         req.session.user = data;
+         req.session.save(function(err){
+           if(err)
+             console.log(err);
+         });
+      }
+    });
+  }
+});
 
 app.get('/configureorg', function(req, res) {
 	if(req.session.user){

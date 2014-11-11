@@ -7,12 +7,9 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
 var flash = require('connect-flash');
-
 var methodOverride = require('method-override');
 
 var app = module.exports = express();
-
-
 
 app.engine('html', hoganexpress);
 app.enable('view cache');
