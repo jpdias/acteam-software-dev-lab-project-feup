@@ -9,16 +9,22 @@ $( "#loginform" ).submit( function(event){
 
   $.ajax({
       url: '/login',
-      type: 'POST',
+      type: 'GET',
       data: account,
       datatype: 'json',
-      success: function(){
-         window.location.href = "/";
-      },
-      error: function(XMLHttpRequest, textStatus, errorThrown) {
-         window.location.href = "signin";
+      success: function(message){
+        console.log(message);
+        if(message.success)
+            window.location = "/";
+        else{
+          if(message.message==="account")
+            window.location = "signin?err=acc";
+          else
+            window.location = "signin?err=pw";
+        }
       }
   });
+  //window.location.reload(true);
   event.preventDefault();
 });
 
@@ -50,14 +56,19 @@ $( "#signinform" ).submit( function(event){
 
   $.ajax({
       url: '/login',
-      type: 'POST',
+      type: 'GET',
       data: account,
       datatype: 'json',
-      success: function(){
-         window.location.href = "/";
-      },
-      error: function(XMLHttpRequest, textStatus, errorThrown) {
-         window.location.href = "signin";
+      success: function(message){
+        console.log(message);
+        if(message.success)
+            window.location = "/";
+        else{
+          if(message.message==="account")
+            window.location = "signin?err=acc";
+          else
+            window.location = "signin?err=pw";
+        }
       }
   });
   event.preventDefault();

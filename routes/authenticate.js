@@ -28,7 +28,9 @@ function sendMail(who,title,msg){
 }
 
 function errorLogin(err,req,res){
-  res.locals({"msg":err});
+  console.log(err);
+  error = {msg:err};
+  res.locals=error;
   res.render(
       'signin',
       {
@@ -41,6 +43,7 @@ function errorLogin(err,req,res){
       }
     );
 }
+module.exports.loginErrors = errorLogin;
 
 function confirmaccount(req,res){
   Account.findOne({ email: req.query.email }, function (err, user) {
@@ -53,7 +56,7 @@ function confirmaccount(req,res){
             return next(err);
           }
           else{
-              errorLogin("Account confirmed with success!",req,res);
+            errorLogin("Account confirmed with success!",req,res);
           }
         });
       }

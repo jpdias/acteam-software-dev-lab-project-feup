@@ -11,17 +11,19 @@ app.use(function(req, res, next){
   common.errNotFound(req,res);
 });
 
-app.post('/login', function(req, res, next) {
+app.get('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
-    if (err) {
-      return next(err); // will generate a 500 error
-    }
-    // Generate a JSON response reflecting authentication status
     if (! user) {
-      return res.send({ success : true, message : 'authentication failed' });
+      if(info.message==='Incorrect username.')
+        return res.send({success: false, message : 'account'});
+      else{
+        return res.send({success: false, message : 'password'});
+      }
     }
-    req.session.user = user;
-    return res.send({ success : true, message : 'authentication succeeded' });
+    else{
+      req.session.user = user;
+      return res.send({ success : true, message : 'authentication succeeded' });
+    }
   })(req, res, next);
 });
 
@@ -186,6 +188,13 @@ app.get('/configureuser', function(req, res) {
 });
 
 app.get('/signin', function(req, res) {
+  if(!req.session.user){
+    if(req.query.err){
+      if(req.query.err==="pw")
+        res.locals={msg:"Wrong password!"};
+      else
+        res.locals={msg:"Invalid account!"};
+    }
   res.render(
     'signin',
     {
@@ -196,7 +205,7 @@ app.get('/signin', function(req, res) {
         scripts: 'common/scripts'
       }
     }
-  );
+  );}
 });
 
 function showOrg(page,req,res,org){
@@ -397,7 +406,6 @@ app.get('/configureorg', function(req, res) {
 					//console.log("Org name: " + org);
 					data.org=organization;
 					res.locals=data;
-
 					res.render(
 						'organization/configureorg',
 						{
@@ -414,4 +422,23 @@ app.get('/configureorg', function(req, res) {
 			});
 		}
 	}
+});
+
+app.get('/recovery',function(req,res){
+  res.render(
+    'recoveryPassword',
+    {
+      partials:
+      {
+        header: 'common/header',
+        footer: 'common/footer',
+        scripts: 'common/scripts'
+      }
+    }
+  );
+});
+
+app.post('/recovery',function(req,res){
+  console.log(req.body.email);
+  return res.send({success: true, message : 'teste'});
 });
