@@ -1,11 +1,6 @@
 /* Form field validation on the edition of a users configuration */
 $(document).ready(function(){
 
-/*  var oldCauses = "{{causes}}".split(",");
-  for(var j=0;j < oldCauses.length; j++)
-    document.getElementById(oldCauses[j]).checked = true;
-*/
-
   $("#editInfo").bootstrapValidator(
     {
       message: "This form is not valid",
@@ -15,23 +10,26 @@ $(document).ready(function(){
           validating: 'glyphicon glyphicon-refresh'
       },
       fields:{
-        workplace: {
-            message: 'The description is not valid',
+        orgName: {
+            message: 'The organization name is not valid',
             validators: {
                 stringLength: {
-                    max: 350,
-                    message: 'The school or workplace designation must be less than 350 characters long'
+                    min: 6,
+                    max: 30,
+                    message: 'The organization name must be more than 6 and less than 30 characters long'
+                },
+                regexp: {
+                    regexp: /^[^0-9]+$/,
+                    message: 'The organization name can only consist of alphabetical and number'
                 }
             }
         },
-        cv: {
-            message: 'The link to CV is not valid',
-            validators: {
-                stringLength: {
-                    max: 350,
-                    message: 'The link to CV must be less than 350 characters long'
+        website: {
+                validators: {
+                    uri: {
+                        message: 'The website address is not valid'
+                    }
                 }
-            }
         },
         address: {
             message: 'The address is not valid',
@@ -59,6 +57,36 @@ $(document).ready(function(){
                   message: 'The district must be less than 100 characters long'
                 }
           }
+        },
+        about: {
+            message: 'The about is not valid',
+            validators: {
+                stringLength: {
+                    max: 350,
+                    message: 'The about section must be less than 350 characters long'
+                }
+            }
+        },
+        image1: {
+                validators: {
+                    uri: {
+                        message: 'The image address is not valid'
+                    }
+                }
+        },
+        image2: {
+                validators: {
+                    uri: {
+                        message: 'The image address is not valid'
+                    }
+                }
+        },
+        image3: {
+                validators: {
+                    uri: {
+                        message: 'The image address is not valid'
+                    }
+                }
         },
         skype: {
           message: 'The skype is not valid',
@@ -128,12 +156,12 @@ $(document).ready(function(){
       }
     })
       .on('success.form.bv', function(e){
-        // Prevent form submission
+
         e.preventDefault();
 
-        var frm = $('#editInfo');
+        var frm = $(e.target);
         var frmdata = frm.serializeArray();
-        //console.log(frmdata);
+
         var boxes = $(":checkbox:checked");
         var causes = [];
 
@@ -141,32 +169,31 @@ $(document).ready(function(){
             causes.push(boxes[i].defaultValue);
         //console.log(causes);
         var acc = {
+            name: frmdata[0].value,
+            website: frmdata[1].value,
             address: {
-              address: frmdata[0].value,
-              municipality: frmdata[1].value,
-              district: frmdata[2].value
+              address:  frmdata[2].value,
+              municipality: frmdata[3].value,
+              district: frmdata[4].value
             },
-            workplace: frmdata[3].value,
-            cv: frmdata[4].value,
+            images:[frmdata[6].value,frmdata[7].value,frmdata[8].value],
+            about: frmdata[5].value,
             networks:{
-              skype: frmdata[5].value,
-              facebook: frmdata[6].value,
-              flickr: frmdata[7].value,
-              instagram: frmdata[8].value,
-              linkedin: frmdata[9].value,
-              twitter: frmdata[10].value,
-              github: frmdata[11].value,
-              gplus:frmdata[12].value
+              skype: frmdata[9].value,
+              facebook: frmdata[10].value,
+              flickr: frmdata[11].value,
+              instagram: frmdata[12].value,
+              linkedin: frmdata[13].value,
+              twitter: frmdata[14].value,
+              github: frmdata[15].value,
+              gplus:frmdata[16].value
             },
             causes: causes
         };
-
-        //console.log(acc);
-          $.ajax({
-              url: '/configuser',
+        $.ajax({
+              url: '/configorg',
               type: 'POST',
               data: {
-                email: user,
                 account: acc
               },
               datatype: 'json'
@@ -174,6 +201,5 @@ $(document).ready(function(){
 
         e.preventDefault();
         swal({allowOutsideClick:true,title: "Done!",text:"Account updated with success.", type:"success"});
-      //location.reload();
     });
 });

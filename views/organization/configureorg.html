@@ -3,98 +3,181 @@
   <div class="row">
     {{> sidebar}}
       <div class="col-sm-6 col-md-offset-1 col-md-10 main">
-        <form class="form-horizontal editInfo">
+        <form class="editInfo" id="editInfo">
           <div class="col-md-offset-1 col-md-5">
-
 
             <!-- Form Name -->
             <legend>Configure</legend>
 
+            <label for="name">Organization Name</label>
             <div class="form-group">
-              <label for="name">Organization Name</label>
-              <input type="text" name="orgName" class="form-control" value={{org.name}}>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <input type="text" name="orgName" class="form-control" value={{org.name}}>
+                </div>
+              </div>
             </div>
 
+            <label for="website">Website</label>
             <div class="form-group">
-
-                <label for="website">Website</label>
-              <input type="text" name="website" class="form-control" value={{org.website}}>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <input type="text" name="website" class="form-control" value={{org.website}}>
+                </div>
+              </div>
             </div>
 
+            <label for="address">Address</label>
             <div class="form-group">
-              <label for="address">Address</label>
-              <input type="text" name="address" class="form-control" value={{org.address.address}}>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <input type="text" name="address" class="form-control" value={{org.address.address}}>
+                </div>
+              </div>
             </div>
 
+            <label for="municipality">Municipality</label>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <input type="text" name="municipality" class="form-control" value={{org.address.municipality}}>
+                </div>
+              </div>
+            </div>
 
-          <div class="form-group">
-
-              <label for="municipality">Municipality</label>
-            <input type="text" name="municipality" class="form-control" value={{org.address.municipality}}>
-          </div>
-
-
-
-          <div class="form-group">
             <label for="district">District</label>
-            <input type="text" name="district" class="form-control" value={{org.address.district}}>
-
-          </div>
-
             <div class="form-group">
-              <label for="aboutus">About Us</label>
-              <textarea style="resize: vertical" name="about" id="about" class="form-control input-md" placeholder="About" tabindex="9">{{org.about}}</textarea>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <input type="text" name="district" class="form-control" value={{org.address.district}}>
+                </div>
+              </div>
+            </div>
+
+            <label for="aboutus">About Us</label>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <textarea style="resize: vertical" name="about" id="about" class="form-control input-md" placeholder="About" tabindex="9">{{org.about}}</textarea>
+                </div>
+              </div>
+            </div>
+
+            <label for="images">Images(Max of 3 images. JPG extension.)</label>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <input id="img1" type="text" name="image1" class="form-control" value="">
+                </div>
+              </div>
             </div>
 
             <div class="form-group">
-              <label for="images">Images(Max of 3 images. JPG extension.)</label>
-              <input id="img1" type="text" name="images" class="form-control" value=""><br>
-              <input id="img2" type="text" name="images" class="form-control" value=""><br>
-              <input id="img3" type="text" name="images" class="form-control" value="">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <input id="img2" type="text" name="image2" class="form-control" value="">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <input id="img3" type="text" name="image3" class="form-control" value="">
+                </div>
+              </div>
             </div>
 
           </div>
-          <div class="col-md-offset-1 col-md-4">
+          <div class="col-md-offset-1 col-md-5">
+
             <br></br><br></br>
+
             <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-skype"></i></div>
-                <input class="form-control" name="skype" type="text" placeholder="skype" value={{org.networks.skype}}>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-skype"></i></div>
+                    <input class="form-control" name="skype" type="text" placeholder="skype" value={{org.networks.skype}}>
+                  </div>
+                </div>
               </div>
-              <br>
-              <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-facebook">&nbsp;</i></div>
-                <input class="form-control" name="facebook" type="text" placeholder="facebook" value={{org.networks.facebook}}>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-facebook">&nbsp;</i></div>
+                    <input class="form-control" name="facebook" type="text" placeholder="facebook" value={{org.networks.facebook}}>
+                  </div>
+                </div>
               </div>
-              <br>
-              <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-flickr"></i></div>
-                <input class="form-control" name="flickr" type="text" placeholder="flickr" value={{org.networks.flickr}}>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-flickr"></i></div>
+                    <input class="form-control" name="flickr" type="text" placeholder="flickr" value={{org.networks.flickr}}>
+                  </div>
+                </div>
               </div>
-              <br>
-              <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-instagram"></i></div>
-                <input class="form-control" name="instagram" type="text" placeholder="instagram" value={{org.networks.instagram}}>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-instagram"></i></div>
+                    <input class="form-control" name="instagram" type="text" placeholder="instagram" value={{org.networks.instagram}}>
+                  </div>
+                </div>
               </div>
-              <br>
-              <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-linkedin"></i></div>
-                <input class="form-control" name="linkedin" type="text" placeholder="linkedin" value={{org.networks.linkedin}}>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-linkedin"></i></div>
+                    <input class="form-control" name="linkedin" type="text" placeholder="linkedin" value={{org.networks.linkedin}}>
+                </div>
               </div>
-              <br>
-              <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-twitter"></i></div>
-                <input class="form-control" name="twitter" type="text" placeholder="twitter" value={{org.networks.twitter}}>
               </div>
-              <br>
-              <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-github"></i></div>
-                <input class="form-control" name="github" type="text" placeholder="github" value={{org.networks.github}}>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-twitter"></i></div>
+                    <input class="form-control" name="twitter" type="text" placeholder="twitter" value={{org.networks.twitter}}>
+                  </div>
+                </div>
               </div>
-              <br>
-              <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-google-plus"></i></div>
-                <input class="form-control" name="gplus" type="text" placeholder="gplus" value={{org.networks.gplus}}>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-github"></i></div>
+                    <input class="form-control" name="github" type="text" placeholder="github" value={{org.networks.github}}>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-google-plus"></i></div>
+                    <input class="form-control" name="gplus" type="text" placeholder="gplus" value={{org.networks.gplus}}>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -140,53 +223,6 @@
 
 {{> scripts}}
 <script>
-  $(function() {
-    $('form.editInfo').submit(function(e) {
-
-      var frm = $('form.editInfo');
-      var frmdata = frm.serializeArray();
-
-      var boxes = $(":checkbox:checked");
-      var causes = [];
-
-      for(var i=0;i < boxes.length; i++)
-          causes.push(boxes[i].defaultValue);
-      //console.log(causes);
-      var acc = {
-          name: frmdata[0].value,
-          website: frmdata[1].value,
-          address: {
-            address:  frmdata[2].value,
-            municipality: frmdata[3].value,
-            district: frmdata[4].value
-          },
-          images:[frmdata[6].value,frmdata[7].value,frmdata[8].value],
-          about: frmdata[5].value,
-          networks:{
-            skype: frmdata[9].value,
-            facebook: frmdata[10].value,
-            flickr: frmdata[11].value,
-            instagram: frmdata[12].value,
-            linkedin: frmdata[13].value,
-            twitter: frmdata[14].value,
-            github: frmdata[15].value,
-            gplus:frmdata[16].value
-          },
-          causes: causes
-      };
-      $.ajax({
-            url: '/configorg',
-            type: 'POST',
-            data: {
-              account: acc
-            },
-            datatype: 'json'
-        });
-      e.preventDefault();
-      swal({allowOutsideClick:true,title: "Done!",text:"Account updated with success.", type:"success"});
-
-    });
-  });
   $( document ).ready(function() {
     var oldImg = "{{org.images}}".split(",");
     //console.log("{{org.causes}}")
@@ -199,4 +235,5 @@
       document.getElementById(oldCauses[j]).checked = true;
   });
 </script>
+<script src="js/organization/editConfigs.js"></script>
 {{> footer}}
