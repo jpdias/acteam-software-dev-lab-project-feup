@@ -422,3 +422,17 @@ app.post('/recovery', function(req, res) {
     message: 'teste'
   });
 });
+
+
+app.get('/searchorg', function(req, res) {
+  res.render(
+      'organization/search', {
+        partials: {
+          header: 'common/header',
+          footer: 'common/footer',
+          scripts: 'common/scripts',
+          searchorg: 'common/searchorg'
+        }
+      }
+  );
+});
