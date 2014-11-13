@@ -78,21 +78,26 @@ function getOrgEvents(orgEmail, callback) {
 module.exports.getOrganizationEvents = getOrgEvents;
 
 function addEventToOrg(event, orgName, callback) {
-  Organization.findOne({
-    "email": orgName
-  }, function(err, org) {
-    //console.log(org);
+  Organization.findOne({"email": orgName}, function(err, org) {
+    console.log(org);
     if (org) {
-      Event.findOne({
-        "name": event.name
-      }, function(err2, duplicateEvent) {
+      Event.findOne({"name": event.name}, function(err2, duplicateEvent) {
         if (!duplicateEvent) {
-          console.log(event);
+          //console.log(event);
           var newEvent = new Event(event);
           console.log(newEvent);
           newEvent.save(function(err3) {
-            callback(err3, event);
+            if(err3){
+              console.log("FAIL");
+            }
+            else{
+              console.log("Success");
+              callback(err3, event);
+          }
+
           });
+
+          //Event.create(event);
           callback(err2, event);
         } else {
           callback(err2, event);

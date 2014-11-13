@@ -330,8 +330,19 @@ app.post('/newevent', function(req, res) {
   var temp = req.body.eventinfo;
   temp.org_email = req.session.user.email;
   console.log(req.session.user.email);
-  dbop.addEventToOrganization(temp, req.body.email, function(err, events) {
-    console.log(err);
+  dbop.addEventToOrganization(temp, temp.org_email, function(err, events) {
+    /*if (err) {
+      return res.send({
+        success: false,
+        message: 'error when adding a new event'
+      });
+    }
+    else {
+      return res.send({
+        success: true,
+        message: 'successfully added a new event'
+      });
+    }*/
   });
 
 });
@@ -344,15 +355,29 @@ app.post('/configuser', function(req, res) {
     temp.email = req.session.user.email;
     dbop.updateUserAccount(temp, req.session.user.email, function(err, data) {
       if (err)
-        console.log(err);
+      {
+        return res.send({
+          success: false,
+          message: 'error when updating user profile'
+        });
+      }
       else {
         req.session.user = data;
         req.session.save(function(err) {
           if (err)
-            console.log(err);
+          {
+            return res.send({
+              success: false,
+              message: 'error when saving session after updating user profile'
+            });
+          }
         });
 
       }
+    });
+    return res.send({
+      success: true,
+      message: 'successful user profile update'
     });
   }
 });
@@ -364,14 +389,28 @@ app.post('/configorg', function(req, res) {
     temp.email = req.session.user.email;
     dbop.updateOrganizationAccount(temp, req.session.user.email, function(err, data) {
       if (err)
-        console.log(err);
+      {
+        return res.send({
+          success: false,
+          message: 'error when updating organization profile'
+        });
+      }
       else {
         req.session.user = data;
         req.session.save(function(err) {
           if (err)
-            console.log(err);
+          {
+            return res.send({
+              success: false,
+              message: 'error when saving session after updating organization profile'
+            });
+          }
         });
       }
+    });
+    return res.send({
+      success: true,
+      message: 'successful organization profile update'
     });
   }
 });
