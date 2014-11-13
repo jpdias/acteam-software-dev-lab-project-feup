@@ -1,124 +1,132 @@
 {{> header}}
 <link rel="stylesheet" type="text/css" href="css/sb-admin-2.css">
 <div class="container">
-    <div class="row">
-        {{> sidebar}}
-        <div class="col-sm-6 col-md-offset-1 col-md-10 main">
-            <!-- 10 spaces left -->
-            <div class="col-md-12">
-                <!-- Modal -->
-              <div class="col-md-12">
-                <h3>
+  <div class="row">
+    {{> sidebar}}
+    <div class="col-sm-6 col-md-offset-1 col-md-10 main">
+      <!-- 10 spaces left -->
+      <div class="col-md-12">
+        <!-- Modal -->
+        <div class="col-md-12">
+          <h3>
+
                   Want to create a new event?
+
                   <button class="btn btn-primary btn-md" data-toggle="modal" data-target="#newEventModal">
+
                       New Event
+
                   </button>
+
                 </h3>
-              </div>
-              <div class="col-md-12">
-              </hr>
-                <div class="currentevents" id="currentevents">
-                    <div class="list-group">
-                      {{#events}}
-                      <div class="panel panel-default">
-                        <div class="panel-body">
-                          <div class="col-md-8">
-                            <h3>{{name}}</h3>
-                          </div>
-                          <div class="col-md-4 text-center">
-                            <h5>Start Date:<br>
+        </div>
+        <div class="col-md-12">
+          </hr>
+          <div class="currentevents" id="currentevents">
+            <div class="list-group">
+              {{#events}}
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="col-md-8">
+                    <h3>{{name}}</h3>
+                  </div>
+                  <div class="col-md-4 text-center">
+                    <h5>Start Date:<br>
+
                               {{date.end}}</h5>
-                            <h5>End Date:<br>
+                    <h5>End Date:<br>
+
                               {{date.end}}</h5>
-                          </div>
-                          <div class="col-md-8">
-                            <p>{{description}}</p>
-                            <p>{{address.address}},{{address.municipality}},{{address.district}}</p>
-                          </div>
-                          <div class="col-md-4">
-                            <button type="button" class="btn btn-primary btn-block btn-md">
-                              <h5>Applications</h5>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      {{/events}}
+                  </div>
+                  <div class="col-md-8">
+                    <p>{{description}}</p>
+                    <p>{{address.address}},{{address.municipality}},{{address.district}}</p>
+                  </div>
+                  <div class="col-md-4">
+                    <button type="button" class="btn btn-primary btn-block btn-md">
+                      <h5>Applications</h5>
+                    </button>
                   </div>
                 </div>
               </div>
-                <div class="modal fade" id="newEventModal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                <h4 class="modal-title">New event</h4>
-                            </div>
-
-                             <form id="createEvent" name="createEvent">
-                                 <div class="modal-body">
-                                    <div class="form-group">
-                                      <div class="row">
-                                        <div class="col-xs-12 col-sm-12 col-md-12">
-                                          <input name="name" type="text" class="form-control input-md" placeholder="Event Name">
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="form-group">
-                                      <div class="row">
-                                        <div class="col-xs-12 col-sm-12 col-md-12">
-                                          <input name="startDate" type="datetime" class="form-control input-md" placeholder="Start Date - dd/mm/yyyy">
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="form-group">
-                                      <div class="row">
-                                        <div class="col-xs-12 col-sm-12 col-md-12">
-                                          <input name="endDate" type="datetime" class="form-control input-md" placeholder="End Date - dd/mm/yyyy">
-                                        </div>
-                                      </div>
-                                    </div>
-                                      <div class="form-group">
-                                        <div class="row">
-                                          <div class="col-xs-12 col-sm-12 col-md-12">
-                                            <textarea style="resize: none" rows="3" name="description" type="text" class="form-control input-md" placeholder="Description"></textarea>
-                                          </div>
-                                      </div>
-                                    </div>
-                                    <h3>Where?</h3>
-                                    <div class="form-group">
-                                      <div class="row">
-                                        <div class="col-xs-12 col-sm-12 col-md-12">
-                                          <input name="address" type="text" class="form-control input-md" placeholder="Address">
-                                        </div>
-                                      </div>
-                                    </div>
-                                      <div class="form-group">
-                                        <div class="row">
-                                          <div class="col-xs-12 col-sm-12 col-md-12">
-                                            <input name="municipality" type="text" class="form-control input-md" placeholder="Municipality">
-                                          </div>
-                                        </div>
-                                    </div>
-                                      <div class="form-group">
-                                        <div class="row">
-                                          <div class="col-xs-12 col-sm-12 col-md-12">
-                                            <input name="district" type="text" class="form-control input-md" placeholder="District">
-                                          </div>
-                                        </div>
-                                    </div>
-                                 </div>
-                                 <div class="modal-footer">
-                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                     <button type="submit" class="btn btn-primary">Create event</button>
-                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal -->
+              {{/events}}
             </div>
+          </div>
         </div>
+        <div class="modal fade" id="newEventModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title">New event</h4>
+              </div>
+
+              <form id="createEvent" name="createEvent">
+                <div class="modal-body">
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12">
+                        <input name="name" type="text" class="form-control input-md" placeholder="Event Name">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12">
+                        <input name="startDate" type="datetime" class="form-control input-md" placeholder="Start Date - dd/mm/yyyy">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12">
+                        <input name="endDate" type="datetime" class="form-control input-md" placeholder="End Date - dd/mm/yyyy">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12">
+                        <textarea style="resize: none" rows="3" name="description" type="text" class="form-control input-md" placeholder="Description"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <h3>Where?</h3>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12">
+                        <input name="address" type="text" class="form-control input-md" placeholder="Address">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12">
+                        <input name="municipality" type="text" class="form-control input-md" placeholder="Municipality">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12">
+                        <input name="district" type="text" class="form-control input-md" placeholder="District">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Create event</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- Modal -->
+      </div>
     </div>
+  </div>
 </div>
 {{> scripts}}
 <script src="js/organization/createEvent.js"></script>

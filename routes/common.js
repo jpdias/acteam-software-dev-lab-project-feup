@@ -5,45 +5,41 @@ var Account = require('../models/account');
 var LocalStrategy = require('../app').localStr;
 var sha1 = require('sha1');
 
-function ErrPermissions(req,res){
+function ErrPermissions(req, res) {
   res.status(500);
   res.render(
-    'errors/500',
-    {
-      partials:
-      {
+    'errors/500', {
+      partials: {
         header: 'common/header',
         footer: 'common/footer',
-        scripts:'common/scripts',
+        scripts: 'common/scripts',
       }
     }
   );
   return;
 }
-function ErrNotFound(req,res){
+
+function ErrNotFound(req, res) {
   res.status(404);
   res.render(
-    'errors/404',
-    {
-      partials:
-      {
+    'errors/404', {
+      partials: {
         header: 'common/header',
         footer: 'common/footer',
-        scripts:'common/scripts',
+        scripts: 'common/scripts',
       }
     }
   );
   return;
 }
-function ErrServiceUnavailable(req,res){
+
+function ErrServiceUnavailable(req, res) {
   res.status(503);
   res.render(
-    'errors/503',
-    {
-      partials:
-      {
+    'errors/503', {
+      partials: {
         footer: 'common/footer',
-        scripts:'common/scripts',
+        scripts: 'common/scripts',
       }
     }
   );
@@ -51,4 +47,4 @@ function ErrServiceUnavailable(req,res){
 }
 
 module.exports.errPermission = ErrPermissions;
-module.exports.errNotFound =  ErrNotFound;
+module.exports.errNotFound = ErrNotFound;

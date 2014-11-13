@@ -1,26 +1,26 @@
 {{> header}}
 <div class="container-fluid">
-    <div class="row">
-		{{> sidebar}}
-		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main fill">
-            <div id="myPromote"></div>
-            <div id="promoteTo"></div>
-            <div id="promotePreview"></div>
-		</div>
-	</div>
+  <div class="row">
+    {{> sidebar}}
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main fill">
+      <div id="myPromote"></div>
+      <div id="promoteTo"></div>
+      <div id="promotePreview"></div>
+    </div>
+  </div>
 </div>
 
 {{> scripts}}
 <script>
-$(document).ready(function() {
+  $(document).ready(function() {
     $('#autoplay').lightSlider({
-		item:1,
-		verticalHeight:200,
-		vThumbWidth:50,
-		auto: true,
-		loop: true,
-		slideMargin:0
+      item: 1,
+      verticalHeight: 200,
+      vThumbWidth: 50,
+      auto: true,
+      loop: true,
+      slideMargin: 0
     });
-});
+  });
 </script>
 {{> footer}}

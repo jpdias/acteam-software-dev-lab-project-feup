@@ -1,38 +1,40 @@
 {{> header}}
 <div class="container-fluid">
-    <div class="row">
-		{{> sidebar}}
-		<div class="main fill">
+  <div class="row">
+    {{> sidebar}}
+    <div class="main fill">
       <div class="navbar-header">
-          <ul class="nav navbar-nav">
-              <li>
-								<h2>My Members</h2>
-							</li>
-          </ul>
+        <ul class="nav navbar-nav">
+          <li>
+            <h2>My Members</h2>
+          </li>
+        </ul>
       </div>
-          <ul class="nav navbar-nav navbar-right">
-              <li><button type="button" class="btn btn-default">Add Member</button></li>
-          </ul>
-      </div>
-      <div class="row" id="memberListing">
-          <div class="col-sm-3">Member 1</div>
-          <div class="col-sm-3">Member 2</div>
-      </div>
-		</div>
-	</div>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <button type="button" class="btn btn-default">Add Member</button>
+        </li>
+      </ul>
+    </div>
+    <div class="row" id="memberListing">
+      <div class="col-sm-3">Member 1</div>
+      <div class="col-sm-3">Member 2</div>
+    </div>
+  </div>
+</div>
 </div>
 
 {{> scripts}}
 <script>
-$(document).ready(function() {
+  $(document).ready(function() {
     $('#autoplay').lightSlider({
-		item:1,
-		verticalHeight:200,
-		vThumbWidth:50,
-		auto: true,
-		loop: true,
-		slideMargin:0
+      item: 1,
+      verticalHeight: 200,
+      vThumbWidth: 50,
+      auto: true,
+      loop: true,
+      slideMargin: 0
     });
-});
+  });
 </script>
 {{> footer}}

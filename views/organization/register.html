@@ -5,103 +5,148 @@
     </div>
     <div class="col-md-8 column">
       <form role="form" id="registerOrgform">
-      <h2>Register your organization <small>It's free and always will be.</small></h2>
-      <hr class="colorgraph">
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-          <div class="form-group">
-            <input type="text" name="name" id="name" class="form-control input-md" placeholder="Name" tabindex="1">
+        <h2>Register your organization <small>It's free and always will be.</small></h2>
+        <hr class="colorgraph">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+              <input type="text" name="name" id="name" class="form-control input-md" placeholder="Name" tabindex="1">
+            </div>
           </div>
         </div>
-      </div>
-      <div class="form-group">
-        <input type="text" name="website" id="website" class="form-control input-md" placeholder="Website Address" tabindex="2">
-      </div>
-      <div class="form-group">
-        <input type="email" name="email" id="email" class="form-control input-md" placeholder="Email Address" tabindex="3">
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-6">
-          <div class="form-group">
-            <input type="password" name="password" id="password" class="form-control input-md" placeholder="Password" tabindex="4">
+        <div class="form-group">
+          <input type="text" name="website" id="website" class="form-control input-md" placeholder="Website Address" tabindex="2">
+        </div>
+        <div class="form-group">
+          <input type="email" name="email" id="email" class="form-control input-md" placeholder="Email Address" tabindex="3">
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+              <input type="password" name="password" id="password" class="form-control input-md" placeholder="Password" tabindex="4">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+              <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-md" placeholder="Confirm Password" tabindex="5">
+            </div>
           </div>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-6">
-          <div class="form-group">
-            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-md" placeholder="Confirm Password" tabindex="5">
+        <div class="form-group">
+          <input type="text" name="address" id="address" class="form-control input-md" placeholder="Address" tabindex="6">
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+              <input type="text" name="municipality" id="municipality" class="form-control input-md" placeholder="Municipality" tabindex="7">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+              <input type="text" name="district" id="district" class="form-control input-md" placeholder="District" tabindex="8">
+            </div>
           </div>
         </div>
-      </div>
-      <div class="form-group">
-        <input type="text" name="address" id="address" class="form-control input-md" placeholder="Address" tabindex="6">
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-6">
-          <div class="form-group">
-            <input type="text" name="municipality" id="municipality" class="form-control input-md" placeholder="Municipality" tabindex="7">
+        <div class="row">
+          <div class="col-xs-12 col-md-12">
+            <textarea style="resize: vertical" name="about" id="about" class="form-control input-md" placeholder="About Us" tabindex="9"></textarea>
           </div>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-6">
-          <div class="form-group">
-            <input type="text" name="district" id="district" class="form-control input-md" placeholder="District" tabindex="8">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-md-12">
-          <textarea style="resize: vertical" name="about" id="about" class="form-control input-md" placeholder="About Us" tabindex="9"></textarea>
-        </div>
-      </div>
-      <div class="row">
-        <br>
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="row">
+          <br>
+          <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
               <label for="birth" class="col-md-3 control-label input-md">Founding Date</label>
               <div class="col-md-9">
                 <input type="text" name="birthdate" class="form-control input-md" id="birth" placeholder="dd/mm/yyyy" tabindex="10">
               </div>
             </div>
-        </div>
-      </div>
-      <div class="row">
-        <br>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-          <div class="form-group">
-            <div class="row">
-              <label for="causes" class="col-md-3 control-label input-md">Causes you support?</label>
-            </div>
-            <div class="row">
-            <div class="col-md-6">
-              <ul class="causes-list">
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Animal Welfare"  type="checkbox" tabindex="11">Animal Welfare</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Arts and Culture" type="checkbox" tabindex="12">Arts and Culture</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Children" type="checkbox" tabindex="13">Children</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Civil Rights and Social Action"  type="checkbox" tabindex="14">Civil Rights and Social Action</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Disaster and Humanitarian Relief" type="checkbox" tabindex="15">Disaster and Humanitarian Relief</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Economic Empowerment"  type="checkbox" tabindex="16">Economic Empowerment</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Education"  type="checkbox" tabindex="17">Education</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Environment"  type="checkbox" tabindex="18">Environment</label></li>
-              </ul>
-            </div>
-            <div class="col-md-6">
-              <ul class="causes-list">
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Health"  type="checkbox" tabindex="19">Health</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Human Rights"  type="checkbox" tabindex="20">Human Rights</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Politics" type="checkbox" tabindex="21" >Politics</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Poverty Alleviation" type="checkbox" tabindex="22">Poverty Alleviation</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Science and Technology" type="checkbox" tabindex="23">Science and Technology</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Social Services"  type="checkbox" tabindex="24">Social Services</label></li>
-                <li><label class="checkbox"><input name="volunteeringInterestsParam" value="Other" type="checkbox" tabindex="25">Other</label></li>
-              </ul>
-            </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-md-12">
-          <input type="submit" value="Register" class="btn btn-primary btn-block btn-md" tabindex="26">
-        </div>
-      </div>
+        <div class="row">
+          <br>
+          <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+              <div class="row">
+                <label for="causes" class="col-md-3 control-label input-md">Causes you support?</label>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <ul class="causes-list">
+                    <li>
+                      <label class="checkbox">
+                        <input name="volunteeringInterestsParam" value="Animal Welfare" type="checkbox" tabindex="11">Animal Welfare</label>
+                    </li>
+                    <li>
+                      <label class="checkbox">
+                        <input name="volunteeringInterestsParam" value="Arts and Culture" type="checkbox" tabindex="12">Arts and Culture</label>
+                    </li>
+                    <li>
+                      <label class="checkbox">
+                        <input name="volunteeringInterestsParam" value="Children" type="checkbox" tabindex="13">Children</label>
+                    </li>
+                    <li>
+                      <label class="checkbox">
+                        <input name="volunteeringInterestsParam" value="Civil Rights and Social Action" type="checkbox" tabindex="14">Civil Rights and Social Action</label>
+                    </li>
+                    <li>
+                      <label class="checkbox">
+                        <input name="volunteeringInterestsParam" value="Disaster and Humanitarian Relief" type="checkbox" tabindex="15">Disaster and Humanitarian Relief</label>
+                    </li>
+                    <li>
+                      <label class="checkbox">
+                        <input name="volunteeringInterestsParam" value="Economic Empowerment" type="checkbox" tabindex="16">Economic Empowerment</label>
+                    </li>
+                    <li>
+                      <label class="checkbox">
+                        <input name="volunteeringInterestsParam" value="Education" type="checkbox" tabindex="17">Education</label>
+                    </li>
+                    <li>
+                      <label class="checkbox">
+                        <input name="volunteeringInterestsParam" value="Environment" type="checkbox" tabindex="18">Environment</label>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <ul class="causes-list">
+                    <li>
+                      <label class="checkbox">
+                        <input name="volunteeringInterestsParam" value="Health" type="checkbox" tabindex="19">Health</label>
+                    </li>
+                    <li>
+                      <label class="checkbox">
+                        <input name="volunteeringInterestsParam" value="Human Rights" type="checkbox" tabindex="20">Human Rights</label>
+                    </li>
+                    <li>
+                      <label class="checkbox">
+                        <input name="volunteeringInterestsParam" value="Politics" type="checkbox" tabindex="21">Politics</label>
+                    </li>
+                    <li>
+                      <label class="checkbox">
+                        <input name="volunteeringInterestsParam" value="Poverty Alleviation" type="checkbox" tabindex="22">Poverty Alleviation</label>
+                    </li>
+                    <li>
+                      <label class="checkbox">
+                        <input name="volunteeringInterestsParam" value="Science and Technology" type="checkbox" tabindex="23">Science and Technology</label>
+                    </li>
+                    <li>
+                      <label class="checkbox">
+                        <input name="volunteeringInterestsParam" value="Social Services" type="checkbox" tabindex="24">Social Services</label>
+                    </li>
+                    <li>
+                      <label class="checkbox">
+                        <input name="volunteeringInterestsParam" value="Other" type="checkbox" tabindex="25">Other</label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-12">
+              <input type="submit" value="Register" class="btn btn-primary btn-block btn-md" tabindex="26">
+            </div>
+          </div>
         </div>
       </form>
     </div>

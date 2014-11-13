@@ -15,7 +15,7 @@ app.engine('html', hoganexpress);
 app.enable('view cache');
 
 app.set('port', process.env.PORT || '3000');
-app.set('views', path.join(__dirname,'views'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
 app.use(express.urlencoded());
@@ -23,20 +23,22 @@ app.use(express.json());
 
 app.use(express.urlencoded());
 app.use(express.cookieParser('keyboard cat'));
-app.use(express.session({ secret: 'anything' }));
+app.use(express.session({
+  secret: 'anything'
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(app.router);
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('development', function(){
+app.use('development', function() {
   app.use(express.errorHandler());
 });
-try{
+try {
   db.createConnection('mongodb://acteam:acteamadmin@ds031088.mongolab.com:31088/acteam');
-}catch(ex){
-  app.get('/', function(req, res){
+} catch (ex) {
+  app.get('/', function(req, res) {
     res.render('errors/503');
   });
 }
@@ -49,6 +51,6 @@ module.exports.localStr = LocalStrategy;
 
 require('./routes');
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('\n----------------------\nNode.js server listening on port '+app.get('port'));
+http.createServer(app).listen(app.get('port'), function() {
+  console.log('\n----------------------\nNode.js server listening on port ' + app.get('port'));
 });

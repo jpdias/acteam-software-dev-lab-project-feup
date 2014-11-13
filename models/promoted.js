@@ -1,13 +1,19 @@
 var mongoose = require('../app').mongodb,
-    Schema = mongoose.Schema,
-    ObjectId = Schema.ObjectId;
+  Schema = mongoose.Schema,
+  ObjectId = Schema.ObjectId;
 
-var Promoted =  new Schema({
+var Promoted = new Schema({
   org_email: String,
   event_name: String,
-  date:{
-    start: {type: Date, default: Date.now},
-    end: {type: Date, default: Date.now}
+  date: {
+    start: {
+      type: Date,
+      default: Date.now
+    },
+    end: {
+      type: Date,
+      default: Date.now
+    }
   },
   description: String,
   type: String,

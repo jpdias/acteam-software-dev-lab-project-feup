@@ -2,121 +2,158 @@
 <link rel="stylesheet" type="text/css" href="css/profileorg.css">
 <div class="container-fluid">
   <div class="row">
-		{{> sidebar}}
-		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main fill">
-			<!--Image Carousel-->
-			<div class="row clearfix">
-				<ul id="autoplay" class="gallery content-slider list-unstyled clearfix lightSlider lSSlide topimg">
-				  {{#org.images}}
+    {{> sidebar}}
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main fill">
+      <!--Image Carousel-->
+      <div class="row clearfix">
+        <ul id="autoplay" class="gallery content-slider list-unstyled clearfix lightSlider lSSlide topimg">
+          {{#org.images}}
           <li>
             <img src="{{.}}">
           </li>
           {{/org.images}}
-				</ul>
-			</div>
+        </ul>
+      </div>
 
-			<div class="row clearfix">
-				<div class="col-sm-3 col-md-3">
-					<div class="text-center" id="imgprof"></div>
-					<br>
-					<br>
-					<button class="btn btn-primary btn-block">
-						Open Recruitment
-					</button>
+      <div class="row clearfix">
+        <div class="col-sm-3 col-md-3">
+          <div class="text-center" id="imgprof"></div>
+          <br>
+          <br>
+          <button class="btn btn-primary btn-block">
+            Open Recruitment
+          </button>
 
-					<!-- causes organization defend -->
-					<h3>Causes we defend:</h3>
-					<h4>
+          <!-- causes organization defend -->
+          <h3>Causes we defend:</h3>
+          <h4>
+
             <ul>
+
               {{#org.causes}}
+
               <li>{{.}}</li>
+
               {{/org.causes}}
+
             </ul>
+
           </h4>
 
-				</div>
-				<div class="col-sm-5 col-md-5">
-					<div class="col-sm-12 col-md-12">
-						<h1>{{org.name}}</h1>
-					</div>
-					<div class="col-sm-12 col-md-12">
-						<address>
+        </div>
+        <div class="col-sm-5 col-md-5">
+          <div class="col-sm-12 col-md-12">
+            <h1>{{org.name}}</h1>
+          </div>
+          <div class="col-sm-12 col-md-12">
+            <address>
+
 							<b>Email: </b>
+
 								{{org.email}}<br>
+
 							<b>Address: </b>
+
 								{{org.address.address}}, {{org.address.municipality}},  {{org.address.district}}<br>
+
 						  <b>Website: </b> {{org.website}}<br>
+
               <h4>
 
+
+
                {{#org.networks.linkedin}}
+
                  <a title="LinkedIn" target="_blank" href="{{org.networks.linkedin}}"><i class="fa fa-linkedin"></i></a>&nbsp;
+
                {{/org.networks.linkedin}}
 
+
+
                {{#org.networks.facebook}}
+
                  <a title="Facebook" target="_blank" href="{{org.networks.facebook}}"><i class="fa fa-facebook"></i></a>&nbsp;
+
                {{/org.networks.facebook}}
+
                {{#org.networks.twitter}}
+
                  <a title="Twitter" target="_blank" href="{{org.networks.twitter}}"><i class="fa fa-twitter"></i></a>&nbsp;
+
                {{/org.networks.twitter}}
+
                {{#org.networks.github}}
+
                  <a title="GitHub" target="_blank" href="{{org.networks.github}}"><i class="fa fa-github"></i></a>&nbsp;
+
                {{/org.networks.github}}
+
                {{#org.networks.gplus}}
+
                  <a title="Google Plus" target="_blank" href="{{org.networks.gplus}}"><i class="fa fa-google-plus"></i></a>&nbsp;
+
                {{/org.networks.gplus}}
+
                {{#org.networks.flickr}}
+
                  <a title="Flickr" target="_blank" href="{{org.networks.flickr}}"><i class="fa fa-flickr"></i></a>&nbsp;
+
                {{/org.networks.flickr}}
+
                {{#org.networks.instagram}}
+
                  <a title="Instagram" target="_blank" href="{{org.networks.instagram}}"><i class="fa fa-instagram"></i></a>
+
                {{/org.networks.instagram}}
+
              </h4>
+
             </address>
-						</h4>
-					</div>
-				</div>
-				<div class="col-sm-4 col-md-4">
-					<h3>About Us</h3>
-					<p>{{org.about}}</p>
-				</div>
-				<div class="col-sm-9 col-md-9">
-					<hr>
-					<div class="event">
-						<div class="row">
-							<div class="col-sm-9 col-md-9">
-							<h3>Event XPTO</h3>
-							</div>
-							<div class="col-sm-3 col-md-3">
-							<h3>9/10/2014</h3>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-9 col-md-9">
-							Some information about the event.mmm mmmmmmm mmmmm mmmmmmmmmmmmmmm mmmmmmmmmm mmmmmmmmmmm.
-							</div>
-							<div class="col-sm-3 col-md-3">
-								<button class="btn btn-primary btn-block">Apply!</button>
-							</div>
-						</div>
-					</div>
-				 </div>
-			</div>
-		</div>
-	</div>
+            </h4>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-4">
+          <h3>About Us</h3>
+          <p>{{org.about}}</p>
+        </div>
+        <div class="col-sm-9 col-md-9">
+          <hr>
+          <div class="event">
+            <div class="row">
+              <div class="col-sm-9 col-md-9">
+                <h3>Event XPTO</h3>
+              </div>
+              <div class="col-sm-3 col-md-3">
+                <h3>9/10/2014</h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-9 col-md-9">
+                Some information about the event.mmm mmmmmmm mmmmm mmmmmmmmmmmmmmm mmmmmmmmmm mmmmmmmmmmm.
+              </div>
+              <div class="col-sm-3 col-md-3">
+                <button class="btn btn-primary btn-block">Apply!</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {{> scripts}}
 
 <script>
-$(document).ready(function() {
+  $(document).ready(function() {
     $('#autoplay').lightSlider({
-			item:1,
-			verticalHeight:200,
-			vThumbWidth:50,
-			auto: true,
-			loop: true,
-			slideMargin:0
+      item: 1,
+      verticalHeight: 200,
+      vThumbWidth: 50,
+      auto: true,
+      loop: true,
+      slideMargin: 0
     });
-});
-$('#imgprof').html('<img class="img-thumbnail" src="' + get_gravatar("{{org.email}}", 180)+'">');
+  });
+  $('#imgprof').html('<img class="img-thumbnail" src="' + get_gravatar("{{org.email}}", 180) + '">');
 </script>
 {{> footer}}
