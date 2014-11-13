@@ -195,15 +195,14 @@
 </div>
 
 {{> scripts}}
-<script src="js/user/editConfigs.js">
-</script>
+<script src="js/user/editConfigs.js"></script>
 <script>
-  $( document ).ready(function() {
-    if("{{causes}}"!=""){
-      var oldCauses = "{{causes}}".split(",");
-      for(var j=0;j < oldCauses.length; j++)
-        document.getElementById(oldCauses[j]).checked = true;
-    }
-  });
+$( document ).ready(function() {
+  if("{{causes}}"!=""){
+    var oldCauses = "{{causes}}".split(",");
+    for(var j=0;j < oldCauses.length; j++)
+      document.getElementById(oldCauses[j]).checked = true;
+  }
+});
 </script>
 {{> footer}}

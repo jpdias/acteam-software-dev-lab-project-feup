@@ -141,7 +141,7 @@ app.get('/profileuser', function(req, res) {
     } else
       common.errNotFound(req, res);
   } else
-    common.errNotFound(req, res);
+    common.errPermission(req, res);
 });
 
 app.get('/userhistory', function(req, res) {
@@ -178,7 +178,7 @@ app.get('/configureuser', function(req, res) {
     } else
       common.errNotFound(req, res);
   } else
-    common.errPermission(req, res);
+    common.errNotFound(req, res);
 });
 
 app.get('/signin', function(req, res) {
@@ -330,8 +330,19 @@ app.post('/newevent', function(req, res) {
   var temp = req.body.eventinfo;
   temp.org_email = req.session.user.email;
   console.log(req.session.user.email);
-  dbop.addEventToOrganization(temp, req.body.email, function(err, events) {
-    console.log(err);
+  dbop.addEventToOrganization(temp, temp.org_email, function(err, events) {
+    /*if (err) {
+      return res.send({
+        success: false,
+        message: 'error when adding a new event'
+      });
+    }
+    else {
+      return res.send({
+        success: true,
+        message: 'successfully added a new event'
+      });
+    }*/
   });
 
 });
@@ -343,13 +354,20 @@ app.post('/configuser', function(req, res) {
     var temp = req.body.account;
     temp.email = req.session.user.email;
     dbop.updateUserAccount(temp, req.session.user.email, function(err, data) {
-      if (err)
-        console.log(err);
-      else {
+      if (err) {
+        return res.send({
+          success: false,
+          message: 'error when updating user profile'
+        });
+      } else {
         req.session.user = data;
         req.session.save(function(err) {
-          if (err)
-            console.log(err);
+          if (err) {
+            return res.send({
+              success: false,
+              message: 'error when saving session after updating user profile'
+            });
+          }
         });
 
       }
@@ -364,15 +382,26 @@ app.post('/configorg', function(req, res) {
     var temp = req.body.account;
     temp.email = req.session.user.email;
     dbop.updateOrganizationAccount(temp, req.session.user.email, function(err, data) {
-      if (err)
-        console.log(err);
-      else {
+      if (err) {
+        return res.send({
+          success: false,
+          message: 'error when updating organization profile'
+        });
+      } else {
         req.session.user = data;
         req.session.save(function(err) {
-          if (err)
-            console.log(err);
+          if (err) {
+            return res.send({
+              success: false,
+              message: 'error when saving session after updating organization profile'
+            });
+          }
         });
       }
+    });
+    return res.send({
+      success: true,
+      message: 'successful organization profile update'
     });
   }
 });
@@ -444,6 +473,57 @@ app.post('/recovery', function(req, res) {
       });
     }
   });
+});
+
+app.get('/recovery', function(req, res) {
+  if (!req.session.user) {
+    res.render(
+      'recoveryPassword', {
+        partials: {
+          header: 'common/header',
+          footer: 'common/footer',
+          scripts: 'common/scripts'
+        }
+      }
+    );
+  }
+});
+
+
+app.get('/searchorg', function(req, res) {
+
+  if (req.session.user.role == "user") {
+    res.render('organization/search', {
+      partials: {
+        header: 'common/header',
+        sidebar: 'user/sidebarUser',
+        suggestedSidebar: 'user/suggestedSidebar',
+        footer: 'common/footer',
+        scripts: 'common/scripts',
+        searchorg: 'common/searchorg'
+      }
+    });
+  } else if (req.session.user.role == "organization") {
+    res.render('user/search', {
+      partials: {
+        header: 'common/header',
+        sidebar: 'organization/sidebar',
+        footer: 'common/footer',
+        scripts: 'common/scripts',
+        searchorg: 'common/searchorg'
+      }
+    });
+
+  } else {
+    res.render('visitor/search', {
+      partials: {
+        header: 'common/header',
+        footer: 'common/footer',
+        scripts: 'common/scripts',
+        searchorg: 'common/searchorg'
+      }
+    });
+  }
 });
 
 app.post('/resetpassword', function(req, res) {

@@ -168,16 +168,29 @@ $(document).ready(function() {
           email: user,
           account: acc
         },
-        datatype: 'json'
+        datatype: 'json',
+        success: function(message) {
+          if (message.success) {
+            swal({
+              allowOutsideClick: true,
+              title: "Done!",
+              text: "Account updated with success.",
+              type: "success"
+            });
+          }
+          else {
+            swal({
+              allowOutsideClick: true,
+              title: "Fail!",
+              text: "An error occured, account unsuccessfully updated.",
+              type: "error"
+            });
+          }
+        }
       });
 
       e.preventDefault();
-      swal({
-        allowOutsideClick: true,
-        title: "Done!",
-        text: "Account updated with success.",
-        type: "success"
-      });
+
       //location.reload();
     });
 });
