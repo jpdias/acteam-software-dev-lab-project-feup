@@ -431,6 +431,7 @@ app.get('/searchorg', function(req, res) {
           header: 'common/header',
           footer: 'common/footer',
           scripts: 'common/scripts',
+          sidebar: 'organization/sidebar',
           searchorg: 'common/searchorg'
         }
       }
