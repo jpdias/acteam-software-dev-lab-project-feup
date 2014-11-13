@@ -437,7 +437,7 @@ app.get('/searchorg', function (req, res) {
             }
         });
     } else if (req.session.user.role == "organization") {
-        res.render( 'organization/search', {
+        res.render( 'user/search', {
             partials: {
                 header: 'common/header',
                 sidebar: 'organization/sidebar',
@@ -449,7 +449,7 @@ app.get('/searchorg', function (req, res) {
 
     }
     else {
-        res.render( 'organization/search', {
+        res.render( 'visitor/search', {
             partials: {
                 header: 'common/header',
                 footer: 'common/footer',
