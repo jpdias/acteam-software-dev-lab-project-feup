@@ -1,0 +1,48 @@
+{{> header}}
+<link rel="stylesheet" href="css/signin.css">
+<div class="container">
+  <h2 class="form-signin-heading text-center">Reset password</h2>
+  <h4 class="form-signin-heading text-center">Enter your new password and you will be back on your feet.</h4>
+  <form class="form-signin" id="resetform">
+    <label>Password</label>
+    <div class="form-group">
+      <input type="email" class="form-control" name="email" placeholder="New password" required>
+    </div>
+    <div class="form-group">
+      <input type="email" class="form-control" name="email" placeholder="Repeat new password" required>
+    </div>
+    <button type="submit" class="btn btn-lg btn-primary btn-block">Reset</button>
+  </form>
+</div>
+<!-- /container -->
+{{> scripts}}
+<script>
+  $("#resetform").submit(function(event) {
+    var frm = $('#resetform');
+    var frmdata = frm.serializeArray();
+
+    var data = {
+      password: frmdata[0].value,
+      email: getQueryVariable("email"),
+      code: getQueryVariable("code")
+    };
+
+    $.ajax({
+      url: '/resetpassword',
+      type: 'POST',
+      data: data,
+      datatype: 'json',
+      success: function(message) {
+        if (message.success)
+          swal({
+            allowOutsideClick: true,
+            title: "Request completed!",
+            text: "Please verify your inbox.",
+            type: "success"
+          });
+      }
+    });
+    event.preventDefault();
+  });
+</script>
+{{> footer}}

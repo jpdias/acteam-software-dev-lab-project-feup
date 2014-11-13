@@ -7,6 +7,7 @@ var LocalStrategy = require('../app').localStr;
 var sha1 = require('sha1');
 var mandrill = require('node-mandrill')('Kj-1SGPKFICoSgUIo9OEqw');
 var fs = require('fs');
+var common = require('./common');
 
 function getUser(userEmail, callback) {
   Account.findOne({
@@ -175,3 +176,47 @@ function editOrgImages(images, orgName, callback) {
 }
 
 module.exports.editOrgImages = editOrgImages;
+
+function recoveryPass(email, callback) {
+  Organization.findOne({
+    "email": email
+  }, function(err, user) {
+    if (!err && user)
+      common.email(email, "Acteam Network", "Hello, Recovery Password Link: http://localhost:3000/recoverypassword?code=" + sha1(user.name + user.password) + "&email=" + user.email + " Acteam Group");
+    else
+      callback(err);
+  });
+  Account.findOne({
+    "email": email
+  }, function(err, user) {
+    if (!err && user)
+      common.email(email, "Acteam Network", "Hello, Recovery Password Link: http://localhost:3000/recovery?code=" + sha1(user.name + user.password) + "&email=" + user.email + " Acteam Group");
+    else
+      callback(err);
+  });
+
+}
+
+module.exports.recoveryPassword = recoveryPass;
+
+function resetpass(email, password, callback) {
+  /*Organization.findOne({
+    "email": email
+  }, function(err, user) {
+    if (!err && user)
+      common.email(email, "Acteam Network", "Hello, Recovery Password Link: http://localhost:3000/recoverypassword?code=" + sha1(user.name + user.password) + "&email=" + user.email + " Acteam Group");
+    else
+      callback(err);
+  });
+  Account.findOne({
+    "email": email
+  }, function(err, user) {
+    if (!err && user)
+      common.email(email, "Acteam Network", "Hello, Recovery Password Link: http://localhost:3000/recovery?code=" + sha1(user.name + user.password) + "&email=" + user.email + " Acteam Group");
+    else
+      callback(err);
+  });*/
+
+}
+
+module.exports.resetpassword = resetpass;

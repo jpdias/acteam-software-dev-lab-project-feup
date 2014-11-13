@@ -4,29 +4,7 @@ var Admin = require('../models/admin');
 var Organization = require('../models/organization');
 var LocalStrategy = require('../app').localStr;
 var sha1 = require('sha1');
-var mandrill = require('node-mandrill')('Kj-1SGPKFICoSgUIo9OEqw');
-var fs = require('fs');
-
-
-function saveImage(webmail, img, role) {}
-
-function sendMail(who, title, msg) {
-  mandrill('/messages/send', {
-    message: {
-      to: [{
-        email: who,
-        name: "Acteam Member"
-      }],
-      from_email: "no-reply@acteam.com",
-      subject: title,
-      text: msg
-    }
-  }, function(error, response) { //uh oh, there was an error
-    if (error) console.log(JSON.stringify(error));
-    //everything's good, lets see what mandrill said
-    else console.log(response);
-  });
-}
+var common = require('./common');
 
 function errorLogin(err, req, res) {
   console.log(err);
@@ -116,7 +94,7 @@ function register(req, res) {
       }
     });
   }
-  sendMail(req.body.email, "Acteam Network", "Hello, Confirmation Link: http://localhost:3000/confirmaccount?code=" + sha1(req.body.email + req.body.name) + "&email=" + req.body.email + " Acteam Group");
+  common.email(req.body.email, "Acteam Network", "Hello, Confirmation Link: http://localhost:3000/confirmaccount?code=" + sha1(req.body.email + req.body.name) + "&email=" + req.body.email + " Acteam Group");
 }
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -178,7 +156,6 @@ passport.deserializeUser(function(user, done) {
     done(err, user);
   });
 });
-module.exports.saveimg = saveImage;
+
 module.exports.confirmuser = confirmaccount;
 module.exports.reg = register;
-module.exports.email = sendMail;
