@@ -26,9 +26,8 @@ $(document).ready(function() {
         cv: {
           message: 'The link to CV is not valid',
           validators: {
-            stringLength: {
-              max: 350,
-              message: 'The link to CV must be less than 350 characters long'
+            uri: {
+              message: 'The facebook address is not valid. The address should be simillar with \'http://teste.com/something\''
             }
           }
         },
