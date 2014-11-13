@@ -348,7 +348,6 @@ app.post('/newevent', function(req, res) {
 });
 
 //Edit user
-<<<<<<< HEAD
 app.post('/configuser', function(req, res) {
   //console.log(req.body.eventinfo);
   if (req.session.user) {
@@ -414,45 +413,6 @@ app.post('/configorg', function(req, res) {
       message: 'successful organization profile update'
     });
   }
-=======
-app.post('/configuser', function (req, res) {
-    //console.log(req.body.eventinfo);
-    if (req.session.user) {
-        var temp = req.body.account;
-        temp.email = req.session.user.email;
-        dbop.updateUserAccount(temp, req.session.user.email, function (err, data) {
-            if (err)
-                console.log(err);
-            else {
-                req.session.user = data;
-                req.session.save(function (err) {
-                    if (err)
-                        console.log(err);
-                });
-
-            }
-        });
-    }
-});
-
-app.post('/configorg', function (req, res) {
-    //console.log(req.body.account);
-    if (req.session.user) {
-        var temp = req.body.account;
-        temp.email = req.session.user.email;
-        dbop.updateOrganizationAccount(temp, req.session.user.email, function (err, data) {
-            if (err)
-                console.log(err);
-            else {
-                req.session.user = data;
-                req.session.save(function (err) {
-                    if (err)
-                        console.log(err);
-                });
-            }
-        });
-    }
->>>>>>> eb55a83b8a02a090f708ff5ccf82a388f5b492c9
 });
 
 app.get('/configureorg', function (req, res) {
