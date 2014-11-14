@@ -331,18 +331,17 @@ app.post('/newevent', function(req, res) {
   temp.org_email = req.session.user.email;
   console.log(req.session.user.email);
   dbop.addEventToOrganization(temp, temp.org_email, function(err, events) {
-    /*if (err) {
+    if (err) {
       return res.send({
         success: false,
         message: 'error when adding a new event'
       });
-    }
-    else {
+    } else {
       return res.send({
         success: true,
         message: 'successfully added a new event'
       });
-    }*/
+    }
   });
 
 });
