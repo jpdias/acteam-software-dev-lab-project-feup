@@ -434,7 +434,7 @@ app.get('/configureorg', function(req, res) {
 app.get('/recovery', function(req, res) {
   if (!req.session.user && (typeof req.query.email !== "undefined") && (typeof req.query.code !== "undefined")) {
     res.render(
-      'recoveryPage', {
+      'generic/recoveryPage', {
         partials: {
           header: 'common/header',
           footer: 'common/footer',
@@ -442,11 +442,9 @@ app.get('/recovery', function(req, res) {
         }
       }
     );
-  }
-
-  if (!req.session.user) {
+  } else if (!req.session.user) {
     res.render(
-      'recoveryPassword', {
+      'generic/recoveryPassword', {
         partials: {
           header: 'common/header',
           footer: 'common/footer',
@@ -474,20 +472,22 @@ app.post('/recovery', function(req, res) {
   });
 });
 
-app.get('/recovery', function(req, res) {
-  if (!req.session.user) {
-    res.render(
-      'recoveryPassword', {
-        partials: {
-          header: 'common/header',
-          footer: 'common/footer',
-          scripts: 'common/scripts'
-        }
-      }
-    );
-  }
-});
 
+app.post('/resetpassword', function(req, res) {
+  dbop.resetpassword(req.body.password, req.body.email, req.body.code, function(err) {
+    if (err) {
+      return res.send({
+        success: false,
+        message: 'teste'
+      });
+    } else {
+      return res.send({
+        success: true,
+        message: 'teste'
+      });
+    }
+  });
+});
 
 app.get('/searchorg', function(req, res) {
 
@@ -523,20 +523,4 @@ app.get('/searchorg', function(req, res) {
       }
     });
   }
-});
-
-app.post('/resetpassword', function(req, res) {
-  dbop.resetpassword(req.body.password, req.body.email, function(err) {
-    if (err) {
-      return res.send({
-        success: false,
-        message: 'teste'
-      });
-    } else {
-      return res.send({
-        success: true,
-        message: 'teste'
-      });
-    }
-  });
 });

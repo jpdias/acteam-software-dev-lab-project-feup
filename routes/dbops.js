@@ -217,24 +217,36 @@ function recoveryPass(email, callback) {
 
 module.exports.recoveryPassword = recoveryPass;
 
-function resetpass(email, password, callback) {
-  /*Organization.findOne({
+function resetpass(password, email, code, callback) {
+  console.log("hey" + email + password + code);
+
+  Organization.findOne({
     "email": email
   }, function(err, user) {
-    if (!err && user)
-      common.email(email, "Acteam Network", "Hello, Recovery Password Link: http://localhost:3000/recoverypassword?code=" + sha1(user.name + user.password) + "&email=" + user.email + " Acteam Group");
-    else
+    if (!err && user) {
+      if (sha1(user.name + user.password) === code) {
+
+        user.password = sha1(password);
+        user.save(function(err2) {
+          callback(err2, user);
+        });
+      }
+    } else
       callback(err);
   });
   Account.findOne({
     "email": email
   }, function(err, user) {
-    if (!err && user)
-      common.email(email, "Acteam Network", "Hello, Recovery Password Link: http://localhost:3000/recovery?code=" + sha1(user.name + user.password) + "&email=" + user.email + " Acteam Group");
-    else
+    if (!err && user) {
+      if (sha1(user.name + user.password) === code) {
+        user.password = sha1(password);
+        user.save(function(err2) {
+          callback(err2, user);
+        });
+      }
+    } else
       callback(err);
-  });*/
-
+  });
 }
 
 module.exports.resetpassword = resetpass;
