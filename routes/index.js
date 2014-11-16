@@ -41,6 +41,14 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
+app.post('/logout', function(req, res) {
+  req.logout();
+  req.session.destroy();
+  return res.send({
+    success: false
+  });
+});
+
 app.post('/register', auth.reg);
 
 app.get('/confirmaccount', auth.confirmuser);
@@ -487,6 +495,26 @@ app.post('/resetpassword', function(req, res) {
       });
     }
   });
+});
+
+app.post('/deleteuser', function(req, res) {
+  if (req.session.user) {
+    dbop.deleteacc(req.session.user, function(err) {
+      //req.logout();
+      //req.session.destroy();
+      //console.log("!");
+      if (err) {
+        return res.send({
+          success: false
+        });
+      } else {
+        return res.send({
+          success: true
+        });
+      }
+    });
+
+  }
 });
 
 app.get('/searchorg', function(req, res) {

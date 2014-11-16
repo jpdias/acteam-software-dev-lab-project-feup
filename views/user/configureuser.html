@@ -2,12 +2,12 @@
 <div class="container">
   <div class="row">
     {{> sidebar}}
-      <div class="col-sm-6 col-md-offset-1 col-md-10 main">
-        <form id="editInfo">
-          <div class="col-md-offset-1 col-md-5">
-            <!-- Form Name -->
-            <legend>Configure</legend>
-<!--
+    <div class="col-sm-6 col-md-offset-1 col-md-10 main">
+      <form id="editInfo">
+        <div class="col-md-offset-1 col-md-5">
+          <!-- Form Name -->
+          <legend>Configure</legend>
+          <!--
             <div class="form-group">
               <label for="newEmail">New Email</label>
               <input type="email" name="inNewEmail" class="form-control">
@@ -18,191 +18,300 @@
               <input type="email" name="inConfirmEmail" class="form-control">
             </div>
 -->
-            <label for="address">Address</label>
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                  <input type="text" name="address" class="form-control" value="{{address.address}}">
-                </div>
+          <label for="address">Address</label>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <input type="text" name="address" class="form-control" value="{{address.address}}">
               </div>
             </div>
-
-            <label for="municipality">Municipality</label>
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                  <input type="text" name="municipality" class="form-control" value="{{address.municipality}}">
-                </div>
-              </div>
-            </div>
-
-            <label for="district">District</label>
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                  <input type="text" name="district" class="form-control" value="{{address.district}}">
-                </div>
-              </div>
-            </div>
-
-            <label for="workplace">School/Workplace</label>
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                  <input type="text" name="workplace" class="form-control" value="{{workplace}}">
-                </div>
-              </div>
-            </div>
-
-            <label for="cv">Link to CV</label>
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                  <input type="text" name="cv" class="form-control" value="{{cv}}">
-                </div>
-              </div>
-            </div>
-
           </div>
-          <div class="col-md-offset-1 col-md-5">
 
-            <br></br><br></br>
-
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                  <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-skype"></i></div>
-                    <input class="form-control" name="skype" type="text" placeholder="skype" value="{{org.networks.skype}}">
-                  </div>
-                </div>
+          <label for="municipality">Municipality</label>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <input type="text" name="municipality" class="form-control" value="{{address.municipality}}">
               </div>
             </div>
+          </div>
 
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                  <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-facebook">&nbsp;</i></div>
-                    <input class="form-control" name="facebook" type="text" placeholder="facebook" value="{{org.networks.facebook}}">
-                  </div>
-                </div>
+          <label for="district">District</label>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <input type="text" name="district" class="form-control" value="{{address.district}}">
               </div>
             </div>
+          </div>
 
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                  <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-flickr"></i></div>
-                    <input class="form-control" name="flickr" type="text" placeholder="flickr" value="{{org.networks.flickr}}">
-                  </div>
-                </div>
+          <label for="workplace">School/Workplace</label>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <input type="text" name="workplace" class="form-control" value="{{workplace}}">
               </div>
             </div>
+          </div>
 
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                  <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-instagram"></i></div>
-                    <input class="form-control" name="instagram" type="text" placeholder="instagram" value="{{org.networks.instagram}}">
-                  </div>
-                </div>
+          <label for="cv">Link to CV</label>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <input type="text" name="cv" class="form-control" value="{{cv}}">
               </div>
             </div>
+          </div>
 
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                  <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-linkedin"></i></div>
-                    <input class="form-control" name="linkedin" type="text" placeholder="linkedin" value="{{org.networks.linkedin}}">
-                </div>
-              </div>
-              </div>
-            </div>
+        </div>
+        <div class="col-md-offset-1 col-md-5">
 
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                  <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-twitter"></i></div>
-                    <input class="form-control" name="twitter" type="text" placeholder="twitter" value="{{org.networks.twitter}}">
+          <br></br>
+          <br></br>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-skype"></i>
                   </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                  <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-github"></i></div>
-                    <input class="form-control" name="github" type="text" placeholder="github" value="{{org.networks.github}}">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                  <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-google-plus"></i></div>
-                    <input class="form-control" name="gplus" type="text" placeholder="gplus" value="{{org.networks.gplus}}">
-                  </div>
+                  <input class="form-control" name="skype" type="text" placeholder="skype" value="{{org.networks.skype}}">
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-12"><hr></div>
-            <div class="col-md-offset-1 col-md-11">
-              <label for="areasInterest">Areas of interest</label>
-              <br>
-              <div class="col-md-6">
-                <ul class="causes-list">
-                  <li><label class="checkbox"><input name="interestField" id="Animal Welfare" value="Animal Welfare"  type="checkbox" tabindex="11">Animal Welfare</label></li>
-                  <li><label class="checkbox"><input name="interestField" id="Arts and Culture" value="Arts and Culture" type="checkbox" tabindex="12">Arts and Culture</label></li>
-                  <li><label class="checkbox"><input name="interestField" id="Children" value="Children" type="checkbox" tabindex="13">Children</label></li>
-                  <li><label class="checkbox"><input name="interestField" id="Civil Rights and Social Action" value="Civil Rights and Social Action"  type="checkbox" tabindex="14">Civil Rights and Social Action</label></li>
-                  <li><label class="checkbox"><input name="interestField" id="Disaster and Humanitarian Relief" value="Disaster and Humanitarian Relief" type="checkbox" tabindex="15">Disaster and Humanitarian Relief</label></li>
-                  <li><label class="checkbox"><input name="interestField" id="Economic Empowerment"  type="checkbox" value="Economic Empowerment"  type="checkbox" tabindex="16">Economic Empowerment</label></li>
-                  <li><label class="checkbox"><input name="interestField" id="Education" value="Education"  type="checkbox" tabindex="17">Education</label></li>
-                  <li><label class="checkbox"><input name="interestField" id="Environment" value="Environment" type="checkbox" tabindex="18">Environment</label></li>
-                </ul>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-facebook">&nbsp;</i>
+                  </div>
+                  <input class="form-control" name="facebook" type="text" placeholder="facebook" value="{{org.networks.facebook}}">
+                </div>
               </div>
-              <div class="col-md-6">
-                <ul class="causes-list">
-                  <li><label class="checkbox"><input name="interestField" id="Health" value="Health"  type="checkbox" tabindex="19">Health</label></li>
-                  <li><label class="checkbox"><input name="interestField" id="Human Rights" value="Human Rights"  type="checkbox" tabindex="20">Human Rights</label></li>
-                  <li><label class="checkbox"><input name="interestField" id="Politics" value="Politics" type="checkbox" tabindex="21" >Politics</label></li>
-                  <li><label class="checkbox"><input name="interestField" id="Poverty Alleviation" value="Poverty Alleviation" type="checkbox" tabindex="22">Poverty Alleviation</label></li>
-                  <li><label class="checkbox"><input name="interestField" id="Science and Technology" value="Science and Technology" type="checkbox" tabindex="23">Science and Technology</label></li>
-                  <li><label class="checkbox"><input name="interestField" id="Social Services" value="Social Services"  type="checkbox" tabindex="24">Social Services</label></li>
-                  <li><label class="checkbox"><input name="interestField" id="Other" value="Other" type="checkbox" tabindex="25">Other</label></li>
-                </ul>
-              </div>
-              <div class="col-md-12">
-                <br>
-                <button style="float:right" type="submit" class="btn btn-primary">Submit</button>
-              </div>
+            </div>
           </div>
-        </form>
-      </div>
-    {{> suggestedSidebar}}
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-flickr"></i>
+                  </div>
+                  <input class="form-control" name="flickr" type="text" placeholder="flickr" value="{{org.networks.flickr}}">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-instagram"></i>
+                  </div>
+                  <input class="form-control" name="instagram" type="text" placeholder="instagram" value="{{org.networks.instagram}}">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-linkedin"></i>
+                  </div>
+                  <input class="form-control" name="linkedin" type="text" placeholder="linkedin" value="{{org.networks.linkedin}}">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-twitter"></i>
+                  </div>
+                  <input class="form-control" name="twitter" type="text" placeholder="twitter" value="{{org.networks.twitter}}">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-github"></i>
+                  </div>
+                  <input class="form-control" name="github" type="text" placeholder="github" value="{{org.networks.github}}">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-google-plus"></i>
+                  </div>
+                  <input class="form-control" name="gplus" type="text" placeholder="gplus" value="{{org.networks.gplus}}">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <hr>
+        </div>
+        <div class="col-md-offset-1 col-md-11">
+          <label for="areasInterest">Areas of interest</label>
+          <br>
+          <div class="col-md-6">
+            <ul class="causes-list">
+              <li>
+                <label class="checkbox">
+                  <input name="interestField" id="Animal Welfare" value="Animal Welfare" type="checkbox" tabindex="11">Animal Welfare</label>
+              </li>
+              <li>
+                <label class="checkbox">
+                  <input name="interestField" id="Arts and Culture" value="Arts and Culture" type="checkbox" tabindex="12">Arts and Culture</label>
+              </li>
+              <li>
+                <label class="checkbox">
+                  <input name="interestField" id="Children" value="Children" type="checkbox" tabindex="13">Children</label>
+              </li>
+              <li>
+                <label class="checkbox">
+                  <input name="interestField" id="Civil Rights and Social Action" value="Civil Rights and Social Action" type="checkbox" tabindex="14">Civil Rights and Social Action</label>
+              </li>
+              <li>
+                <label class="checkbox">
+                  <input name="interestField" id="Disaster and Humanitarian Relief" value="Disaster and Humanitarian Relief" type="checkbox" tabindex="15">Disaster and Humanitarian Relief</label>
+              </li>
+              <li>
+                <label class="checkbox">
+                  <input name="interestField" id="Economic Empowerment" type="checkbox" value="Economic Empowerment" type="checkbox" tabindex="16">Economic Empowerment</label>
+              </li>
+              <li>
+                <label class="checkbox">
+                  <input name="interestField" id="Education" value="Education" type="checkbox" tabindex="17">Education</label>
+              </li>
+              <li>
+                <label class="checkbox">
+                  <input name="interestField" id="Environment" value="Environment" type="checkbox" tabindex="18">Environment</label>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul class="causes-list">
+              <li>
+                <label class="checkbox">
+                  <input name="interestField" id="Health" value="Health" type="checkbox" tabindex="19">Health</label>
+              </li>
+              <li>
+                <label class="checkbox">
+                  <input name="interestField" id="Human Rights" value="Human Rights" type="checkbox" tabindex="20">Human Rights</label>
+              </li>
+              <li>
+                <label class="checkbox">
+                  <input name="interestField" id="Politics" value="Politics" type="checkbox" tabindex="21">Politics</label>
+              </li>
+              <li>
+                <label class="checkbox">
+                  <input name="interestField" id="Poverty Alleviation" value="Poverty Alleviation" type="checkbox" tabindex="22">Poverty Alleviation</label>
+              </li>
+              <li>
+                <label class="checkbox">
+                  <input name="interestField" id="Science and Technology" value="Science and Technology" type="checkbox" tabindex="23">Science and Technology</label>
+              </li>
+              <li>
+                <label class="checkbox">
+                  <input name="interestField" id="Social Services" value="Social Services" type="checkbox" tabindex="24">Social Services</label>
+              </li>
+              <li>
+                <label class="checkbox">
+                  <input name="interestField" id="Other" value="Other" type="checkbox" tabindex="25">Other</label>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-12">
+            <br>
+            <button style="float:right" type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </form>
+
+      <form>
+        <div class="col-md-offset-1 col-md-11">
+          <hr>
+          <div class="col-md-8">
+            <p>Delete my account</p>
+          </div>
+          <div class="col-md-4 text-right">
+            <button id="deleteaccount" type="button" class="btn btn-danger">Delete account</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
   </div>
+  {{> suggestedSidebar}}
+</div>
 </div>
 
 {{> scripts}}
 <script src="js/user/editConfigs.js"></script>
 <script>
-$( document ).ready(function() {
-  if("{{causes}}"!=""){
-    var oldCauses = "{{causes}}".split(",");
-    for(var j=0;j < oldCauses.length; j++)
-      document.getElementById(oldCauses[j]).checked = true;
-  }
-});
+  $('#deleteaccount').on('click', function() {
+    swal({
+        title: "Are you sure?",
+        text: "You will not be able to login or recovery this account!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel please!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          $.post("/deleteuser");
+          //$.post("/logout", function(data) {
+          swal({
+              title: "Account deleted.",
+              text: "You will not be able to recover this account.",
+              type: "warning",
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Ok.",
+              closeOnConfirm: false
+            },
+            function() {
+
+              $("#closesession").trigger("click");
+
+            });
+
+          //});
+
+        } else {
+          swal("Cancelled", "Your account is safe :)", "success");
+        }
+      });
+  });
+
+
+  $(document).ready(function() {
+    if ("{{causes}}" != "") {
+      var oldCauses = "{{causes}}".split(",");
+      for (var j = 0; j < oldCauses.length; j++)
+        document.getElementById(oldCauses[j]).checked = true;
+    }
+  });
 </script>
 {{> footer}}

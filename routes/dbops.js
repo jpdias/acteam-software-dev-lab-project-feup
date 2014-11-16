@@ -250,3 +250,21 @@ function resetpass(password, email, code, callback) {
 }
 
 module.exports.resetpassword = resetpass;
+
+function deleteaccount(user, callback) {
+  Account.find({
+    "email": user.email
+  }).remove(function(err) {
+    if (err) {
+      callback(err);
+    }
+  });
+  Organization.find({
+    "email": user.email
+  }).remove(function(err) {
+    if (err) {
+      callback(err);
+    }
+  });
+}
+module.exports.deleteacc = deleteaccount;
