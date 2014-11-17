@@ -29,12 +29,18 @@ $(document).ready(function() {
         }
       },
       email: {
+        trigger: 'blur',
         validators: {
           notEmpty: {
             message: 'The email is required'
           },
           emailAddress: {
             message: 'The input is not a valid email address'
+          },
+          remote: {
+            message: 'The email already exists',
+            url: '/userexists',
+            type: 'POST'
           }
         }
       },
