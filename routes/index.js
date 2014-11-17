@@ -517,6 +517,20 @@ app.post('/deleteuser', function(req, res) {
   }
 });
 
+app.post('/userexists', function(req, res) {
+  dbop.findUser(req.body.email, function(err, exists) {
+    if (exists) {
+      return res.send({
+        exist: true
+      });
+    } else {
+      return res.send({
+        exist: false
+      });
+    }
+  });
+});
+
 app.get('/searchorg', function(req, res) {
 
   if (req.session.user.role == "user") {

@@ -268,3 +268,25 @@ function deleteaccount(user, callback) {
   });
 }
 module.exports.deleteacc = deleteaccount;
+
+function findUsr(email, callback) {
+  Organization.findOne({
+    "email": email
+  }, function(err, user) {
+    if (!err && user) {
+      callback(err, true);
+    } else {
+      Account.findOne({
+        "email": email
+      }, function(err, user) {
+        if (!err && user) {
+          callback(err, true);
+        } else
+          callback(err, false);
+      });
+    }
+  });
+
+}
+
+module.exports.findUser = findUsr;
