@@ -46,11 +46,11 @@ $(document).ready(function() {
               message: 'The email is required'
             },
             emailAddress: {
-              message: 'The input is not a valid email address'
+              message: 'The input is not a valid email address (Example: \'something@test.com\')'
             },
             remote: {
               message: 'The email already exists',
-              url: '/userexists',
+              url: '/usernotexists',
               type: 'POST'
             }
           }
