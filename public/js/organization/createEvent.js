@@ -113,7 +113,7 @@ $(document).ready(function() {
 
       var frm = $(e.target);
       var frmdata = frm.serializeArray();
-      console.log(frmdata);
+
       var events = {
         name: frmdata[0].value,
         date: {
@@ -135,14 +135,28 @@ $(document).ready(function() {
           email: user,
           eventinfo: events
         },
-        datatype: 'json'
+        datatype: 'json',
+        success: function(message) {
+          if (message.success) {
+            swal({
+              allowOutsideClick: true,
+              title: "Event created with success!",
+              type: "success"
+            });
+          }
+          else {
+            swal({
+              allowOutsideClick: true,
+              title: "Fail!",
+              text: "An error occured, event unsuccessfully created.",
+              type: "error"
+            });
+          }
+        }
       });
       $('#newEventModal').modal('hide');
-      swal({
-        allowOutsideClick: true,
-        title: "Event created with success!",
-        type: "success"
-      });
-      event.preventDefault();
+
+
+      e.preventDefault();
     });
 });

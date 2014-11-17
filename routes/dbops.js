@@ -7,6 +7,7 @@ var LocalStrategy = require('../app').localStr;
 var sha1 = require('sha1');
 var mandrill = require('node-mandrill')('Kj-1SGPKFICoSgUIo9OEqw');
 var fs = require('fs');
+var common = require('./common');
 
 function getUser(userEmail, callback) {
   Account.findOne({
@@ -81,26 +82,44 @@ function addEventToOrg(event, orgName, callback) {
   Organization.findOne({
     "email": orgName
   }, function(err, org) {
-    //console.log(org);
-    if (org) {
-      Event.findOne({
-        "name": event.name
-      }, function(err2, duplicateEvent) {
-        if (!duplicateEvent) {
-          console.log(event);
-          var newEvent = new Event(event);
-          console.log(newEvent);
-          newEvent.save(function(err3) {
-            callback(err3, event);
-          });
-          callback(err2, event);
-        } else {
-          callback(err2, event);
-        }
-      });
+    var newEvent = new Event(event);
+    //console.log(newEvent);
+    newEvent.save(function(err) {
+      if (err) {
+        console.log("FAIL");
+        callback(err, event);
+      } else {
+        console.log("Success");
+        callback(err, event);
+      }
+    });
+    /*console.log(org);
+      if (org) {
+        Event.findOne({"name": event.name}, function(err2, duplicateEvent) {
+          if (!duplicateEvent) {
+            //console.log(event);
+            var newEvent = new Event(event);
+            console.log(newEvent);
+            newEvent.save(function(err3) {
+              if(err3){
+                console.log("FAIL");
+              }
+              else{
+                console.log("Success");
+                callback(err3, event);
+            }
+
+            });
+
+            //Event.create(event);
+            callback(err2, event);
+          } else {
+            callback(err2, event);
+          }
+        });
     } else {
       callback(err, org);
-    }
+    }*/
   });
 }
 
@@ -175,3 +194,77 @@ function editOrgImages(images, orgName, callback) {
 }
 
 module.exports.editOrgImages = editOrgImages;
+
+function recoveryPass(email, callback) {
+  Organization.findOne({
+    "email": email
+  }, function(err, user) {
+    if (!err && user)
+      common.email(email, "Acteam Network", "Hello, Recovery Password Link: http://localhost:3000/recoverypassword?code=" + sha1(user.name + user.password) + "&email=" + user.email + " Acteam Group");
+    else
+      callback(err);
+  });
+  Account.findOne({
+    "email": email
+  }, function(err, user) {
+    if (!err && user)
+      common.email(email, "Acteam Network", "Hello, Recovery Password Link: http://localhost:3000/recovery?code=" + sha1(user.name + user.password) + "&email=" + user.email + " Acteam Group");
+    else
+      callback(err);
+  });
+
+}
+
+module.exports.recoveryPassword = recoveryPass;
+
+function resetpass(password, email, code, callback) {
+  console.log("hey" + email + password + code);
+
+  Organization.findOne({
+    "email": email
+  }, function(err, user) {
+    if (!err && user) {
+      if (sha1(user.name + user.password) === code) {
+
+        user.password = sha1(password);
+        user.save(function(err2) {
+          callback(err2, user);
+        });
+      }
+    } else
+      callback(err);
+  });
+  Account.findOne({
+    "email": email
+  }, function(err, user) {
+    if (!err && user) {
+      if (sha1(user.name + user.password) === code) {
+        user.password = sha1(password);
+        user.save(function(err2) {
+          callback(err2, user);
+        });
+      }
+    } else
+      callback(err);
+  });
+}
+
+module.exports.resetpassword = resetpass;
+
+function deleteaccount(user, callback) {
+  Account.find({
+    "email": user.email
+  }).remove(function(err) {
+    if (err) {
+      callback(err);
+    }
+  });
+  Organization.find({
+    "email": user.email
+  }).remove(function(err) {
+    if (err) {
+      callback(err);
+    }
+  });
+}
+module.exports.deleteacc = deleteaccount;

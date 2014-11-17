@@ -4,6 +4,7 @@ var passport = require('../app').auth;
 var Account = require('../models/account');
 var LocalStrategy = require('../app').localStr;
 var sha1 = require('sha1');
+var mandrill = require('node-mandrill')('Kj-1SGPKFICoSgUIo9OEqw');
 
 function ErrPermissions(req, res) {
   res.status(500);
@@ -48,3 +49,23 @@ function ErrServiceUnavailable(req, res) {
 
 module.exports.errPermission = ErrPermissions;
 module.exports.errNotFound = ErrNotFound;
+
+function sendMail(who, title, msg) {
+  mandrill('/messages/send', {
+    message: {
+      to: [{
+        email: who,
+        name: "Acteam Member"
+      }],
+      from_email: "no-reply@acteam.com",
+      subject: title,
+      text: msg
+    }
+  }, function(error, response) { //uh oh, there was an error
+    if (error) console.log(JSON.stringify(error));
+    //everything's good, lets see what mandrill said
+    else console.log(response);
+  });
+}
+
+module.exports.email = sendMail;

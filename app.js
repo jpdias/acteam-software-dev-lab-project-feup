@@ -10,6 +10,7 @@ var flash = require('connect-flash');
 var methodOverride = require('method-override');
 
 var app = module.exports = express();
+var logger = require("morgan");
 
 app.engine('html', hoganexpress);
 app.enable('view cache');
@@ -29,12 +30,13 @@ app.use(express.session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-app.use(app.router);
+
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('development', function() {
-  app.use(express.errorHandler());
-});
+app.use(logger('dev'));
+
+app.use(app.router);
+
 try {
   db.createConnection('mongodb://acteam:acteamadmin@ds031088.mongolab.com:31088/acteam');
 } catch (ex) {
@@ -50,6 +52,8 @@ module.exports.auth = passport;
 module.exports.localStr = LocalStrategy;
 
 require('./routes');
+
+
 
 http.createServer(app).listen(app.get('port'), function() {
   console.log('\n----------------------\nNode.js server listening on port ' + app.get('port'));
