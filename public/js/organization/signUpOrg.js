@@ -67,6 +67,10 @@ $(document).ready(function() {
             stringLength: {
               min: 8,
               message: 'The password must have at least 8 characters'
+            },
+            identical: {
+              field: 'password_confirmation',
+              message: 'The password must be the same as the password confirmation'
             }
           }
         },
