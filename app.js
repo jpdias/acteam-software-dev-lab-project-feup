@@ -27,6 +27,7 @@ app.use(express.cookieParser('keyboard cat'));
 app.use(express.session({
   secret: 'anything'
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());

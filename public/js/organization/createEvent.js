@@ -113,12 +113,13 @@ $(document).ready(function() {
 
       var frm = $(e.target);
       var frmdata = frm.serializeArray();
-
+      var st = Date.parse(frmdata[1].value);
+      var en = Date.parse(frmdata[2].value);
       var events = {
         name: frmdata[0].value,
         date: {
-          start: frmdata[1].value,
-          end: frmdata[2].value,
+          start: st,
+          end: en
         },
         description: frmdata[3].value,
         address: {
@@ -143,8 +144,7 @@ $(document).ready(function() {
               title: "Event created with success!",
               type: "success"
             });
-          }
-          else {
+          } else {
             swal({
               allowOutsideClick: true,
               title: "Fail!",
@@ -155,7 +155,6 @@ $(document).ready(function() {
         }
       });
       $('#newEventModal').modal('hide');
-
 
       e.preventDefault();
     });

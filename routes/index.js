@@ -115,7 +115,7 @@ app.get('/', function(req, res) {
 app.get('/profileuser', function(req, res) {
   if (req.session.user) {
     res.locals = req.session.user;
-    console.log(res.partials);
+    //console.log(res.partials);
     res.status(200);
     if (req.session.user.role === "user" && (typeof req.query.username === "undefined")) {
       res.render(
@@ -133,6 +133,7 @@ app.get('/profileuser', function(req, res) {
       //console.log(req.query.email);
       dbop.getUser(req.query.email, function(err, user) {
         res.locals.user = user;
+
         res.render(
           'organization/userprofile', {
             partials: {
@@ -141,8 +142,8 @@ app.get('/profileuser', function(req, res) {
               sidebar: 'organization/sidebar',
               scripts: 'common/scripts'
             }
-          }
-        );
+          });
+
       });
 
 
@@ -219,40 +220,43 @@ function showOrg(page, req, res, org) {
       var data = {};
       //console.log("Org name: " + org);
       data.org = organization;
-      res.locals = data;
+      dbop.getOrganizationEvents(data.org.email, function(err, events) {
+        data.events = events;
+        res.locals = data;
+        if (page == "organization") {
+          res.render(
+            'organization/profile', {
+              partials: {
+                sidebar: 'organization/sidebar',
+                header: 'common/header',
+                footer: 'common/footer',
+                scripts: 'common/scripts'
+              }
+            }
+          );
+        } else if (page == "user") {
+          res.render(
+            'user/profileorg', {
+              partials: {
+                sidebar: 'user/sidebarUser',
+                header: 'common/header',
+                footer: 'common/footer',
+                scripts: 'common/scripts'
+              }
+            }
+          );
+        } else {
+          res.render(
+            'visitor/profileorg', {
+              partials: {
+                header: 'common/header',
+                footer: 'common/footer',
+                scripts: 'common/scripts'
+              }
+            });
+        }
 
-      if (page == "organization") {
-        res.render(
-          'organization/profile', {
-            partials: {
-              sidebar: 'organization/sidebar',
-              header: 'common/header',
-              footer: 'common/footer',
-              scripts: 'common/scripts'
-            }
-          }
-        );
-      } else if (page == "user") {
-        res.render(
-          'user/profileorg', {
-            partials: {
-              sidebar: 'user/sidebarUser',
-              header: 'common/header',
-              footer: 'common/footer',
-              scripts: 'common/scripts'
-            }
-          }
-        );
-      } else {
-        res.render(
-          'visitor/profileorg', {
-            partials: {
-              header: 'common/header',
-              footer: 'common/footer',
-              scripts: 'common/scripts'
-            }
-          });
-      }
+      });
     }
   });
 }
@@ -292,6 +296,7 @@ app.get('/events', function(req, res) {
       dbop.getOrganizationEvents(req.session.user.email, function(err, data) {
         if (!err) {
           res.locals.events = data;
+          res.locals.org = req.session.user;
           res.render(
             'organization/myevents', {
               partials: {
@@ -553,6 +558,7 @@ app.post('/usernotexists', function(req, res) {
 app.get('/searchorg', function(req, res) {
 
   if (req.session.user.role == "user") {
+    res.locals.user = req.session.user;
     res.render('organization/search', {
       partials: {
         header: 'common/header',
@@ -564,6 +570,7 @@ app.get('/searchorg', function(req, res) {
       }
     });
   } else if (req.session.user.role == "organization") {
+    res.locals.org = req.session.user;
     res.render('user/search', {
       partials: {
         header: 'common/header',

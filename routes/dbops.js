@@ -87,6 +87,7 @@ function addEventToOrg(event, orgName, callback) {
     newEvent.save(function(err) {
       if (err) {
         console.log("FAIL");
+        console.log(err);
         callback(err, event);
       } else {
         console.log("Success");
