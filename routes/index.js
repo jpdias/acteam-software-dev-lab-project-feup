@@ -222,7 +222,9 @@ function showOrg(page, req, res, org) {
       data.org = organization;
       dbop.getOrganizationEvents(data.org.email, function(err, events) {
         data.events = events;
+        data.user = req.session.user;
         res.locals = data;
+
         if (page == "organization") {
           res.render(
             'organization/profile', {
@@ -313,6 +315,21 @@ app.get('/events', function(req, res) {
       common.errNotFound(req, res);
   } else
     common.errNotFound(req, res);
+});
+
+
+app.post('/eventapply', function(req, res) {
+  //console.log(req.body.name + req.body.org_email + req.body.user_email);
+  dbop.setApplyEvent(req.body.name, req.body.org_email, req.body.user_email, function(err, event) {
+    if (!err) {
+      res.send({
+        success: true
+      });
+    } else
+      res.send({
+        success: false
+      });
+  });
 });
 
 

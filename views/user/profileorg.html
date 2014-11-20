@@ -186,7 +186,7 @@
             <div class="event">
               <div class="row">
                 <div class="col-sm-9 col-md-9">
-                  <h3>{{name}}</h3>
+                  <h3 class="eventname">{{name}}</h3>
                 </div>
                 <div class="col-sm-3 col-md-3">
                   <h3><time class="datestamp" datetime="{{date.end}}"><time></h3>
@@ -197,7 +197,7 @@
                   <p>{{description}}</p>
                 </div>
                 <div class="col-sm-3 col-md-3">
-                  <button class="btn btn-primary btn-block">Apply!</button>
+                  <button class="apply btn btn-primary btn-block">Apply!</button>
                 </div>
               </div>
             </div>
@@ -221,5 +221,43 @@
       });
     });
     $('#imgprof').html('<img class="img-thumbnail" src="' + get_gravatar("{{org.email}}", 180) + '">');
+
+    $('.apply').click(function() {
+      if ($(this)) {
+        var tempname = $(this).closest('.event').find('.eventname').text();
+        swal({
+            title: "Confirmation",
+            text: "You will apply to this event.",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#2ecc71",
+            confirmButtonText: "Yes, apply!",
+            closeOnConfirm: false
+          },
+          function() {
+            $.ajax({
+              url: '/eventapply',
+              type: 'POST',
+              data: {
+                name: tempname,
+                org_email: "{{org.email}}",
+                user_email: "{{user.email}}",
+              },
+              success: function(data) {
+                if (data.success)
+                  swal("Done!", "You are now part of this event.", "success");
+                else
+                  swal("Error!", "Something has gone wrong.", "error");
+              },
+              error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Desc: " + desc + "\nErr:" + err);
+              }
+
+            })
+
+          });
+      }
+    });
   </script>
   {{> footer}}
