@@ -521,11 +521,25 @@ app.post('/userexists', function(req, res) {
   dbop.findUser(req.body.email, function(err, exists) {
     if (exists) {
       return res.send({
-        exist: true
+        valid: true
       });
     } else {
       return res.send({
-        exist: false
+        valid: false
+      });
+    }
+  });
+});
+
+app.post('/usernotexists', function(req, res) {
+  dbop.findUser(req.body.email, function(err, exists) {
+    if (exists) {
+      return res.send({
+        valid: false
+      });
+    } else {
+      return res.send({
+        valid: true
       });
     }
   });
