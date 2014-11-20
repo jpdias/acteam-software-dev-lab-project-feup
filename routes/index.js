@@ -374,6 +374,11 @@ app.post('/configuser', function(req, res) {
               success: false,
               message: 'error when saving session after updating user profile'
             });
+          } else {
+            return res.send({
+              success: true,
+              message: 'sucess'
+            });
           }
         });
 
