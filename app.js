@@ -15,7 +15,7 @@ var logger = require("morgan");
 app.engine('html', hoganexpress);
 app.enable('view cache');
 
-app.set('port', process.env.PORT || '3000');
+app.set('port', process.env.PORT || '80');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
@@ -27,6 +27,7 @@ app.use(express.cookieParser('keyboard cat'));
 app.use(express.session({
   secret: 'anything'
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
