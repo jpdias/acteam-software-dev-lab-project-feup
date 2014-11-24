@@ -612,8 +612,11 @@ app.get('/searchorg', function(req, res) {
 
 app.post('/searchorg', function(req, res) {
 	console.log(req.body);
-	
-	//dbop.searchOrg(req, function(err, data) {});
-	
-  //}
+	dbop.searchOrganization(req.body.name, function(err, data) {
+		if(!err){
+		
+			res.send(data);}
+		else 
+			console.log(err);
+	});
 });
