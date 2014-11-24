@@ -27,6 +27,14 @@ function getOrg(orgname, callback) {
   });
 }
 
+function searchOrg(name, callback) {
+  Organization.find({
+    "name": new RegExp('^'+name+'$','i')
+  }, function(err, data) {
+    callback(err, data);
+  });
+}
+
 module.exports.getOrganization = getOrg;
 
 function addNewMemberToOrg(member, orgName, callback) {

@@ -576,7 +576,7 @@ app.get('/searchorg', function(req, res) {
 
   if (req.session.user.role == "user") {
     res.locals.user = req.session.user;
-    res.render('organization/search', {
+    res.render('user/search', {
       partials: {
         header: 'common/header',
         sidebar: 'user/sidebarUser',
@@ -588,7 +588,7 @@ app.get('/searchorg', function(req, res) {
     });
   } else if (req.session.user.role == "organization") {
     res.locals.org = req.session.user;
-    res.render('user/search', {
+    res.render('organization/search', {
       partials: {
         header: 'common/header',
         sidebar: 'organization/sidebar',
@@ -608,4 +608,12 @@ app.get('/searchorg', function(req, res) {
       }
     });
   }
+});
+
+app.post('/searchorg', function(req, res) {
+	console.log(req.body);
+	
+	//dbop.searchOrg(req, function(err, data) {});
+	
+  //}
 });

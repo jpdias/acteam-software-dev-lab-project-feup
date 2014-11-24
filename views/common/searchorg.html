@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="css/search.css">
+
 <div class="container">
 	<div class="col-sm-12 col-md-offset-1 col-md-12 main">
 	  
@@ -7,24 +8,36 @@
 				<div class="form-group">
 					<div class="right-inner-addon">
 						<i class="glyphicon glyphicon-search"></i>
-						<input type="search" class="form-control" placeholder="Search" />
+						<input id="searchText" class="form-control" placeholder="Search" />
 					</div>
 				</div>
 			</div>
 			
+			
 			<div class="col-md-5">
-				<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
-					<a href="#" class="btn btn-default" role="button">Municipality</a>
-					<a href="#" class="btn btn-default" role="button">District</a>
+				<div class="btn-group-justified" data-toggle="buttons">
+					<label class="btn btn-default active">
+						<input type="radio" name="options" id="All" autocomplete="off" checked> All
+					</label>
+					<label class="btn btn-default">
+						<input type="radio" name="options" id="Municipality" autocomplete="off" checked> Municipality
+					</label>
+					<label class="btn btn-default">
+						<input type="radio" name="options" id="District" autocomplete="off"> District
+					</label>
 				</div>
 			</div>
 		</div>
 			
 		<div class="row">
 			<div class="col-sm-3 col-md-3">
-				<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
-					<a href="#" class="btn btn-default" role="button">Events</a>
-					<a href="#" class="btn btn-default" role="button">Organizations</a>
+				<div class="btn-group-justified" data-toggle="buttons">
+					<label class="btn btn-default">
+						<input type="radio" name="options" id="Events" autocomplete="off" checked> Events
+					</label>
+					<label class="btn btn-default active">
+						<input type="radio" name="options" id="Organizations" autocomplete="off"> Organizations
+					</label>
 				</div>
 			</div>
 			
@@ -54,12 +67,13 @@
 			</div>
 			
 			<div class="col-sm-5 col-md-5">
-				<button type="submit" class="btn btn-primary btn-block">Submit</button>
+				<button id="searchButton" class="btn btn-primary btn-block">Search</button>
 			</div>
 		</div>
 			
 		<div class="row">
 			<hr>
+			
 		</div>
 	</div>
 </div>
