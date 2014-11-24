@@ -27,15 +27,18 @@ function getOrg(orgname, callback) {
   });
 }
 
+module.exports.getOrganization = getOrg;
+
 function searchOrg(name, callback) {
   Organization.find({
-    "name": new RegExp('^'+name+'$','i')
+    "name": new RegExp('.*'+name+'.*','i')
   }, function(err, data) {
+ 
     callback(err, data);
   });
 }
 
-module.exports.getOrganization = getOrg;
+module.exports.searchOrganization = searchOrg;
 
 function addNewMemberToOrg(member, orgName, callback) {
   Organization.findOne({

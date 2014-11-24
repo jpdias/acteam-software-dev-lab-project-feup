@@ -17,13 +17,13 @@
       <div class="col-md-5">
         <div class="btn-group-justified" data-toggle="buttons">
           <label class="btn btn-default active">
-            <input type="radio" name="options" id="All" autocomplete="off" checked> All
+            <input type="radio" name="options" value="All" autocomplete="off" checked> All
           </label>
           <label class="btn btn-default">
-            <input type="radio" name="options" id="Municipality" autocomplete="off" checked> Municipality
+            <input type="radio" name="options" value="Municipality" autocomplete="off"> Municipality
           </label>
           <label class="btn btn-default">
-            <input type="radio" name="options" id="District" autocomplete="off"> District
+            <input type="radio" name="options" value="District" autocomplete="off"> District
           </label>
         </div>
       </div>
@@ -33,10 +33,10 @@
       <div class="col-sm-3 col-md-3">
         <div class="btn-group-justified" data-toggle="buttons">
           <label class="btn btn-default">
-            <input type="radio" name="options" id="Events" autocomplete="off" checked> Events
+            <input type="radio" name="options" value="Events" autocomplete="off" checked> Events
           </label>
           <label class="btn btn-default active">
-            <input type="radio" name="options" id="Organizations" autocomplete="off"> Organizations
+            <input type="radio" name="options" value="Organizations" autocomplete="off"> Organizations
           </label>
         </div>
       </div>
@@ -86,8 +86,10 @@
     </div>
 
     <div class="row">
-      <hr>
-
+		<hr>
+		<div id="searchRes">
+			
+		</div>
     </div>
   </div>
 </div>
