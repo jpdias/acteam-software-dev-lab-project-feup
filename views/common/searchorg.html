@@ -17,13 +17,13 @@
       <div class="col-md-5">
         <div class="btn-group-justified" data-toggle="buttons">
           <label class="btn btn-default active">
-            <input type="radio" name="options" value="All" autocomplete="off" checked> All
+            <input type="radio" name="options" id="All" autocomplete="off" checked> All
           </label>
           <label class="btn btn-default">
-            <input type="radio" name="options" value="Municipality" autocomplete="off"> Municipality
+            <input type="radio" name="options" id="Municipality" autocomplete="off" checked> Municipality
           </label>
           <label class="btn btn-default">
-            <input type="radio" name="options" value="District" autocomplete="off"> District
+            <input type="radio" name="options" id="District" autocomplete="off"> District
           </label>
         </div>
       </div>
@@ -35,6 +35,12 @@
       <div class="btn-group col-sm-7 col-md-7">
         <button type="button" class="drop btn btn-default  dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="width: 92%;">Causes</button>
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+</div>
+
+      <!-- Split button -->
+      <div class="btn-group col-sm-4 col-md-4">
+        <button type="button" class="btn btn-default" style="width: 92%;">Causes</button>
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
           <span class="caret"></span>
           <span class="sr-only">Toggle Dropdown</span>
         </button>
@@ -76,10 +82,8 @@
     </div>
 
     <div class="row">
-		<hr>
-		<div id="searchRes">
-			
-		</div>
+      <hr>
+
     </div>
   </div>
 </div>

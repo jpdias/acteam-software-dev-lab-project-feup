@@ -560,7 +560,6 @@ app.post('/userexists', function(req, res) {
 
 app.post('/checkevent', function(req, res) {
   dbop.checkEventExists(req.body.name, function(err, exists) {
-    console.log("EVENT NAME: " + req.body.name + " " + exists);
     if (exists) {
       return res.send({
         valid: true
@@ -644,6 +643,6 @@ app.post('/searchorg', function(req, res) {
 	dbop.searchOrganization(data,function(err,result){
 		console.log(result);
 		res.send(result);
-		
+	
 	});
 });
