@@ -558,6 +558,21 @@ app.post('/userexists', function(req, res) {
   });
 });
 
+app.post('/checkevent', function(req, res) {
+  dbop.checkEventExists(req.body.name, function(err, exists) {
+    console.log("EVENT NAME: " + req.body.name + " " + exists);
+    if (exists) {
+      return res.send({
+        valid: true
+      });
+    } else {
+      return res.send({
+        valid: false
+      });
+    }
+  });
+});
+
 app.post('/usernotexists', function(req, res) {
   dbop.findUser(req.body.email, function(err, exists) {
     if (exists) {
@@ -611,12 +626,12 @@ app.get('/searchorg', function(req, res) {
 });
 
 app.post('/searchorg', function(req, res) {
-	console.log(req.body);
-	dbop.searchOrganization(req.body.name, function(err, data) {
-		if(!err){
-		
-			res.send(data);}
-		else 
-			console.log(err);
-	});
+  console.log(req.body);
+  dbop.searchOrganization(req.body.name, function(err, data) {
+    if (!err) {
+
+      res.send(data);
+    } else
+      console.log(err);
+  });
 });

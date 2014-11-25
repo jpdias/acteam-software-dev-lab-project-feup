@@ -11,6 +11,7 @@ $(document).ready(function() {
       fields: {
         name: {
           message: 'The event name is not valid',
+          trigger: 'blur',
           validators: {
             notEmpty: {
               message: 'The event name is required'
@@ -19,6 +20,11 @@ $(document).ready(function() {
               max: 50,
               message: 'The event name must be less than 50 characters long'
             },
+            remote: {
+              message: 'There is already an event with that same name',
+              url: '/checkevent',
+              type: 'POST'
+            }
           }
         },
         startDate: {
