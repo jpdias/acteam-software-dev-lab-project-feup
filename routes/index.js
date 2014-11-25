@@ -639,10 +639,7 @@ app.post('/searchorg', function(req, res) {
 		data.address.district= req.session.user.address.district;
 	}
 	
-		console.log(data);
 	dbop.searchOrganization(data,function(err,result){
-		console.log(result);
 		res.send(result);
-	
 	});
 });
