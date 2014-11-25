@@ -1,5 +1,5 @@
 var region = "All";
-var defaultshow = 10;
+var defaultshow = 5;
 $(document).ready(function() {
   $(function() {
     $(".dropdown-menu li a").click(function() {
@@ -11,10 +11,11 @@ $(document).ready(function() {
 
 });
 
+var currentResults;
 
 $('#searchButton').on('click', function(e) {
-$('#pages').empty();
-$('#searchRes').empty();
+  $('#pages').empty();
+  $('#searchRes').empty();
   $.ajax({
     url: '/searchorg',
     type: 'POST',
@@ -25,24 +26,27 @@ $('#searchRes').empty();
     },
     datatype: 'json',
     success: function(data) {
-		var size = data.length;
-		
-		for(var k = 0; k < Math.ceil(size/defaultshow); k++){
-			$('#pages').append('<li class="active"><a href="#">'+k +'<span class="sr-only">(current)</span></a></li>');
-		}
-		showResults(data,0);
+      var size = data.length;
+      currentResults = data;
+      for (var k = 0; k < Math.ceil(size / defaultshow); k++) {
+        $('#pages').append('<li ><a href="javascript:void(0)" data-id="' + k + '" class="currentpage">' + k + '<span class="sr-only">(current)</span></a></li>');
+      }
+      $('.currentpage').on("click", function() {
+        $('#searchRes').empty();
+        showResults(currentResults, $(this).data("id"));
+      });
+      showResults(currentResults, 0);
     }
   });
   e.preventDefault();
 });
 
+function showResults(data, current) {
+  var size = data.length;
+  var showed = current * defaultshow;
 
-function showResults(data,current){
-	var size = data.length;
-	var showed = current*defaultshow;
-	
-	for(var k = showed; k < defaultshow && k<size; k++){
-		
-		$("#searchRes").append('<ol><li>' + data[k].name + '</li></ol>');
-	}
-};
+  for (var k = showed; k < defaultshow * (current + 1) && k < size; k++) {
+    var temp = '<a href="profileorg?org=' + data[k].name + '"><div class="panel panel-primary"> <div class="panel-heading"> <h3 class="panel-title"> ' + data[k].name + ' </h3> </div> <div class="panel-body"> ' + data[k].about + ' <br> Location: ' + data[k].address.address + ',' + data[k].address.municipality + ', ' + data[k].address.district + ' </div> </div > </a>';
+    $("#searchRes").append(temp);
+  }
+}
