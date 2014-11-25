@@ -32,10 +32,10 @@ module.exports.getOrganization = getOrg;
 
 function searchOrg(data, callback) {
   Organization.find(
-   data
-  , function(err, data) {
-    callback(err, data);
-  });
+    data,
+    function(err, data) {
+      callback(err, data);
+    });
 }
 
 module.exports.searchOrganization = searchOrg;

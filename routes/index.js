@@ -625,21 +625,28 @@ app.get('/searchorg', function(req, res) {
 });
 
 app.post('/searchorg', function(req, res) {
+  if (req.session.user) {
+
     data = {};
-	if(req.body.name)
-	data.name = new RegExp(".*"+req.body.name+".*",'i');
-	if(req.body.cause)
-	data.causes = req.body.cause;
-	if(req.body.location==="Municipality"){
-	data.address={};
-	data.address.municipality= req.session.user.address.municipality;
-	}	
-	if(req.body.location==="District"){
-		data.address={};
-		data.address.district= req.session.user.address.district;
-	}
-	
-	dbop.searchOrganization(data,function(err,result){
-		res.send(result);
-	});
+    if (req.body.name)
+      data.name = new RegExp(".*" + req.body.name + ".*", 'i');
+    if (req.body.cause)
+      data.causes = req.body.cause;
+    if (req.body.location === "Municipality") {
+      data.address = {};
+      data.address.municipality = req.session.user.address.municipality;
+    } else if (req.body.location === "District") {
+      data.address = {};
+      data.address.district = req.session.user.address.district;
+    }
+
+    dbop.searchOrganization(data, function(err, result) {
+      if (err)
+        res.send({
+          "status": "error"
+        });
+      else
+        res.send(result);
+    });
+  }
 });
