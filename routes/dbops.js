@@ -31,9 +31,9 @@ module.exports.getOrganization = getOrg;
 
 function searchOrg(name, callback) {
   Organization.find({
-    "name": new RegExp('.*'+name+'.*','i')
+    "name": new RegExp('.*' + name + '.*', 'i')
   }, function(err, data) {
- 
+
     callback(err, data);
   });
 }
@@ -317,7 +317,20 @@ function findUsr(email, callback) {
       });
     }
   });
-
 }
 
 module.exports.findUser = findUsr;
+
+function checkIfEventExists(name, callback) {
+  Event.findOne({
+    "name": name
+  }, function(event, err) {
+    if (!err) {
+      callback(err, true);
+    } else {
+      callback(err, false);
+    }
+  });
+}
+
+module.exports.checkEventExists = checkIfEventExists;
