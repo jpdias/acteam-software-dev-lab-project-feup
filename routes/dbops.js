@@ -29,10 +29,10 @@ function getOrg(orgname, callback) {
 
 module.exports.getOrganization = getOrg;
 
-function searchOrg(name, callback) {
-  Organization.find({
-    "name": new RegExp('.*'+name+'.*','i')
-  }, function(err, data) {
+function searchOrg(data, callback) {
+  Organization.find(
+   data
+  , function(err, data) {
  
     callback(err, data);
   });

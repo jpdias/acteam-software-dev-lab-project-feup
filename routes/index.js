@@ -611,12 +611,24 @@ app.get('/searchorg', function(req, res) {
 });
 
 app.post('/searchorg', function(req, res) {
-	console.log(req.body);
-	dbop.searchOrganization(req.body.name, function(err, data) {
-		if(!err){
+    data = {};
+	if(req.body.name)
+	data.name = new RegExp(".*"+req.body.name+".*",'i');
+	if(req.body.cause)
+	data.causes = req.body.cause;
+	if(req.body.location==="Municipality"){
+	data.address={};
+	data.address.municipality= req.session.user.address.municipality;
+	}	
+	if(req.body.location==="District"){
+		data.address={};
+		data.address.district= req.session.user.address.district;
+	}
+	
+		console.log(data);
+	dbop.searchOrganization(data,function(err,result){
+		console.log(result);
+		res.send(result);
 		
-			res.send(data);}
-		else 
-			console.log(err);
 	});
 });
