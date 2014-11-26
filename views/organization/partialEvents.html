@@ -1,43 +1,37 @@
 <div class="events" id="events" style="display: none;">
   <div class="col-md-12">
-    <div class="list-group">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="col-md-8">
-            <h3>Event XPTO</h3>
-          </div>
-          <div class="col-md-4 text-center">
-            <h5>End Date:<br>
-              22/22/2222</h5>
-          </div>
-          <div class="col-md-8">
-            <p>Description xpto</p>
-          </div>
-          <div class="col-md-4">
-            <button type="button" class="btn btn-primary btn-block">
-              <h5>55 Aplications</h5>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="col-md-8">
-            <h3>Event XPTO</h3>
-          </div>
-          <div class="col-md-4 text-center">
-            <h5>End Date:<br>
-              22/22/2222</h5>
-          </div>
-          <div class="col-md-8">
-            <p>Description xpto</p>
-          </div>
-          <div class="col-md-4">
-            <button type="button" class="btn btn-primary btn-block">
-              <h5>55 Aplications</h5>
-            </button>
+    <div class="currentevents" id="currentevents">
+      <div class="list-group">
+        {{#events}}
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="col-md-8">
+              <h3>{{name}}</h3>
+            </div>
+            <div class="col-md-4 text-center">
+              <h5>Start Date:<br>
+
+
+
+              <time class="datestamp" datetime="{{date.start}}"><time></h5>
+              <h5>End Date:<br>
+
+
+
+                  <time class="datestamp" datetime="{{date.end}}"><time></h5>
+            </div>
+            <div class="col-md-8">
+              <p>{{description}}</p>
+              <p>{{address.address}},{{address.municipality}},{{address.district}}</p>
+            </div>
+            <div class="col-md-4">
+              <button type="button" class="btn btn-primary btn-block btn-md">
+                <h5>Applications</h5>
+              </button>
+            </div>
           </div>
         </div>
+        {{/events}}
       </div>
     </div>
   </div>
