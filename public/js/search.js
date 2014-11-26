@@ -14,10 +14,11 @@ $(document).ready(function() {
 var currentResults;
 
 $('#searchButton').on('click', function(e) {
+  var link = document.URL.split("/");
   $('#pages').empty();
   $('#searchRes').empty();
   $.ajax({
-    url: '/searchorg',
+    url: '/' + link[link.length-1],
     type: 'POST',
     data: {
       name: $('#searchText').val(),
@@ -25,7 +26,7 @@ $('#searchButton').on('click', function(e) {
       location: $(".active :first-child")[0].value,
     },
     datatype: 'json',
-    success: function(data) {
+    success: function(data, url) {
       var size = data.length;
       currentResults = data;
       for (var k = 0; k < Math.ceil(size / defaultshow); k++) {
@@ -33,20 +34,38 @@ $('#searchButton').on('click', function(e) {
       }
       $('.currentpage').on("click", function() {
         $('#searchRes').empty();
-        showResults(currentResults, $(this).data("id"));
+		if(url=='/searchorg'){
+			showOrgs(currentResults, $(this).data("id"));
+		}else{
+			showUsers(currentResults, $(this).data("id"));
+		}
       });
-      showResults(currentResults, 0);
+	  if(url=='searchorg'){
+		showOrgs(currentResults, 0);
+	  }else{
+		showUsers(currentResults, 0);
+	  }
     }
   });
   e.preventDefault();
 });
 
-function showResults(data, current) {
+function showOrgs(data, current) {
   var size = data.length;
   var showed = current * defaultshow;
 
   for (var k = showed; k < defaultshow * (current + 1) && k < size; k++) {
     var temp = '<a href="profileorg?org=' + data[k].name + '"><div class="panel panel-primary"> <div class="panel-heading"> <h3 class="panel-title"> ' + data[k].name + ' </h3> </div> <div class="panel-body"> ' + data[k].about + ' <br> Location: ' + data[k].address.address + ',' + data[k].address.municipality + ', ' + data[k].address.district + ' </div> </div > </a>';
+    $("#searchRes").append(temp);
+  }
+}
+
+function showUsers(data, current) {
+  var size = data.length;
+  var showed = current * defaultshow;
+
+  for (var k = showed; k < defaultshow * (current + 1) && k < size; k++) {
+    var temp = '<a href="profileorg?org=' + data[k].name + '"><div class="panel panel-primary"> <div class="panel-heading"> <h3 class="panel-title"> ' + data[k].name + ' </h3> </div> <div class="panel-body"> ' + data[k].email + ' <br> Location: ' + data[k].address.address + ',' + data[k].address.municipality + ', ' + data[k].address.district + ' </div> </div > </a>';
     $("#searchRes").append(temp);
   }
 }

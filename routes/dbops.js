@@ -19,6 +19,16 @@ function getUser(userEmail, callback) {
 
 module.exports.getUser = getUser;
 
+function searchUsr(data, callback) {
+  Account.find(
+    data,
+    function(err, data) {
+      callback(err, data);
+    });
+}
+
+module.exports.searchUser = searchUsr;
+
 function getOrg(orgname, callback) {
   Organization.findOne({
     "name": orgname
