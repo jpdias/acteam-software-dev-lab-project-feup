@@ -704,6 +704,7 @@ app.post('/searchuser', function(req, res) {
 
 app.post('/approveOrgAcc', function(req, res) {
   if (req.session.user.role == "admin") {
+    console.log(req.body);
     decision = req.body;
     dbop.approveOrgAcc(decision, function(err, result) {
       if (err)
@@ -711,7 +712,9 @@ app.post('/approveOrgAcc', function(req, res) {
           "status": "error"
         });
       else
-        res.send(result);
+        res.send({
+          "status": "success"
+        });
     });
   }
 });

@@ -20,24 +20,100 @@
 </div>
 {{>scripts}}
 <script>
-  $.ajax({
-  	url: '/getOrgAccByApprove',
-  	type: 'GET',
-  	datatype: 'json',
-  	success: function(data) {
-  		for (var i = 0; i < data.length; i++) {
-  			$('#orgAccInfo').append('<tr><td>' + data[i].name + '</td><td>' + data[i].email +
-  				'</td><td><button data-id="' + data[i].email + '" class="success btn btn-success btn-xs"><span class="glyphicon glyphicon-ok"></span></button> &nbsp; <button data-id="' + data[i].email +
-  				'" class="denied btn btn-danger btn-xs"> <span class="glyphicon glyphicon-remove"></span></button></td></tr>'
-  			);
-  			$('.success').on('click', function(e) {
-  				console.log($(this).data('id'));
-  			})
-  			$('.denied').on('click', function(e) {
-  				console.log($(this).data('id'));
-  			})
-  		}
-  	}
+  $(document).ready(function() {
+    loadAccounts();
   });
+
+  function approve(datax) {
+    $.ajax({
+      url: '/approveOrgAcc',
+      type: 'POST',
+      data: datax,
+      datatype: 'json',
+      success: function(data) {
+        loadAccounts();
+      }
+    });
+  }
+
+  function reject(datax) {
+    $.ajax({
+      url: '/approveOrgAcc',
+      type: 'POST',
+      data: datax,
+      datatype: 'json',
+      success: function(data) {
+        loadAccounts();
+      }
+    })
+  }
+
+  function loadAccounts() {
+    $('#orgAccInfo').empty();
+
+    $.ajax({
+
+      url: '/getOrgAccByApprove',
+      type: 'GET',
+      datatype: 'json',
+      success: function(info) {
+        for (var i = 0; i < info.length; i++) {
+          $('#orgAccInfo').append('<tr><td>' + info[i].name + '</td><td>' + info[i].email +
+            '</td><td><button data-id="' + info[i].email + '" class="success btn btn-success btn-xs"><span class="glyphicon glyphicon-ok"></span></button> &nbsp; <button data-id="' + info[i].email +
+            '" class="denied btn btn-danger btn-xs"> <span class="glyphicon glyphicon-remove"></span></button></td></tr>'
+          )
+        };
+        $('.success').on('click', function(e) {
+          var data = {
+            isOrgApproved: "true",
+            email: $(this).data('id')
+          };
+          swal({
+            title: "Approve account",
+            text: "Do you wish to approve this account?",
+            type: "warning",
+            confirmButtonColor: "#33CC33",
+            confirmButtonText: "Yes, approve it!",
+            showCancelButton: true,
+            cancelButtonText: "Wait, let me think.",
+            closeOnConfirm: true,
+            closeOnCancel: false
+          }, function(isConfirm) {
+            if (isConfirm) {
+              approve(data);
+              swal("Approved", "This account has been approved", "success");
+            } else {
+              swal("Cancelled", "This account is not yet approved", "success");
+            }
+          })
+        })
+
+        $('.denied').on('click', function(e) {
+          var data = {
+            isOrgApproved: "false",
+            email: $(this).data('id'),
+          };
+          swal({
+            title: "Reject account",
+            text: "Do you wish to reject this account?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "Wait, let me think.",
+            closeOnConfirm: true,
+            closeOnCancel: false
+          }, function(isConfirm) {
+            if (isConfirm) {
+              reject(data);
+              swal("Rejected", "This account has been deleted", "success");
+            } else {
+              swal("Cancelled", "This account still needs approval", "success");
+            }
+          })
+        })
+      }
+    })
+  };
 </script>
 {{>footer}}

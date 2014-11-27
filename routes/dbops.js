@@ -271,20 +271,27 @@ function resetpass(password, email, code, callback) {
 module.exports.resetpassword = resetpass;
 
 function deleteaccount(user, callback) {
-  Account.find({
-    "email": user.email
-  }).remove(function(err) {
-    if (err) {
-      callback(err);
-    }
-  });
-  Organization.find({
-    "email": user.email
-  }).remove(function(err) {
-    if (err) {
-      callback(err);
-    }
-  });
+  if (user.role === "organization") {
+    Organization.find({
+      "email": user.email
+    }).remove(function(err) {
+      if (err) {
+        callback(err);
+      } else
+        callback(true);
+    });
+  } else {
+    Account.find({
+      "email": user.email
+    }).remove(function(err) {
+      if (err) {
+        callback(err);
+      } else
+        callback(true);
+    });
+  }
+
+
 }
 module.exports.deleteacc = deleteaccount;
 
@@ -323,13 +330,14 @@ function checkIfEventExists(name, callback) {
 
 module.exports.checkEventExists = checkIfEventExists;
 
-function approveOrganizationAccount(data, email, callback) {
-  if (data.decision == "approved") {
+function approveOrganizationAccount(data, callback) {
+  if (data.isOrgApproved === "true") {
     Organization.findOne({
-      "email": email
+      "email": data.email
     }, function(err, user) {
-      if (!err && user) {
 
+      if (user) {
+        console.log("MONEY");
         user.isOrgApproved = true;
 
         user.save(function(err2) {
@@ -339,16 +347,27 @@ function approveOrganizationAccount(data, email, callback) {
       } else
         callback(err);
     });
-  } else if (data.decision == "reject") {
-    var user = {};
-    user.email = email;
+  } else if (data.isOrgApproved === "false") {
+    Organization.findOne({
+      "email": data.email,
 
-    deleteaccount(user, function(err) {
+    }, function(err, user) {
 
+      if (user) {
+
+        var org = {};
+        org.email = data.email;
+        org.role = "organization";
+        deleteaccount(org, function(errw) {
+          console.log("Ya screwed boy");
+          callback(errw);
+        });
+
+      } else
+        callback(err);
     });
-  } else {
-    callback(err, user);
   }
+
 }
 
 module.exports.approveOrgAcc = approveOrganizationAccount;
