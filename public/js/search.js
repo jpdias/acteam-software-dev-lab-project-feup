@@ -86,7 +86,7 @@ function show(data, current) {
       temp = '<a href="profileorg?org=' + data[k].name + '"><div class="panel panel-primary"> <div class="panel-heading"> <h3 class="panel-title"> ' + data[k].name + ' </h3> </div> <div class="panel-body"> ' + data[k].about + ' <br> Location: ' + data[k].address.address + ',' + data[k].address.municipality + ', ' + data[k].address.district + ' </div> </div > </a>';
       $("#searchRes").append(temp);
     } else {
-      temp = '<a href="profileorg?org=' + data[k].name + '"><div class="panel panel-primary"> <div class="panel-heading"> <h3 class="panel-title"> ' + data[k].name + ' </h3> </div> <div class="panel-body"> ' + data[k].email + ' <br> Location: ' + data[k].address.address + ',' + data[k].address.municipality + ', ' + data[k].address.district + ' </div> </div > </a>';
+      temp = '<a href="profileuser?email=' + data[k].email + '"><div class="panel panel-primary"> <div class="panel-heading"> <h3 class="panel-title"> ' + data[k].name + ' </h3> </div> <div class="panel-body"> ' + data[k].email + ' <br> Location: ' + data[k].address.address + ',' + data[k].address.municipality + ', ' + data[k].address.district + ' </div> </div > </a>';
       $("#searchRes").append(temp);
     }
   }
