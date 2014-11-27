@@ -3,56 +3,77 @@
 <div class="container">
   <div class="row">
     {{> sidebar}}
+
     <div class="col-sm-6  col-md-offset-1 col-md-10  main">
       <ul class="timeline">
+        {{#events}}
         <li>
           <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i>
           </div>
-          <div class="timeline-panel">
+          <div class="timeline-panel event">
             <div class="timeline-heading">
-              <h4 class="timeline-title">IEEE Help Others</h4>
-              <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>20/12/2014</small>
+              <h4 class="timeline-title eventname" data-id="{{org_email}}">{{name}}</h4>
+              <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i><time class="datestamp" datetime="{{date.end}}"><time></small>
               </p>
             </div>
             <div class="timeline-body">
-              <p>IEEE Help Me</p>
-              <button class="btn btn-primary">Apply</button>
+              <p>{{description}}</p>
+              <button class="btn btn-primary apply">Apply</button>
             </div>
           </div>
         </li>
-        <li class="timeline-inverted">
-          <div class="timeline-badge warning"><i class="glyphicon glyphicon-hand"></i>
-          </div>
-          <div class="timeline-panel">
-            <div class="timeline-heading">
-              <h4 class="timeline-title">Porto for tommorrow</h4>
-              <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>20/1/2015</small>
-              </p>
-            </div>
-            <div class="timeline-body">
-              <p>Helping make a better world. Join us to discuss ideias</p>
-              <button class="btn btn-primary">Apply</button>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i>
-          </div>
-          <div class="timeline-panel">
-            <div class="timeline-heading">
-              <h4 class="timeline-title">IEEE Hour of Code</h4>
-              <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>2/2/2015</small>
-              </p>
-            </div>
-            <div class="timeline-body">
-              <p>Teach a language for free.</p>
-              <button class="btn btn-primary">Apply</button>
-            </div>
-          </div>
-        </li>
+        {{/events}}
       </ul>
     </div>
     {{> suggestedSidebar}}
   </div>
 </div>
-{{> scripts}} {{> footer}}
+{{> scripts}}
+<script>
+  $('.apply').click(function() {
+    if ($(this)) {
+      var tempname = $(this).closest('.event').find('.eventname').text();
+      var orgmail = $(this).closest('.event').find('.eventname').data("id");
+      console.log(tempname)
+      swal({
+          title: "Confirmation",
+          text: "You will apply to this event.",
+          type: "info",
+          showCancelButton: true,
+          confirmButtonColor: "#2ecc71",
+          confirmButtonText: "Yes, apply!",
+          closeOnConfirm: false
+        },
+        function() {
+
+          var datasend = {
+            name: tempname,
+            org_email: orgmail,
+            user_email: user
+          };
+          console.log(datasend);
+          $.ajax({
+            url: '/eventapply',
+            type: 'POST',
+            data: datasend,
+            success: function(data) {
+              if (data.success)
+                swal("Done!", "You are now part of this event.", "success");
+              else
+                swal("Error!", "Something has gone wrong.", "error");
+            },
+            error: function(xhr, desc, err) {
+              console.log(xhr);
+              console.log("Desc: " + desc + "\nErr:" + err);
+            }
+
+          })
+
+        });
+    }
+  });
+  $('.datestamp').each(function() {
+    var temp = new Date($(this).attr('datetime'));
+    $(this).text(temp.getDay() + "/" + temp.getMonth() + "/" + temp.getFullYear());
+  });
+</script>{{> footer}}

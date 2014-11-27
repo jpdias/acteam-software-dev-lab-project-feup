@@ -71,7 +71,27 @@ app.get('/loggedIn', function(req, res) {
 function getHome(type, req, res) {
   var page;
   var partial;
-  if (type !== "") {
+  if (type === "user") {
+    dbop.getEventsDistrict(req.session.user.address.district, function(err, eventdata) {
+
+      page = 'user/index';
+      partial = {
+        header: 'common/header',
+        footer: 'common/footer',
+        scripts: 'common/scripts',
+        suggestedSidebar: 'user/suggestedSidebar',
+        sidebar: 'user/sidebarUser',
+
+      };
+      res.locals = req.session.user;
+      res.locals.events = eventdata;
+      res.render(
+        page, {
+          partials: partial
+        }
+      );
+    });
+  } else if (type !== "") {
     page = type + '/index';
     partial = {
       header: 'common/header',
@@ -80,6 +100,12 @@ function getHome(type, req, res) {
       suggestedSidebar: 'user/suggestedSidebar',
       sidebar: 'user/sidebarUser'
     };
+    res.locals = req.session.user;
+    res.render(
+      page, {
+        partials: partial
+      }
+    );
   } else {
     partial = {
       header: 'common/header',
@@ -87,13 +113,14 @@ function getHome(type, req, res) {
       scripts: 'common/scripts'
     };
     page = "index";
+    res.locals = req.session.user;
+    res.render(
+      page, {
+        partials: partial
+      }
+    );
   }
-  res.locals = req.session.user;
-  res.render(
-    page, {
-      partials: partial
-    }
-  );
+
 }
 
 app.get('/', function(req, res) {

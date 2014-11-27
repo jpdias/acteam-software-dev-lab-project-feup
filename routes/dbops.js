@@ -104,6 +104,20 @@ function getOrgEvents(orgEmail, callback) {
 
 module.exports.getOrganizationEvents = getOrgEvents;
 
+function getOrgEventsByDistrict(district, callback) {
+  var currentTime = new Date();
+  Event.find({
+    "address.district": district,
+    "date.end": {
+      $gt: currentTime
+    }
+  }, function(err, events) {
+    callback(err, events);
+  });
+}
+
+module.exports.getEventsDistrict = getOrgEventsByDistrict;
+
 function applyToEvent(name, orgEmail, userEmail, callback) {
   Event.findOne({
     "org_email": orgEmail,
