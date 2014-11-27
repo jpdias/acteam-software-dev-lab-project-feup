@@ -349,3 +349,33 @@ function checkIfEventExists(name, callback) {
 }
 
 module.exports.checkEventExists = checkIfEventExists;
+
+function approveOrganizationAccount(data, email, callback) {
+  if (data.decision == "approved") {
+    Organization.findOne({
+      "email": email
+    }, function(err, user) {
+      if (!err && user) {
+
+        user.isOrgApproved = true;
+
+        user.save(function(err2) {
+          callback(err2, user);
+        });
+
+      } else
+        callback(err);
+    });
+  } else if (data.decision == "reject") {
+    var user = {};
+    user.email = email;
+
+    deleteaccount(user, function(err) {
+
+    });
+  } else {
+    callback(err, user);
+  }
+}
+
+module.exports.approveOrgAcc = approveOrganizationAccount;
