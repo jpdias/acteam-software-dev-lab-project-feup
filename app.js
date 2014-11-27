@@ -40,13 +40,13 @@ app.use(app.router);
 
 try {
   db.createConnection('mongodb://acteam:acteamadmin@ds031088.mongolab.com:31088/acteam');
+  db.connect('mongodb://acteam:acteamadmin@ds031088.mongolab.com:31088/acteam');
 } catch (ex) {
   app.get('/', function(req, res) {
     res.render('errors/503');
   });
 }
 
-db.connect('mongodb://acteam:acteamadmin@ds031088.mongolab.com:31088/acteam');
 
 module.exports.mongodb = db;
 module.exports.auth = passport;
