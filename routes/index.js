@@ -154,6 +154,7 @@ app.get('/profileuser', function(req, res) {
 });
 
 app.get('/userhistory', function(req, res) {
+  res.status(200);
   res.render(
     'user/history', {
       partials: {
@@ -168,7 +169,6 @@ app.get('/userhistory', function(req, res) {
 });
 
 app.get('/configureuser', function(req, res) {
-
   if (req.session.user) {
     res.locals = req.session.user;
     res.status(200);
@@ -202,6 +202,7 @@ app.get('/signin', function(req, res) {
           msg: "Invalid account!"
         };
     }
+    res.status(200);
     res.render(
       'signin', {
         partials: {
@@ -225,6 +226,7 @@ function showOrg(page, req, res, org) {
         data.user = req.session.user;
         res.locals = data;
 
+        res.status(200);
         if (page == "organization") {
           res.render(
             'organization/profile', {
@@ -283,6 +285,7 @@ app.get('/profileorg', function(req, res, next) {
 });
 
 app.get('/registerorg', function(req, res) {
+  res.status(200);
   res.render(
     'organization/register', {
       partials: {
