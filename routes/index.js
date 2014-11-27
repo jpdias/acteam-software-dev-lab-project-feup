@@ -265,6 +265,7 @@ function showOrg(page, req, res, org) {
 
 app.get('/profileorg', function(req, res, next) {
   if (req.session.user && (typeof req.query.org !== "undefined")) {
+    res.status(200);
     if (req.session.user.role == "user" || (req.session.user.role == "admin")) {
       showOrg("user", req, res, req.query.org);
     } else if (req.session.user.role == "organization") {
@@ -273,9 +274,11 @@ app.get('/profileorg', function(req, res, next) {
       errPermissions(req, res);
     }
   } else if (typeof req.query.org !== "undefined") {
+    res.status(200);
     showOrg("", req, res, req.query.org);
-  } else
+  } else {
     common.errNotFound(req, res);
+  }
 
 });
 
@@ -600,7 +603,7 @@ app.get('/searchorg', function(req, res) {
         suggestedSidebar: 'user/suggestedSidebar',
         footer: 'common/footer',
         scripts: 'common/scripts',
-        searchorg: 'common/search'
+        searchorg: 'common/searchOrganizations'
       }
     });
   } else if (req.session.user.role == "organization") {
@@ -611,19 +614,12 @@ app.get('/searchorg', function(req, res) {
         sidebar: 'organization/sidebar',
         footer: 'common/footer',
         scripts: 'common/scripts',
-        searchorg: 'common/search'
+        searchorg: 'common/searchOrganizations'
       }
     });
 
   } else {
-    res.render('visitor/searchorg', {
-      partials: {
-        header: 'common/header',
-        footer: 'common/footer',
-        scripts: 'common/scripts',
-        searchorg: 'common/search'
-      }
-    });
+    common.errPermission(req, res);
   }
 });
 
@@ -636,11 +632,13 @@ app.post('/searchorg', function(req, res) {
     if (req.body.cause)
       data.causes = req.body.cause;
     if (req.body.location === "Municipality") {
-      data.address = {};
-      data.address.municipality = req.session.user.address.municipality;
+      data = {
+        'address.municipality': req.session.user.address.municipality
+      };
     } else if (req.body.location === "District") {
-      data.address = {};
-      data.address.district = req.session.user.address.district;
+      data = {
+        'address.district': req.session.user.address.district
+      };
     }
 
     dbop.searchOrganization(data, function(err, result) {
@@ -664,9 +662,11 @@ app.get('/searchuser', function(req, res) {
         sidebar: 'organization/sidebar',
         footer: 'common/footer',
         scripts: 'common/scripts',
-        searchorg: 'common/search'
+        searchorg: 'common/searchUsers'
       }
     });
+  } else {
+    common.errPermission(req, res);
   }
 });
 
@@ -679,11 +679,13 @@ app.post('/searchuser', function(req, res) {
     if (req.body.cause)
       data.causes = req.body.cause;
     if (req.body.location === "Municipality") {
-      data.address = {};
-      data.address.municipality = req.session.user.address.municipality;
+      data = {
+        'address.municipality': req.session.user.address.municipality
+      };
     } else if (req.body.location === "District") {
-      data.address = {};
-      data.address.district = req.session.user.address.district;
+      data = {
+        'address.district': req.session.user.address.district
+      };
     }
 
     dbop.searchUser(data, function(err, result) {

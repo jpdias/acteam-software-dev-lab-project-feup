@@ -6,7 +6,6 @@
     <div class="col-sm-6 col-md-offset-1 col-md-10 main">
       <!-- 10 spaces left -->
       <div class="col-md-12">
-
         <div class="col-lg-6 col-md-12">
           <div class="panel panel-green">
             <div class="panel-heading">
@@ -15,8 +14,7 @@
                   <i class="glyphicon glyphicon-calendar" style="font-size:52px;"></i>
                 </div>
                 <div class="col-xs-9 text-right">
-                  <div class="huge">2</div>
-                  <div>Events soon</div>
+                  <h4>Future Events</h4>
                 </div>
               </div>
             </div>
@@ -37,8 +35,9 @@
                   <i class="glyphicon glyphicon-inbox" style="font-size:52px;"></i>
                 </div>
                 <div class="col-xs-9 text-right">
-                  <div class="huge">124</div>
-                  <div>Pending Members</div>
+                  <div>
+                    <h4>Pending Members</h4>
+                  </div>
                 </div>
               </div>
             </div>
@@ -69,6 +68,10 @@
   $('#open_recruit').click(function() {
     $("#recruit").show();
     $("#events").hide();
+  });
+  $('.datestamp').each(function() {
+    var temp = new Date($(this).attr('datetime'));
+    $(this).text(temp.getDay() + "/" + temp.getMonth() + "/" + temp.getFullYear());
   });
 </script>
 

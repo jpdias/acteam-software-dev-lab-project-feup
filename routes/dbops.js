@@ -23,6 +23,7 @@ function searchUsr(data, callback) {
   Account.find(
     data,
     function(err, data) {
+      console.log(data);
       callback(err, data);
     });
 }
@@ -90,8 +91,12 @@ function rmMemberFromOrg(member, orgName, callback) {
 module.exports.removeMemberFromOrganization = rmMemberFromOrg;
 
 function getOrgEvents(orgEmail, callback) {
+  var currentTime = new Date();
   Event.find({
-    "org_email": orgEmail
+    "org_email": orgEmail,
+    "date.end": {
+      $gt: currentTime
+    }
   }, function(err, events) {
     callback(err, events);
   });
