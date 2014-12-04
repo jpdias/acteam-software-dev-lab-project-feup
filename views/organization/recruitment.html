@@ -1,0 +1,34 @@
+{{> header}}
+<div class="container">
+  <div class="col-sm-12 col-md-offset-1 col-md-12 main">
+    <div class="row">
+      {{> sidebar}} {{#recruitment.status}}
+      <div class="col-md-12">
+        <button type="button" class="btn btn-primary">Start recruitment</button>
+      </div>
+      {{/recruitment.status}} {{^recruitment.status}}
+      <div class="col-md-12">
+        <button type="button" class="btn btn-primary">End recruitment</button>
+      </div>
+      {{/recruitment.status}}
+    </div>
+    <div class="col-md-12">
+      {{#recruitment.appliances}}
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title"> {{email} </h3> </div>
+        <div class="panel-body">
+          <div class="col-md-8"> {{letter}}</div>
+          <br>
+          <div class="col-md-4">
+            <button type="button" class="btn btn-primary">Accept</button>
+          </div>
+        </div>
+      </div>
+      {{/recruitment.appliances}}
+    </div>
+  </div>
+</div>
+{{> scripts}}
+<script src="js/search.js"></script>
+{{> footer}}

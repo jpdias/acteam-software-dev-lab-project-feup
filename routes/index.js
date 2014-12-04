@@ -657,10 +657,6 @@ app.post('/searchorg', function(req, res) {
   if (req.session.user) {
 
     data = {};
-    if (req.body.name)
-      data.name = new RegExp(".*" + req.body.name + ".*", 'i');
-    if (req.body.cause)
-      data.causes = req.body.cause;
     if (req.body.location === "Municipality") {
       data = {
         'address.municipality': req.session.user.address.municipality
@@ -670,6 +666,10 @@ app.post('/searchorg', function(req, res) {
         'address.district': req.session.user.address.district
       };
     }
+    if (req.body.name)
+      data.name = new RegExp(".*" + req.body.name + ".*", 'i');
+    if (req.body.cause)
+      data.causes = req.body.cause;
 
     dbop.searchOrganization(data, function(err, result) {
       if (err)
@@ -704,10 +704,6 @@ app.post('/searchuser', function(req, res) {
   if (req.session.user) {
 
     data = {};
-    if (req.body.name)
-      data.name = new RegExp(".*" + req.body.name + ".*", 'i');
-    if (req.body.cause)
-      data.causes = req.body.cause;
     if (req.body.location === "Municipality") {
       data = {
         'address.municipality': req.session.user.address.municipality
@@ -717,6 +713,11 @@ app.post('/searchuser', function(req, res) {
         'address.district': req.session.user.address.district
       };
     }
+    if (req.body.name)
+      data.name = new RegExp(".*" + req.body.name + ".*", 'i');
+    if (req.body.cause)
+      data.causes = req.body.cause;
+
 
     dbop.searchUser(data, function(err, result) {
       if (err)
@@ -759,4 +760,19 @@ app.get('/getOrgAccByApprove', function(req, res) {
         res.send(result);
     });
   }
+});
+
+app.get('/recruitment', function(req, res) {
+  if (req.session.user.role === "organization") {
+    res.locals.org = req.session.user;
+    res.render('organization/recruitment', {
+      partials: {
+        header: 'common/header',
+        sidebar: 'organization/sidebar',
+        footer: 'common/footer',
+        scripts: 'common/scripts'
+      }
+    });
+  } else
+    common.errNotFound(req, res);
 });

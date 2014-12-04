@@ -10,8 +10,7 @@ var Member = new Schema({
 
 var Proposal = new Schema({
   email: String,
-  letter: String,
-  status: Boolean
+  letter: String
 });
 
 
@@ -33,20 +32,13 @@ var Organization = new Schema({
   members: [Member],
   about: String,
   causes: [String],
-  recruitment: [{
-    status: Boolean,
-    time: {
-      start: {
-        type: Date,
-        default: Date.now
-      },
-      end: {
-        type: Date,
-        default: Date.now
-      }
+  recruitment: {
+    status: {
+      type: Boolean,
+      default: false
     },
     appliances: [Proposal]
-  }],
+  },
   networks: {
     skype: String,
     facebook: String,
