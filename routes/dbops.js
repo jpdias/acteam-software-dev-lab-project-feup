@@ -56,6 +56,7 @@ function addNewMemberToOrg(member, orgName, callback) {
     "name": orgName
   }, function(err, org) {
     if (org) {
+      console.log("\n-------------------THIS ISN'T WORKING------------------------\n");
       if (!org.members.hasOwnProperty(member.email)) {
         org.members.push(member);
         org.save(function(err2) {
@@ -92,17 +93,42 @@ module.exports.removeMemberFromOrganization = rmMemberFromOrg;
 
 function getOrgEvents(orgEmail, callback) {
   var currentTime = new Date();
-  Event.find({
-    "org_email": orgEmail,
-    "date.end": {
-      $gt: currentTime
-    }
-  }, function(err, events) {
-    callback(err, events);
-  });
+  if(orgEmail == ""){
+    Event.find({
+      "people.email": "jpdias@live.com",
+      "date.end": {
+        $gt: currentTime
+      }
+    }, function(err, events) {
+      callback(err, events);
+    });
+  } else {
+    Event.find({
+      "org_email": orgEmail,
+      "date.end": {
+        $gt: currentTime
+      }
+    }, function(err, events) {
+      callback(err, events);
+    });
+  }
 }
 
 module.exports.getOrganizationEvents = getOrgEvents;
+
+function getUsrEvents(userEmail, callback) {
+  var currentTime = new Date();
+    Event.find({
+      "people.email": userEmail,
+      "date.end": {
+        $gt: currentTime
+      }
+    }, function(err, events) {
+      callback(err, events);
+    });
+}
+
+module.exports.getUserEvents = getUsrEvents;
 
 function getOrgEventsByDistrict(district, callback) {
   var currentTime = new Date();
@@ -123,15 +149,29 @@ function applyToEvent(name, orgEmail, userEmail, callback) {
     "org_email": orgEmail,
     "name": name
   }, function(err, events) {
-    //console.log(userEmail);
-    events.people.push({
-      email: userEmail,
-      status: false
-    });
-    //console.log(events);
-    events.save(function(err) {
-      callback(err, events);
-    });
+    console.log(events);
+
+    var status = true;
+    for(var i=0, max=events.people.length; i<max; i++)
+        {
+            if(events.people[i].email===userEmail)
+            {
+                status = false;
+                break;
+            }
+        }
+
+    if(status){
+      events.people.push({
+        email: userEmail,
+        status: false
+      });
+      events.save(function(err) {
+        callback(err, events);
+      });
+    } else {
+      callback("error", events);
+    }
   });
 }
 
