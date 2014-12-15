@@ -181,18 +181,25 @@ app.get('/profileuser', function(req, res) {
 });
 
 app.get('/userhistory', function(req, res) {
-  res.status(200);
-  res.render(
-    'user/history', {
-      partials: {
-        header: 'common/header',
-        footer: 'common/footer',
-        sidebar: 'user/sidebarUser',
-        suggestedSidebar: 'user/suggestedSidebar',
-        scripts: 'common/scripts'
-      }
-    }
-  );
+  if (req.session.user) {
+    res.locals = req.session.user;
+    res.status(200);
+    if (req.session.user.role === "user") {
+      res.render(
+        'user/history', {
+          partials: {
+            header: 'common/header',
+            footer: 'common/footer',
+            sidebar: 'user/sidebarUser',
+            suggestedSidebar: 'user/suggestedSidebar',
+            scripts: 'common/scripts'
+          }
+        }
+      );
+    } else
+        common.errNotFound(req, res);
+  } else
+        common.errPermission(req, res);
 });
 
 app.get('/configureuser', function(req, res) {
@@ -539,6 +546,18 @@ app.post('/recovery', function(req, res) {
         success: true,
         message: 'teste'
       });
+    }
+  });
+});
+
+app.post('/userevents', function(req, res){
+  dbop.getUserEvents(req.body.userEmail, function(err, events){
+    if (err) {
+      return res.send({
+        error: true
+        });
+    } else {
+      return res.send(events);
     }
   });
 });
