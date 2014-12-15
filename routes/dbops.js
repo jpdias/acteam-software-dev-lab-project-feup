@@ -114,6 +114,7 @@ function getOrgEvents(orgEmail, callback) {
   }
 }
 
+
 module.exports.getOrganizationEvents = getOrgEvents;
 
 function getUsrEvents(userEmail, callback) {
