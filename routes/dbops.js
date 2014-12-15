@@ -414,7 +414,6 @@ function approveOrganizationAccount(data, callback) {
         org.email = data.email;
         org.role = "organization";
         deleteaccount(org, function(errw) {
-          console.log("Ya screwed boy");
           callback(errw);
         });
 
@@ -426,3 +425,46 @@ function approveOrganizationAccount(data, callback) {
 }
 
 module.exports.approveOrgAcc = approveOrganizationAccount;
+
+
+
+function deleteOrganizationAccount(data, callback) {
+    Organization.findOne({
+      "email": data.email,
+
+    }, function(err, user) {
+
+      if (user) {
+
+        var org = {};
+        org.email = data.email;
+        org.role = "organization";
+        deleteaccount(org, function(errw) {
+          callback(errw);
+        });
+
+      } else
+        {
+		Account.findOne({
+		  "email": data.email,
+
+		}, function(err, user) {
+
+		  if (user) {
+
+			var user = {};
+			user.email = data.email;
+			user.role = "user";
+			deleteaccount(user, function(errw) {
+			  callback(errw);
+			});
+
+		  } else
+			callback(err);
+		});
+		
+		}
+    });
+}
+
+module.exports.deleteOrgAcc = deleteOrganizationAccount;

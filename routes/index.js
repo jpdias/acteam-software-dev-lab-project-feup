@@ -781,6 +781,23 @@ app.get('/getOrgAccByApprove', function(req, res) {
   }
 });
 
+app.post('/deleteOrgAcc', function(req, res) {
+  if (req.session.user.role == "admin") {
+    console.log(req.body);
+    decision = req.body;
+    dbop.deleteOrgAcc(decision, function(err, result) {
+      if (err)
+        res.send({
+          "status": "error"
+        });
+      else
+        res.send({
+          "status": "success"
+        });
+    });
+  }
+});
+
 app.get('/recruitment', function(req, res) {
   if (req.session.user.role === "organization") {
     res.locals.org = req.session.user;
