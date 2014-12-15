@@ -23,7 +23,7 @@ function searchUsr(data, callback) {
   Account.find(
     data,
     function(err, data) {
-      console.log(data);
+      //console.log(data);
       callback(err, data);
     });
 }
