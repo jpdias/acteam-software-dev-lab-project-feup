@@ -20,32 +20,17 @@
           <div class="col-sm-3 col-md-3">
             <div class="text-center" id="imgprof">
             </div>
+            <br> {{#org.recruitment.status}}
+            <button type="button" id="recruit" class="btn btn-block btn-primary" data-toggle="modal" data-target="#myModal">Open Recruitment</button>
+            {{/org.recruitment.status}}
             <br>
             <h3>Causes we defend:</h3>
             <h4>
-
-
-
             <ul>
-
-
-
               {{#org.causes}}
-
-
-
               <li>{{.}}</li>
-
-
-
               {{/org.causes}}
-
-
-
             </ul>
-
-
-
           </h4>
           </div>
           <div class="col-sm-5 col-md-5">
@@ -54,125 +39,33 @@
             </div>
             <div class="col-sm-12 col-md-12">
               <address>
-
-
-
               <b>Email: </b> {{org.email}}<br>
-
-
-
               <b>Address: </b> {{org.address.address}}, {{org.address.municipality}},  {{org.address.district}}<br>
-
-
-
               <b>Website: </b> {{org.website}}<br>
-
-
-
               <b>Skype: </b> {{org.networks.skype}}
-
-
-
               <h4>
-
-
-
-
-
-
-
                {{#org.networks.linkedin}}
-
-
-
                  <a title="LinkedIn" target="_blank" href="{{org.networks.linkedin}}"><i class="fa fa-linkedin"></i></a>&nbsp;
-
-
-
                {{/org.networks.linkedin}}
-
-
-
-
-
-
-
                {{#org.networks.facebook}}
-
-
-
                  <a title="Facebook" target="_blank" href="{{org.networks.facebook}}"><i class="fa fa-facebook"></i></a>&nbsp;
-
-
-
                {{/org.networks.facebook}}
-
-
-
                {{#org.networks.twitter}}
-
-
-
                  <a title="Twitter" target="_blank" href="{{org.networks.twitter}}"><i class="fa fa-twitter"></i></a>&nbsp;
-
-
-
                {{/org.networks.twitter}}
-
-
-
                {{#org.networks.github}}
-
-
-
                  <a title="GitHub" target="_blank" href="{{org.networks.github}}"><i class="fa fa-github"></i></a>&nbsp;
-
-
-
                {{/org.networks.github}}
-
-
-
                {{#org.networks.gplus}}
-
-
-
                  <a title="Google Plus" target="_blank" href="{{org.networks.gplus}}"><i class="fa fa-google-plus"></i></a>&nbsp;
-
-
-
                {{/org.networks.gplus}}
-
-
-
                {{#org.networks.flickr}}
-
-
-
                  <a title="Flickr" target="_blank" href="{{org.networks.flickr}}"><i class="fa fa-flickr"></i></a>&nbsp;
-
-
-
                {{/org.networks.flickr}}
-
-
-
                {{#org.networks.instagram}}
-
-
-
                  <a title="Instagram" target="_blank" href="{{org.networks.instagram}}"><i class="fa fa-instagram"></i></a>
-
-
-
                {{/org.networks.instagram}}
-
-
-
              </h4>
-
-
-
             </address>
               </h4>
             </div>
@@ -208,8 +101,53 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Recruitment form</h4>
+      </div>
+      <div class="modal-body">
+        <h3>Motivation (What you want to do, etc...)</h3>
+        <textarea id="textToSend" style="resize:none" name="name" cols="70" rows="5"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="submitRecruit" type="button" class="btn btn-primary" data-dismiss="modal">Send request!</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 {{> scripts}}
 <script>
+  $("#submitRecruit").click(function() {
+    $.ajax({
+      url: '/recruitmentApply',
+      type: 'POST',
+      data: {
+        motivation: $("#textToSend").val(),
+        org_email: "{{org.email}}"
+      },
+      success: function(data) {
+
+        if (data.success)
+          swal("Done!", "You are applied to this recuitment.", "success");
+        else
+          swal("Error!", "Something has gone wrong.", "error");
+      },
+      error: function(xhr, desc, err) {
+        console.log(xhr);
+        console.log("Desc: " + desc + "\nErr:" + err);
+      }
+
+    });
+
+  })
   $(document).ready(function() {
     $('#autoplay').lightSlider({
       item: 1,

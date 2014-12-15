@@ -1,25 +1,17 @@
 <div class="events" id="recruit" style="display: none;">
   <div class="col-md-12">
-    <div class="list-group">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="col-md-8">
-            <h3>Summer Recruitment</h3>
-          </div>
-          <div class="col-md-4 text-center">
-            <h5>End Date:<br>
-              22/22/2222</h5>
-          </div>
-          <div class="col-md-8">
-            <p>Description xpto</p>
-          </div>
-          <div class="col-md-4">
-            <button type="button" class="btn btn-primary btn-block">
-              <h5>55 Aplications</h5>
-            </button>
-          </div>
+    {{#recruitment.appliances}}
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title"> {{email} </h3> </div>
+      <div class="panel-body">
+        <div class="col-md-8"> {{letter}}</div>
+        <br>
+        <div class="col-md-4">
+          <button type="button" class="btn btn-primary">Accept</button>
         </div>
       </div>
     </div>
+    {{/recruitment.appliances}}
   </div>
 </div>

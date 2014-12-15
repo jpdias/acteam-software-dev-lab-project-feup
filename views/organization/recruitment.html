@@ -1,19 +1,30 @@
 {{> header}}
+
 <div class="container">
   <div class="col-sm-12 col-md-offset-1 col-md-12 main">
     <div class="row">
-      {{> sidebar}} {{#recruitment.status}}
-      <div class="col-md-12">
-        <button type="button" class="btn btn-primary">Start recruitment</button>
+      {{> sidebar}}
+      <div class="col-md-6">
+        <h3>Recruitment Management </h3>
       </div>
-      {{/recruitment.status}} {{^recruitment.status}}
-      <div class="col-md-12">
-        <button type="button" class="btn btn-primary">End recruitment</button>
+      <script>
+        console.log("{{org.recruitment.status}}")
+      </script>
+      {{#org.recruitment.status}}
+
+      <div class="col-md-4">
+
+        <h3><button type="button" id="endRec" class="btn btn-block btn-primary">End recruitment</button></h3>
       </div>
-      {{/recruitment.status}}
+      {{/org.recruitment.status}} {{^org.recruitment.status}}
+      <div class="col-md-4">
+
+        <h3><button type="button" id="startRec" class="btn btn-block btn-primary">Start recruitment</button></h3>
+      </div>
+      {{/org.recruitment.status}}
     </div>
     <div class="col-md-12">
-      {{#recruitment.appliances}}
+      {{#org.recruitment.appliances}}
       <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title"> {{email} </h3> </div>
@@ -25,10 +36,84 @@
           </div>
         </div>
       </div>
-      {{/recruitment.appliances}}
+      {{/org.recruitment.appliances}}
     </div>
   </div>
 </div>
 {{> scripts}}
-<script src="js/search.js"></script>
+<script>
+  $("#startRec").on("click", function() {
+    swal({
+        title: "Open recruitment",
+        text: "You will start a new recruitment!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Confirm",
+        cancelButtonText: "Cancel",
+        closeOnConfirm: false,
+        closeOnCancel: true,
+        allowOutsideClick: true,
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          $.ajax({
+            url: '/recruitmentstage',
+            type: 'POST',
+            data: {
+              action: "start"
+            },
+            success: function(data) {
+              if (data.action === "started") {
+                swal("Done!", "You started a recruitment.", "success");
+                location.reload();
+              } else
+                swal("Error!", "Something has gone wrong.", "error");
+            },
+            error: function(xhr, desc, err) {
+              console.log(xhr);
+              console.log("Desc: " + desc + "\nErr:" + err);
+            }
+
+          })
+        }
+      });
+  });
+  $("#endRec").on("click", function() {
+    swal({
+        title: "Close recruitment",
+        text: "You will end the recruitment stage!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Confirm",
+        cancelButtonText: "Cancel",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          $.ajax({
+            url: '/recruitmentstage',
+            type: 'POST',
+            data: {
+              action: "end"
+            },
+            success: function(data) {
+              if (data.action === "end") {
+                swal("Done!", "You started a recruitment.", "success");
+                location.reload();
+              } else
+                swal("Error!", "Something has gone wrong.", "error");
+            },
+            error: function(xhr, desc, err) {
+              console.log(xhr);
+              console.log("Desc: " + desc + "\nErr:" + err);
+            }
+
+          })
+        }
+      });
+  });
+</script>
 {{> footer}}

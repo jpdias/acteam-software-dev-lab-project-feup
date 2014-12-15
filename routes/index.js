@@ -197,9 +197,9 @@ app.get('/userhistory', function(req, res) {
         }
       );
     } else
-        common.errNotFound(req, res);
+      common.errNotFound(req, res);
   } else
-        common.errPermission(req, res);
+    common.errPermission(req, res);
 });
 
 app.get('/configureuser', function(req, res) {
@@ -550,12 +550,12 @@ app.post('/recovery', function(req, res) {
   });
 });
 
-app.post('/userevents', function(req, res){
-  dbop.getUserEvents(req.body.userEmail, function(err, events){
+app.post('/userevents', function(req, res) {
+  dbop.getUserEvents(req.body.userEmail, function(err, events) {
     if (err) {
       return res.send({
         error: true
-        });
+      });
     } else {
       return res.send(events);
     }
@@ -811,4 +811,65 @@ app.get('/recruitment', function(req, res) {
     });
   } else
     common.errNotFound(req, res);
+});
+
+app.post('/recruitmentstage', function(req, res) {
+  if (req.session.user.role === "organization") {
+    if (req.body.action === "start") {
+      dbop.changeRecruit(req.session.user, function(err, result) {
+        if (err)
+          res.send({
+            "status": "error"
+          });
+        else {
+          req.session.user.recruitment.status = !req.session.user.recruitment.status;
+          req.session.save(function(err) {});
+          res.send({
+            "action": 'started'
+          });
+        }
+      });
+    } else if (req.body.action === "end") {
+      dbop.changeRecruit(req.session.user, function(err, result) {
+        if (err)
+          res.send({
+            "status": "error"
+          });
+        else {
+          req.session.user.recruitment.status = !req.session.user.recruitment.status;
+          req.session.save(function(err) {});
+          res.send({
+            "action": 'started'
+          });
+        }
+      });
+      res.send({
+        'action': 'end'
+      });
+    } else {
+      res.send();
+    }
+  } else
+    common.errPermission(req, res);
+});
+
+app.post('/recruitmentApply', function(req, res) {
+  if (req.session.user.role === "user") {
+    data = {};
+    data.letter = req.body.motivation;
+    data.email = req.session.user.email;
+    dbop.addNewMemberRecruit(req.body.org_email, data, function(err, data) {
+      if (err)
+        res.send({
+          "success": "false"
+        });
+      else {
+
+        res.send({
+          "success": 'true'
+        });
+      }
+    });
+  } else
+    common.errPermission(req, res);
 });

@@ -93,7 +93,7 @@ module.exports.removeMemberFromOrganization = rmMemberFromOrg;
 
 function getOrgEvents(orgEmail, callback) {
   var currentTime = new Date();
-  if(orgEmail == ""){
+  if (orgEmail === "") {
     Event.find({
       "people.email": "jpdias@live.com",
       "date.end": {
@@ -119,14 +119,14 @@ module.exports.getOrganizationEvents = getOrgEvents;
 
 function getUsrEvents(userEmail, callback) {
   var currentTime = new Date();
-    Event.find({
-      "people.email": userEmail,
-      "date.end": {
-        $gt: currentTime
-      }
-    }, function(err, events) {
-      callback(err, events);
-    });
+  Event.find({
+    "people.email": userEmail,
+    "date.end": {
+      $gt: currentTime
+    }
+  }, function(err, events) {
+    callback(err, events);
+  });
 }
 
 module.exports.getUserEvents = getUsrEvents;
@@ -153,16 +153,15 @@ function applyToEvent(name, orgEmail, userEmail, callback) {
     console.log(events);
 
     var status = true;
-    for(var i=0, max=events.people.length; i<max; i++)
-        {
-            if(events.people[i].email===userEmail)
-            {
-                status = false;
-                break;
-            }
-        }
 
-    if(status){
+    for (var i = 0, max = events.people.length; i < max; i++) {
+      if (events.people[i].email === userEmail) {
+        status = false;
+        break;
+      }
+    }
+
+    if (status) {
       events.people.push({
         email: userEmail,
         status: false
@@ -429,42 +428,66 @@ module.exports.approveOrgAcc = approveOrganizationAccount;
 
 
 function deleteOrganizationAccount(data, callback) {
-    Organization.findOne({
-      "email": data.email,
-
-    }, function(err, user) {
-
-      if (user) {
-
-        var org = {};
-        org.email = data.email;
-        org.role = "organization";
-        deleteaccount(org, function(errw) {
-          callback(errw);
-        });
-
-      } else
-        {
-		Account.findOne({
-		  "email": data.email,
-
-		}, function(err, user) {
-
-		  if (user) {
-
-			var user = {};
-			user.email = data.email;
-			user.role = "user";
-			deleteaccount(user, function(errw) {
-			  callback(errw);
-			});
-
-		  } else
-			callback(err);
-		});
-		
-		}
-    });
+  Organization.findOne({
+    "email": data.email,
+  }, function(err, user) {
+    if (user) {
+      var org = {};
+      org.email = data.email;
+      org.role = "organization";
+      deleteaccount(org, function(errw) {
+        callback(errw);
+      });
+    } else {
+      Account.findOne({
+        "email": data.email,
+      }, function(err, user) {
+        if (user) {
+          user = {};
+          user.email = data.email;
+          user.role = "user";
+          deleteaccount(user, function(errw) {
+            callback(errw);
+          });
+        } else
+          callback(err);
+      });
+    }
+  });
 }
 
 module.exports.deleteOrgAcc = deleteOrganizationAccount;
+
+function changeRecruitmentStatus(data, callback) {
+  Organization.findOne({
+    "email": data.email,
+  }, function(err, org) {
+    if (org) {
+      org.recruitment.status = !org.recruitment.status;
+      org.save(function(err2) {
+        callback(err2, org);
+      });
+    } else {
+      callback(err, org);
+    }
+  });
+}
+
+module.exports.changeRecruit = changeRecruitmentStatus;
+
+function addNewMemberToRecruit(email, data, callback) {
+  Organization.findOne({
+    "email": email
+  }, function(err, org) {
+    if (org) {
+      org.recruitment.appliances.push(data);
+      org.save(function(err2) {
+        callback(err2, org);
+      });
+    } else {
+      callback(err, org);
+    }
+  });
+}
+
+module.exports.addNewMemberRecruit = addNewMemberToRecruit;
