@@ -120,10 +120,11 @@ module.exports.getOrganizationEvents = getOrgEvents;
 function getUsrEvents(userEmail, callback) {
   var currentTime = new Date();
   Event.find({
-    "people.email": userEmail,
-    "date.end": {
-      $gt: currentTime
-    }
+    "people.email": userEmail
+      /*,
+          "date.end": {
+            $gt: currentTime
+          }*/
   }, function(err, events) {
     callback(err, events);
   });
