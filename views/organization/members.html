@@ -1,40 +1,72 @@
 {{> header}}
-<div class="container-fluid">
-  <div class="row">
-    {{> sidebar}}
-    <div class="main fill">
-      <!-- >Organization Board</!-->
-      <div class="row">
-        <h2>Organization's Board</h2>
-        <div class="col-sm-3">BoardMember0</div>
-        <div class="col-sm-3">BoardMember1</div>
-        <div class="col-sm-3">BoardMember2</div>
+<div class="container">
+  <div class="col-sm-12 col-md-offset-1 col-md-12 main">
+    <div class="row">
+      {{> sidebar}}
+      <div class="col-md-12">
+        <h3>Members Board</h3>
       </div>
-      <!-- >Ordinary Members</!-->
-      <div class="row">
-        <h2>Organization's Members</h2>
-        <div class="col-sm-3">Member0</div>
-        <div class="col-sm-3">Member1</div>
-        <div class="col-sm-3">Member2</div>
-        <div class="col-sm-3">Member3</div>
-        <div class="col-sm-3">Member4</div>
-        <div class="col-sm-3">Member5</div>
+      <div class="col-md-12">
+        {{#org.members}}
+        <div class="col-md-3">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <div class="imgprof text-center" div-data="{{email}}">
+              </div>
+            </div>
+            <div class="panel-body">
+              <div style="text-align:center" class="col-md-12">
+                <a href="mailito:{{email}}">{{email}}</a> &nbsp;
+                <a href="/profileuser?email={{email}}" type="button" class="btn btn-sm btn-block  btn-default">Open Profile</a>
+                <button data-button="{{email}}" type="button" class=" eliminate btn btn-sm btn-block btn-warning">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{/org.members}}
       </div>
     </div>
   </div>
 </div>
-
 {{> scripts}}
 <script>
-  $(document).ready(function() {
-    $('#autoplay').lightSlider({
-      item: 1,
-      verticalHeight: 200,
-      vThumbWidth: 50,
-      auto: true,
-      loop: true,
-      slideMargin: 0
-    });
+  $(".eliminate").on("click", function() {
+    var mail = $(this).attr('data-button');
+    swal({
+        title: "Remove member",
+        text: "Are you sure?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Confirm",
+        cancelButtonText: "Cancel",
+        closeOnConfirm: false,
+        closeOnCancel: true,
+        allowOutsideClick: true,
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          $.ajax({
+            url: '/deleteMember',
+            type: 'POST',
+            data: {
+              email: mail
+            },
+            success: function(data) {
+              if (data.success) {
+                swal("Done!", "You deleted the user.", "success");
+                location.reload();
+              } else
+                swal("Error!", "Something has gone wrong.", "error");
+            },
+            error: function(xhr, desc, err) {
+              console.log(xhr);
+              console.log("Desc: " + desc + "\nErr:" + err);
+            }
+
+          })
+        }
+      });
   });
 </script>
 {{> footer}}

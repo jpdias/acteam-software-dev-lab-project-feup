@@ -229,7 +229,7 @@ app.get('/signin', function(req, res) {
     if (req.query.err) {
       if (req.query.err === "pw")
         res.locals = {
-          msg: "Wrong password!"
+          msg: "Error with the account."
         };
       else
         res.locals = {
@@ -908,6 +908,36 @@ app.get('/members', function(req, res) {
           sidebar: 'organization/sidebar',
           footer: 'common/footer',
           scripts: 'common/scripts'
+        }
+      });
+    } else
+      common.errPermission(req, res);
+  } else
+    common.errPermission(req, res);
+});
+
+app.post("/deleteMember", function(req, res) {
+  if (req.session.user) {
+    if (req.session.user.role === "organization") {
+      data = {};
+      data.email = req.session.user.email;
+      data.remove_email = req.body.email;
+
+      dbop.removeMemberFromOrganization(data, function(err, data) {
+        if (err)
+          res.send({
+            "success": "false"
+          });
+        else {
+          dbop.getOrganization(req.session.user.name, function(err, org) {
+            req.session.user = org;
+            req.session.save(function(err) {
+
+            });
+            res.send({
+              "success": 'true'
+            });
+          });
         }
       });
     } else

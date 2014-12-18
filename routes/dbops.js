@@ -71,25 +71,6 @@ function addNewMemberToOrg(member, orgName, callback) {
 
 module.exports.addNewMemberToOrganization = addNewMemberToOrg;
 
-function rmMemberFromOrg(member, orgName, callback) {
-  Organization.findOne({
-    "name": orgName
-  }, function(err, org) {
-    if (org) {
-      var i = org.members.indexOf(member);
-      if (i != 1) {
-        org.members.splice(i);
-        org.save(function(err2) {
-          callback(err2, org);
-        });
-      }
-    } else {
-      callback(err, org);
-    }
-  });
-}
-
-module.exports.removeMemberFromOrganization = rmMemberFromOrg;
 
 function getOrgEvents(orgEmail, callback) {
   var currentTime = new Date();
@@ -521,3 +502,28 @@ function memberReg(data, callback) {
 }
 
 module.exports.memberRegestration = memberReg;
+
+function rmMemberFromOrg(data, callback) {
+  //  console.log(data);
+  Organization.findOne({
+    "email": data.email
+  }, function(err, org) {
+    console.log(org);
+    if (org) {
+      var tmp = org.members;
+      for (var j = 0; j < tmp.length; j++) {
+        if (tmp[j].email === data.remove_email) {
+          tmp.splice(j, 1);
+          break;
+        }
+      }
+      org.save(function(err2) {
+        callback(err2, org);
+      });
+    } else {
+      callback(err, org);
+    }
+  });
+}
+
+module.exports.removeMemberFromOrganization = rmMemberFromOrg;

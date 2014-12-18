@@ -129,7 +129,7 @@ passport.use(new LocalStrategy(
               } else
                 return done(null, user);
             });
-          } else if (sha1(password) != user.password || user.confirmed === false) {
+          } else if (sha1(password) != user.password || user.confirmed === false || user.isOrgApproved === false) {
             return done(null, false, {
               message: 'Incorrect password.'
             });
