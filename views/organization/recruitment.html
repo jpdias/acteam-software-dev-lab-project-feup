@@ -7,32 +7,29 @@
       <div class="col-md-6">
         <h3>Recruitment Management </h3>
       </div>
-      <script>
-        console.log("{{org.recruitment.status}}")
-      </script>
       {{#org.recruitment.status}}
-
       <div class="col-md-4">
-
         <h3><button type="button" id="endRec" class="btn btn-block btn-primary">End recruitment</button></h3>
       </div>
       {{/org.recruitment.status}} {{^org.recruitment.status}}
       <div class="col-md-4">
-
         <h3><button type="button" id="startRec" class="btn btn-block btn-primary">Start recruitment</button></h3>
       </div>
       {{/org.recruitment.status}}
     </div>
     <div class="col-md-12">
       {{#org.recruitment.appliances}}
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title"> {{email} </h3> </div>
-        <div class="panel-body">
-          <div class="col-md-8"> {{letter}}</div>
-          <br>
-          <div class="col-md-4">
-            <button type="button" class="btn btn-primary">Accept</button>
+      <div class="col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <a href="/profileuser?email={{email}}" type="button" class="text-left btn btn-sm btn-default">Open Profile</a> &nbsp; <a style="color:white" href="mailito:{{email}}">{{email}}</a>
+          </div>
+          <div class="panel-body">
+            <div class="col-md-8">{{letter}}</div>
+            <div class="col-md-4">
+              <button id="accept" data-button="{{email}}" type="button" class="btn btn-sm btn-block btn-success">Accept</button>
+              <button id="recuse" data-button="{{email}}" type="button" class="btn btn-sm btn-block btn-danger">Recuse</button>
+            </div>
           </div>
         </div>
       </div>
@@ -42,6 +39,55 @@
 </div>
 {{> scripts}}
 <script>
+  function recruitAct(status, mail) {
+    var dados;
+    if (true) {
+      dados = {
+        accept: true,
+        email: mail
+      };
+    } else {
+      dados = {
+        accept: false,
+        email: mail
+      };
+    }
+
+    $.ajax({
+      url: '/recruitmentAction',
+      type: 'POST',
+      data: dados,
+      success: function(data) {
+        if (data.success) {
+          swal({
+              title: "Done!",
+              text: "You stated this candidate!",
+              type: "success",
+              confirmButtonColor: "#AEDEF4",
+              confirmButtonText: "Ok!",
+              closeOnConfirm: false
+            },
+            function() {
+              location.reload();
+            });
+
+        } else
+          swal("Error!", "Something has gone wrong.", "error");
+      },
+      error: function(xhr, desc, err) {
+        console.log(xhr);
+        console.log("Desc: " + desc + "\nErr:" + err);
+      }
+
+    })
+  }
+  $("#accept").on("click", function() {
+    recruitAct(true, $(this).attr('data-button'));
+  });
+  $("#recuse").on("click", function() {
+    recruitAct(false, $(this).attr('data-button'));
+  });
+
   $("#startRec").on("click", function() {
     swal({
         title: "Open recruitment",
@@ -102,7 +148,7 @@
             success: function(data) {
               if (data.action === "end") {
                 swal("Done!", "You started a recruitment.", "success");
-                location.reload();
+
               } else
                 swal("Error!", "Something has gone wrong.", "error");
             },
@@ -110,7 +156,6 @@
               console.log(xhr);
               console.log("Desc: " + desc + "\nErr:" + err);
             }
-
           })
         }
       });

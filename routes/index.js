@@ -642,30 +642,33 @@ app.post('/usernotexists', function(req, res) {
 });
 
 app.get('/searchorg', function(req, res) {
-
-  if (req.session.user.role == "user") {
-    res.locals.user = req.session.user;
-    res.render('user/searchorg', {
-      partials: {
-        header: 'common/header',
-        sidebar: 'user/sidebarUser',
-        suggestedSidebar: 'user/suggestedSidebar',
-        footer: 'common/footer',
-        scripts: 'common/scripts',
-        searchorg: 'common/searchOrganizations'
-      }
-    });
-  } else if (req.session.user.role == "organization") {
-    res.locals.org = req.session.user;
-    res.render('organization/searchorg', {
-      partials: {
-        header: 'common/header',
-        sidebar: 'organization/sidebar',
-        footer: 'common/footer',
-        scripts: 'common/scripts',
-        searchorg: 'common/searchOrganizations'
-      }
-    });
+  if (req.session.user) {
+    if (req.session.user.role == "user") {
+      res.locals.user = req.session.user;
+      res.render('user/searchorg', {
+        partials: {
+          header: 'common/header',
+          sidebar: 'user/sidebarUser',
+          suggestedSidebar: 'user/suggestedSidebar',
+          footer: 'common/footer',
+          scripts: 'common/scripts',
+          searchorg: 'common/searchOrganizations'
+        }
+      });
+    } else if (req.session.user.role == "organization") {
+      res.locals.org = req.session.user;
+      res.render('organization/searchorg', {
+        partials: {
+          header: 'common/header',
+          sidebar: 'organization/sidebar',
+          footer: 'common/footer',
+          scripts: 'common/scripts',
+          searchorg: 'common/searchOrganizations'
+        }
+      });
+    } else {
+      common.errPermission(req, res);
+    }
 
   } else {
     common.errPermission(req, res);
@@ -872,4 +875,25 @@ app.post('/recruitmentApply', function(req, res) {
     });
   } else
     common.errPermission(req, res);
+});
+
+app.post('/recruitmentAction', function(req, res) {
+  var data = req.body;
+  data.org = req.session.user.email;
+  dbop.memberRegestration(data, function(err, data) {
+    if (err)
+      res.send({
+        "success": "false"
+      });
+    else {
+      dbop.getOrganization(req.session.user.name, function(err, org) {
+        req.session.user = org;
+        req.session.save(function(err) {});
+      });
+      res.send({
+        "success": 'true'
+      });
+
+    }
+  });
 });

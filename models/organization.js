@@ -5,7 +5,10 @@ var mongoose = require('../app').mongodb,
 
 var Member = new Schema({
   email: String,
-  position: String
+  position: {
+    type: String,
+    default: "null"
+  }
 });
 
 var Proposal = new Schema({

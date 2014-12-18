@@ -491,3 +491,32 @@ function addNewMemberToRecruit(email, data, callback) {
 }
 
 module.exports.addNewMemberRecruit = addNewMemberToRecruit;
+
+function memberReg(data, callback) {
+  Organization.findOne({
+    "email": data.org
+  }, function(err, org) {
+    if (org) {
+      var tmp = org.recruitment.appliances;
+      for (var j = 0; j < tmp.length; j++) {
+        if (tmp[j].email === data.email) {
+          tmp.splice(j, 1);
+          break;
+        }
+      }
+      org.recruitment.appliances = tmp;
+      if (data.accept) {
+        org.members.push({
+          email: data.email
+        });
+      }
+      org.save(function(err2) {
+        callback(err2, org);
+      });
+    } else {
+      callback(err, org);
+    }
+  });
+}
+
+module.exports.memberRegestration = memberReg;
