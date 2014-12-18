@@ -897,3 +897,21 @@ app.post('/recruitmentAction', function(req, res) {
     }
   });
 });
+
+app.get('/members', function(req, res) {
+  if (req.session.user) {
+    if (req.session.user.role == "organization") {
+      res.locals.org = req.session.user;
+      res.render('organization/members', {
+        partials: {
+          header: 'common/header',
+          sidebar: 'organization/sidebar',
+          footer: 'common/footer',
+          scripts: 'common/scripts'
+        }
+      });
+    } else
+      common.errPermission(req, res);
+  } else
+    common.errPermission(req, res);
+});
