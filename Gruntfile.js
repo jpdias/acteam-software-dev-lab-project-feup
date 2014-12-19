@@ -25,10 +25,15 @@ module.exports = function(grunt) {
     },
     shell: {
       'heroku': {
-        command: 'git push heroku deploy'
+        command: ['git checkout deploy',
+          'git merge master',
+          'git push heroku deploy',
+          'git checkout master'
+        ]
       }
     }
   });
+  grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.registerTask('default', ['express:dev', 'mochaTest']);
