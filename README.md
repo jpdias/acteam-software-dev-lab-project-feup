@@ -23,9 +23,9 @@ C:\> choco install Atom
 
 ```
 
-### How do I get set up? ###
+### How do I run the testes? ###
 
-* To run the tests, initiate the server first on a console, then in another console in the same path run
+* Initiate the server first on a console, then in another console with the same path, run
 ```
 #!cmd
 
