@@ -25,11 +25,12 @@ module.exports = function(grunt) {
     },
     shell: {
       'heroku': {
-        command: ['git checkout deploy',
+        command: [
+          'git checkout deploy',
           'git merge master',
           'git push heroku deploy',
           'git checkout master'
-        ]
+        ].join('&&')
       }
     }
   });
