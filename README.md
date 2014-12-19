@@ -22,6 +22,16 @@ C:\> @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-ob
 C:\> choco install Atom
 
 ```
+
+### How do I get set up? ###
+
+* To run the tests, initiate the server first on a console, then in another console in the same path run
+```
+#!cmd
+
+C:\> mocha
+
+```
 ---------------------------------------------------------------------------------
 
 ## UPDATE ##
