@@ -1,0 +1,62 @@
+
+[0m[0m
+[0m  GET /profileuser[0m
+[2K[0G  [31m  1) login[0m
+[2K[0G  [31m  2) login[0m
+[2K[0G  [31m  3) login[0m
+[2K[0G  [31m  4) login[0m
+[2K[0G  [31m  5) login[0m
+[2K[0G  [31m  6) login[0m
+[2K[0G  [31m  7) login[0m
+[2K[0G  [31m  8) login[0m
+[2K[0G  [31m  9) login[0m
+[2K[0G  [31m  10) login[0m
+[2K[0G  [31m  11) login[0m
+[2K[0G  [31m  12) login[0m
+
+[0m  GET /userhistory[0m
+[2K[0G  [31m  13) login[0m
+
+[0m  GET /configureuser[0m
+[2K[0G  [31m  14) login[0m
+[2K[0G  [31m  15) uri that requires user to be logged in[0m
+[2K[0G  [31m  16) uri that requires user to be logged in[0m
+
+[0m  GET /profileorg[0m
+[2K[0G  [31m  17) login[0m
+
+[0m  GET /events[0m
+[2K[0G  [31m  18) login[0m
+[2K[0G  [31m  19) uri that requires user to be logged in[0m
+[2K[0G  [31m  20) uri that requires user to be logged in[0m
+
+[0m  GET /configureorg[0m
+[2K[0G  [31m  21) login[0m
+
+[0m  GET /searchorg[0m
+[2K[0G  [31m  22) login[0m
+[2K[0G  [31m  23) uri that requires user to be logged in[0m
+[2K[0G  [31m  24) uri that requires user to be logged in[0m
+
+[0m  GET /searchorg[0m
+[2K[0G  [31m  25) login[0m
+
+[0m  GET /searchuser[0m
+[2K[0G  [31m  26) login[0m
+[2K[0G  [31m  27) uri that requires user to be logged in[0m
+[2K[0G  [31m  28) uri that requires user to be logged in[0m
+
+[0m  GET /recruitment[0m
+[2K[0G  [31m  29) login[0m
+
+[0m  GET /members[0m
+[2K[0G  [31m  30) login[0m
+[2K[0G  [31m  31) uri that requires user to be logged in[0m
+[2K[0G  [31m  32) uri that requires user to be logged in[0m
+
+[0m  POST /configuser[0m
+[2K[0G  [31m  33) login[0m
+
+
+[92m [0m[32m 0 passing[0m[90m (12s)[0m
+
