@@ -36,5 +36,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-mocha-test');
-  grunt.registerTask('default', ['express:dev', 'mochaTest']);
+  grunt.registerTask('default', ['express:dev', 'mochaTest', 'shell:heroku']);
 };
