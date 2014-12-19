@@ -22,10 +22,14 @@ module.exports = function(grunt) {
         },
         src: ['test/unitTests.js']
       }
+    },
+    shell: {
+      'heroku': {
+        command: 'git push heroku deploy'
+      }
     }
   });
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-mocha-test');
-  grunt.loadNpmTasks('grunt-heroku-deploy');
   grunt.registerTask('default', ['express:dev', 'mochaTest']);
 };
