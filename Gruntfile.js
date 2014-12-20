@@ -32,10 +32,18 @@ module.exports = function(grunt) {
           'git checkout master'
         ].join('&&')
       }
-    }
+    },
+    watch: {
+      files: ['**/*'],
+      options: {
+        reload: true
+      }
+    },
   });
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-mocha-test');
-  grunt.registerTask('default', ['express:dev', 'mochaTest', 'shell:heroku']);
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.registerTask('default', ['express:dev', 'watch']);
+  grunt.registerTask('deploy', ['express:dev', 'mochaTest', 'shell:heroku']);
 };
