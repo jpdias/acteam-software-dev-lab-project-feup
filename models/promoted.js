@@ -4,7 +4,6 @@ var mongoose = require('../app').mongodb,
 
 var Promoted = new Schema({
   org_email: String,
-  event_name: String,
   date: {
     start: {
       type: Date,
@@ -15,10 +14,10 @@ var Promoted = new Schema({
       default: Date.now
     }
   },
-  description: String,
-  type: String,
-  value: Number,
-  isPaid: Boolean
+  isValidate: {
+    type: Boolean,
+    default: false
+  },
 });
 
 module.exports = mongoose.model('Promoted', Promoted);

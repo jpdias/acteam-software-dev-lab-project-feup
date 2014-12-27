@@ -35,8 +35,9 @@ module.exports = function(grunt) {
     },
     watch: {
       files: ['**/*'],
+      tasks: ['express:dev'],
       options: {
-        reload: true
+        spawn: false
       }
     },
   });

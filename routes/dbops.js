@@ -1,6 +1,7 @@
 var passport = require('../app').auth;
 var Account = require('../models/account');
 var Admin = require('../models/admin');
+var Promoted = require('../models/promoted');
 var Organization = require('../models/organization');
 var Event = require('../models/events');
 var LocalStrategy = require('../app').localStr;
@@ -527,3 +528,18 @@ function rmMemberFromOrg(data, callback) {
 }
 
 module.exports.removeMemberFromOrganization = rmMemberFromOrg;
+
+function addToPromote(data, callback) {
+  var pro = new Promoted(data);
+
+  pro.save(function(error, data) {
+
+    if (error) {
+      callback(true);
+    } else {
+      callback(false);
+    }
+  });
+}
+
+module.exports.addPromo = addToPromote;

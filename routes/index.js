@@ -948,3 +948,43 @@ app.post("/deleteMember", function(req, res) {
   } else
     common.errPermission(req, res);
 });
+
+app.get("/promote", function(req, res) {
+  if (req.session.user) {
+    if (req.session.user.role === "organization") {
+      res.locals.org = req.session.user;
+      res.render('organization/promote', {
+        partials: {
+          header: 'common/header',
+          sidebar: 'organization/sidebar',
+          footer: 'common/footer',
+          scripts: 'common/scripts'
+        }
+      });
+
+    } else
+      common.errPermission(req, res);
+  } else
+    common.errPermission(req, res);
+});
+
+app.post("/promote", function(req, res) {
+  if (req.session.user) {
+    if (req.session.user.role === "organization") {
+      var data = {};
+      data.date = req.body;
+      data.org_email = req.session.user.email;
+      dbop.addPromo(data, function(err) {
+        if (err)
+          res.send({
+            "success": "false"
+          });
+        else {
+          res.send({
+            "success": 'true'
+          });
+        }
+      });
+    }
+  }
+});
