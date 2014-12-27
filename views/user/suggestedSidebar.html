@@ -1,25 +1,14 @@
 <div class="col-sm-3 col-md-offset-10 col-md-2 sidebar" style="text-align:center">
-  <h5>Suggested Organizations</h5>
-  <div class="row-clearfix">
-    <div class="col-md-12">
-      <h6><b>Organization 1</b></h6>
-      <div class="col-md-6">
-        <img class="thumbnail" src="img/organization1.png" width="100%">
-      </div>
-      <div class="col-md-6">
-        <a href="#">Show profile</a>
-      </div>
+  <h5>Suggested Organizations</h5> {{#suggested}}
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <a href="/profileorg?org={{org_name}}"><h3 class="panel-title" style="color:white"> {{org_name}}</h3></a>
+    </div>
+    <div class="panel-body">
+      <h3 class="panel-title">Get in touch: <br><a href="mailto:{{org_email}}">{{org_email}}</h3>
     </div>
   </div>
-  <div class="row-clearfix">
-    <div class="col-md-12">
-      <h6><b>Organization 2</b></h6>
-      <div class="col-md-6">
-        <img class="thumbnail" src="img/organization2.png" width="100%">
-      </div>
-      <div class="col-md-6">
-        <a href="#">Show profile</a>
-      </div>
-    </div>
-  </div>
+
+  {{/suggested}}
 </div>

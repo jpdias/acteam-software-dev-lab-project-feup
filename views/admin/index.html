@@ -1,69 +1,168 @@
 {{>header}}
 <link rel="stylesheet" type="text/css" href="css/search.css">
-
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-sm-6 col-md-6">
-			<h2>Pending Organization Accounts</h2>
-			<table class="table table-hover" id="orgTable" style="display:none">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Options</th>
-					</tr>
-				</thead>
-				<tbody id="orgAccInfo">
+  <div class="row">
+    <div class="col-sm-6 col-md-6">
+      <h2>Pending Organization Accounts</h2>
+      <table class="table table-hover" id="orgTable" style="display:none">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody id="orgAccInfo">
 
-				</tbody>
-			</table>
-			<div class="alert alert-success" role="alert" id="nopending" style="display:none">
-				<p><strong>Well Done!</strong> You have no pending accounts.</p>
-			</div>
-		</div>
-	
-		<div class="col-sm-6 col-md-6">
-			<h2>Search user accounts</h2>
-			<div class="row">
-				<div class="col-sm-8 col-md-8">
-					<div class="form-group">
-						<div class="right-inner-addon">
-							<i class="glyphicon glyphicon-search"></i>
-							<input id="searchText" class="form-control" placeholder="Search" />
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-4 col-md-4">
-					<button id="searchUserAccounts" class="btn btn-primary btn-block">Search</button>
-				</div>
-			</div>
-			<table class="table table-hover" id="userTable" style="display:none">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Options</th>
-					</tr>
-				</thead>
-				<tbody id="userAccInfo">
+        </tbody>
+      </table>
+      <div class="alert alert-success" role="alert" id="nopending" style="display:none">
+        <p><strong>Well Done!</strong> You have no pending accounts.</p>
+      </div>
+    </div>
 
-				</tbody>
-			</table>
-			<div id="userMessage" style="display:none">
-				<div class="alert alert-warning" role="alert"><p><strong>No results!</strong>Try again.</p></div>
-			</div>
-		</div>
-	</div>
+    <div class="col-sm-6 col-md-6">
+      <h2>Search user accounts</h2>
+      <div class="row">
+        <div class="col-sm-8 col-md-8">
+          <div class="form-group">
+            <div class="right-inner-addon">
+              <i class="glyphicon glyphicon-search"></i>
+              <input id="searchText" class="form-control" placeholder="Search" />
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-4">
+          <button id="searchUserAccounts" class="btn btn-primary btn-block">Search</button>
+        </div>
+      </div>
+      <table class="table table-hover" id="userTable" style="display:none">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody id="userAccInfo">
+
+        </tbody>
+      </table>
+      <div id="userMessage" style="display:none">
+        <div class="alert alert-warning" role="alert">
+          <p><strong>No results!</strong>Try again.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 col-md-6">
+      <h2>Pending Promote Requests</h2>
+      <table class="table table-hover" id="orgPromos" style="display:none">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody id="promo">
+
+        </tbody>
+      </table>
+      <div class="alert alert-success" role="alert" id="nopromo" style="display:none">
+        <p><strong>Well Done!</strong> You have no pending promotional requests.</p>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 {{>scripts}}
 <script>
   var results;
-  
+
   $(document).ready(function() {
     loadOrgAccounts();
+    loadPromos();
   });
 
+  function loadPromos() {
+    $.ajax({
+      url: '/promoreq',
+      type: 'GET',
+      datatype: 'json',
+      success: function(data) {
+        showPromote(data);
+      }
+    })
+  };
+
+  function showPromote(info) {
+    $('#promo').empty();
+    if (info.length != 0) {
+      $("#orgPromos").show();
+      $("#nopromo").hide();
+      for (var i = 0; i < info.length; i++) {
+        if (info[i].role != "admin") {
+          $('#promo').append('<tr><td>' + info[i].org_email +
+            '</td><td>' +
+            moment(info[i].date.start).format('DD/MM/YYYY') +
+            '</td><td>' +
+            moment(info[i].date.end).format('DD/MM/YYYY') +
+            '</td><td><button data-id="' + info[i].org_email +
+            '" class="response btn btn-danger btn-xs"> <span class="glyphicon glyphicon-edit"></span></button></td></tr>'
+          )
+        }
+      };
+    } else {
+      $("#orgPromos").hide();
+      $("#nopromo").show();
+    }
+
+    $('.response').on('click', function(e) {
+      var data = {
+        email: $(this).data('id'),
+      };
+      swal({
+        title: "Promote",
+        text: "Do you wish to confirm or cancel this promote?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Confirm",
+        cancelButtonText: "Deny",
+        closeOnConfirm: true,
+        closeOnCancel: true
+      }, function(isConfirm) {
+        if (isConfirm) {
+          data.confirm = true;
+          $.ajax({
+            url: '/setpromostatus',
+            type: 'POST',
+            data: data,
+            datatype: 'json',
+            success: function(data) {
+              swal("Approved", "This promo has been approved", "success");
+              location.reload();
+            }
+          });
+
+        } else {
+          data.confirm = false;
+          $.ajax({
+            url: '/setpromostatus',
+            type: 'POST',
+            data: data,
+            datatype: 'json',
+            success: function(data) {
+              swal("Refused", "This promo has been refused", "success");
+              location.reload();
+            }
+          });
+        }
+      })
+    })
+  };
 
   function approve(datax) {
     $.ajax({
@@ -88,7 +187,7 @@
       }
     })
   }
-  
+
   function deleteOrgAcc(datax) {
     $.ajax({
       url: '/deleteOrgAcc',
@@ -97,79 +196,86 @@
       datatype: 'json',
       success: function(data) {
         loadUserAccounts(results);
-		searchAd();
+        searchAd();
       }
     })
   }
-  function searchAd(){results = new Array();
-	  $.ajax({
-		url: '/searchorg',
-		type: 'POST',
-		data: {name: $('#searchText').val()},
-		datatype: 'json',
-		success: function(data) {
-			results = results.concat(data);
-		}
-	  });
-	   $.ajax({
-		url: '/searchuser',
-		type: 'POST',
-		data: {name: $('#searchText').val()},
-		datatype: 'json',
-		success: function(data) {
-			results = results.concat(data);
-			loadUserAccounts(results);
-		}
-	  });}
+
+  function searchAd() {
+    results = new Array();
+    $.ajax({
+      url: '/searchorg',
+      type: 'POST',
+      data: {
+        name: $('#searchText').val()
+      },
+      datatype: 'json',
+      success: function(data) {
+        results = results.concat(data);
+      }
+    });
+    $.ajax({
+      url: '/searchuser',
+      type: 'POST',
+      data: {
+        name: $('#searchText').val()
+      },
+      datatype: 'json',
+      success: function(data) {
+        results = results.concat(data);
+        loadUserAccounts(results);
+      }
+    });
+  }
   $('#searchUserAccounts').on('click', function(e) {
-	  searchAd();
-	e.preventDefault();
-});
-  
+    searchAd();
+    e.preventDefault();
+  });
+
   function loadUserAccounts(info) {
     $('#userAccInfo').empty();
-	if(info.length!=0){
-		$("#userTable").show();
-		$("#userMessage").hide();
-		for (var i = 0; i < info.length; i++) {
-			if(info[i].role!="admin"){
-			  $('#userAccInfo').append('<tr><td>' + info[i].name + '</td><td>' + info[i].email +
-				'</td><td><button data-id="' + info[i].email +
-				'" class="denied btn btn-danger btn-xs"> <span class="glyphicon glyphicon-remove"></span></button></td></tr>'
-			  )
-			}
-		};
-	}else{
-		$("#userTable").hide();
-		$("#userMessage").show();
-	}
+    if (info.length != 0) {
+      $("#userTable").show();
+      $("#userMessage").hide();
+      for (var i = 0; i < info.length; i++) {
+        if (info[i].role != "admin") {
+          $('#userAccInfo').append('<tr><td>' + info[i].name + '</td><td>' + info[i].email +
+            '</td><td><button data-id="' + info[i].email +
+            '" class="denied btn btn-danger btn-xs"> <span class="glyphicon glyphicon-remove"></span></button></td></tr>'
+          )
+        }
+      };
+    } else {
+      $("#userTable").hide();
+      $("#userMessage").show();
+    }
 
-	$('.denied').on('click', function(e) {
-		var data = {
-			email: $(this).data('id'),
-		};
-		swal({
-			title: "Delete account",
-			text: "Do you wish to delete this account?",
-			type: "warning",
-			showCancelButton: true,
-			confirmButtonColor: "#DD6B55",
-			confirmButtonText: "Yes, delete it!",
-			cancelButtonText: "Wait, let me think.",
-			closeOnConfirm: true,
-			closeOnCancel: false
-		}, function(isConfirm) {
-			if (isConfirm) {
-				deleteOrgAcc(data, function(errw) {
-				 callback(errw);
-			});
-			  swal("Deleted", "This account has been deleted", "success");
-			} else {
-			  swal("Cancelled", "This account still exists", "success");
-			}
-		})
-	})
-};
+    $('.denied').on('click', function(e) {
+      var data = {
+        email: $(this).data('id'),
+      };
+      swal({
+        title: "Delete account",
+        text: "Do you wish to delete this account?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "Wait, let me think.",
+        closeOnConfirm: true,
+        closeOnCancel: false
+      }, function(isConfirm) {
+        if (isConfirm) {
+          deleteOrgAcc(data, function(errw) {
+            callback(errw);
+          });
+          swal("Deleted", "This account has been deleted", "success");
+        } else {
+          swal("Cancelled", "This account still exists", "success");
+        }
+      })
+    })
+  };
 
   function loadOrgAccounts() {
     $('#orgAccInfo').empty();
@@ -180,20 +286,20 @@
       type: 'GET',
       datatype: 'json',
       success: function(info) {
-		if(info.length!=0){
-			$("#orgTable").show();
-			$("#nopending").hide();
-			for (var i = 0; i < info.length; i++) {
-			  $('#orgAccInfo').append('<tr><td>' + info[i].name + '</td><td>' + info[i].email +
-				'</td><td><button data-id="' + info[i].email + '" class="success btn btn-success btn-xs"><span class="glyphicon glyphicon-ok"></span></button> &nbsp; <button data-id="' + info[i].email +
-				'" class="denied btn btn-danger btn-xs"> <span class="glyphicon glyphicon-remove"></span></button></td></tr>'
-			  )
-			};
-		}else{
-			$("#orgTable").hide();
-			$("#nopending").show();
-			
-		}
+        if (info.length != 0) {
+          $("#orgTable").show();
+          $("#nopending").hide();
+          for (var i = 0; i < info.length; i++) {
+            $('#orgAccInfo').append('<tr><td>' + info[i].name + '</td><td>' + info[i].email +
+              '</td><td><button data-id="' + info[i].email + '" class="success btn btn-success btn-xs"><span class="glyphicon glyphicon-ok"></span></button> &nbsp; <button data-id="' + info[i].email +
+              '" class="denied btn btn-danger btn-xs"> <span class="glyphicon glyphicon-remove"></span></button></td></tr>'
+            )
+          };
+        } else {
+          $("#orgTable").hide();
+          $("#nopending").show();
+
+        }
         $('.success').on('click', function(e) {
           var data = {
             isOrgApproved: "true",

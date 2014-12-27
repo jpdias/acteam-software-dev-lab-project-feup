@@ -73,7 +73,6 @@ function getHome(type, req, res) {
   var partial;
   if (type === "user") {
     dbop.getEventsDistrict(req.session.user.address.district, function(err, eventdata) {
-
       page = 'user/index';
       partial = {
         header: 'common/header',
@@ -81,18 +80,21 @@ function getHome(type, req, res) {
         scripts: 'common/scripts',
         suggestedSidebar: 'user/suggestedSidebar',
         sidebar: 'user/sidebarUser',
-
       };
       res.locals = req.session.user;
       res.locals.events = eventdata;
-      res.render(
-        page, {
-          partials: partial
-        }
-      );
+      dbop.getPromo(function(err, data) {
+        res.locals.suggested = data;
+        res.render(
+          page, {
+            partials: partial
+          }
+        );
+      });
     });
   } else if (type !== "") {
     page = type + '/index';
+
     partial = {
       header: 'common/header',
       footer: 'common/footer',
@@ -126,10 +128,13 @@ function getHome(type, req, res) {
 app.get('/', function(req, res) {
   if (req.session.user) {
     if (req.session.user.role == "user") {
+
       getHome("user", req, res);
+
     } else if (req.session.user.role == "organization") {
       dashboard(req, res);
-    } else if (req.session.user.role == "admin") {
+    } else
+    if (req.session.user.role == "admin") {
       getHome("admin", req, res);
     } else {
       getHome("", req, res);
@@ -145,17 +150,21 @@ app.get('/profileuser', function(req, res) {
     //console.log(res.partials);
     res.status(200);
     if (req.session.user.role === "user" && (typeof req.query.username === "undefined")) {
-      res.render(
-        'user/userprofile', {
-          partials: {
-            header: 'common/header',
-            footer: 'common/footer',
-            sidebar: 'user/sidebarUser',
-            suggestedSidebar: 'user/suggestedSidebar',
-            scripts: 'common/scripts'
+      dbop.getPromo(function(err, data) {
+        res.locals.suggested = data;
+        res.render(
+          'user/userprofile', {
+            partials: {
+              header: 'common/header',
+              footer: 'common/footer',
+              sidebar: 'user/sidebarUser',
+              suggestedSidebar: 'user/suggestedSidebar',
+              scripts: 'common/scripts'
+            }
           }
-        }
-      );
+        );
+      });
+
     } else if (req.session.user.role === "organization" && (typeof req.query.email !== "undefined")) {
       //console.log(req.query.email);
       dbop.getUser(req.query.email, function(err, user) {
@@ -183,19 +192,24 @@ app.get('/profileuser', function(req, res) {
 app.get('/userhistory', function(req, res) {
   if (req.session.user) {
     res.locals = req.session.user;
+
     res.status(200);
     if (req.session.user.role === "user") {
-      res.render(
-        'user/history', {
-          partials: {
-            header: 'common/header',
-            footer: 'common/footer',
-            sidebar: 'user/sidebarUser',
-            suggestedSidebar: 'user/suggestedSidebar',
-            scripts: 'common/scripts'
+      dbop.getPromo(function(err, data) {
+        res.locals.suggested = data;
+        res.render(
+          'user/history', {
+            partials: {
+              header: 'common/header',
+              footer: 'common/footer',
+              sidebar: 'user/sidebarUser',
+              suggestedSidebar: 'user/suggestedSidebar',
+              scripts: 'common/scripts'
+            }
           }
-        }
-      );
+        );
+      });
+
     } else
       common.errNotFound(req, res);
   } else
@@ -206,18 +220,23 @@ app.get('/configureuser', function(req, res) {
   if (req.session.user) {
     res.locals = req.session.user;
     res.status(200);
+
     if (req.session.user.role === "user") {
-      res.render(
-        'user/configureuser', {
-          partials: {
-            header: 'common/header',
-            footer: 'common/footer',
-            sidebar: 'user/sidebarUser',
-            suggestedSidebar: 'user/suggestedSidebar',
-            scripts: 'common/scripts'
+      dbop.getPromo(function(err, data) {
+        res.locals.suggested = data;
+        res.render(
+          'user/configureuser', {
+            partials: {
+              header: 'common/header',
+              footer: 'common/footer',
+              sidebar: 'user/sidebarUser',
+              suggestedSidebar: 'user/suggestedSidebar',
+              scripts: 'common/scripts'
+            }
           }
-        }
-      );
+        );
+      });
+
     } else
       common.errNotFound(req, res);
   } else
@@ -973,6 +992,7 @@ app.post("/promote", function(req, res) {
     if (req.session.user.role === "organization") {
       var data = {};
       data.date = req.body;
+      data.org_name = req.session.user.name;
       data.org_email = req.session.user.email;
       dbop.addPromo(data, function(err) {
         if (err)
@@ -983,6 +1003,38 @@ app.post("/promote", function(req, res) {
           res.send({
             "success": 'true'
           });
+        }
+      });
+    }
+  }
+});
+
+app.get("/promoreq", function(req, res) {
+  if (req.session.user) {
+    if (req.session.user.role === "admin") {
+      dbop.getPromoReq(function(err, data) {
+        if (err)
+          res.send({
+            "success": "false"
+          });
+        else {
+          res.send(data);
+        }
+      });
+    }
+  }
+});
+
+app.post("/setpromostatus", function(req, res) {
+  if (req.session.user) {
+    if (req.session.user.role === "admin") {
+      dbop.setpromo(req.body, function(err, data) {
+        if (err)
+          res.send({
+            "success": "false"
+          });
+        else {
+          res.send(data);
         }
       });
     }

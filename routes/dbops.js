@@ -543,3 +543,47 @@ function addToPromote(data, callback) {
 }
 
 module.exports.addPromo = addToPromote;
+
+function getPromotionalReq(callback) {
+  Promoted.find({
+    "isValidate": false
+  }, function(err, data) {
+    callback(err, data);
+  });
+}
+
+module.exports.getPromoReq = getPromotionalReq;
+
+
+function getPromotional(callback) {
+  Promoted.find({
+    "isValidate": true
+  }, function(err, data) {
+    callback(err, data);
+  });
+}
+
+module.exports.getPromo = getPromotional;
+
+
+function setPromotionalReq(datax, callback) {
+
+  Promoted.findOne({
+    "org_email": datax.email
+  }, function(err, data) {
+    if (datax.confirm) {
+      data.isValidate = true;
+      data.save(function(error, data) {
+        if (error) {
+          callback(true);
+        } else {
+          callback(false);
+        }
+      });
+    } else {
+      Promoted.remove(data).exec();
+    }
+  });
+}
+
+module.exports.setpromo = setPromotionalReq;

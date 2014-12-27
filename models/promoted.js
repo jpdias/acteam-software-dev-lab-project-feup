@@ -3,6 +3,7 @@ var mongoose = require('../app').mongodb,
   ObjectId = Schema.ObjectId;
 
 var Promoted = new Schema({
+  org_name: String,
   org_email: String,
   date: {
     start: {
