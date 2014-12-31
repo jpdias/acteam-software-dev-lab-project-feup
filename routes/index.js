@@ -150,7 +150,7 @@ app.get('/profileuser', function(req, res) {
     //console.log(res.partials);
     res.status(200);
     if (req.session.user.role === "user" && (typeof req.query.username === "undefined")) {
-      dbop.getPromo(function(err, data) {
+      dbop.getPromotedOrgs(function(err, data) {
         res.locals.suggested = data;
         res.render(
           'user/userprofile', {
@@ -580,7 +580,6 @@ app.post('/userevents', function(req, res) {
     }
   });
 });
-
 
 app.post('/resetpassword', function(req, res) {
   dbop.resetpassword(req.body.password, req.body.email, req.body.code, function(err) {

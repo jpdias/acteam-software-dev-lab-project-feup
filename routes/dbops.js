@@ -587,3 +587,27 @@ function setPromotionalReq(datax, callback) {
 }
 
 module.exports.setpromo = setPromotionalReq;
+
+/*function removeOutdatedPromotions(callback){
+  var currentTime = new Date();
+    Promoted.find({
+      "date.end": {
+        $gt: currentTime
+      }).remove(callback());
+}
+
+module.exports.removeOutdatedPromotions = removeOutdatedPromotions;*/
+
+function getPromoOrgs(callback) {
+  var currentTime = new Date();
+  Promoted.find().remove({"date.end": {$lt: currentTime}}, function(err){
+    Promoted.find({"isValidate" : true}, function(err, orgs) {
+      callback(err, orgs);
+      console.log(orgs);
+    });
+  });
+}
+
+
+
+module.exports.getPromotedOrgs = getPromoOrgs;
