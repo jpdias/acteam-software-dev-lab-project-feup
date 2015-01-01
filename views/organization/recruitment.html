@@ -1,14 +1,14 @@
 {{> header}}
 
 <div class="container">
-  <div class="col-sm-12 col-md-offset-1 col-md-12 main">
+  <div class="col-sm-12 col-sm-offset-2 col-md-offset-1 col-md-12 main">
     <div class="row">
       {{> sidebar}}
       <div class="col-md-6">
         <h3>Recruitment Management </h3>
       </div>
       {{#org.recruitment.status}}
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-4 col-sm-offset-1">
         <h3><button type="button" id="endRec" class="btn btn-block btn-primary">End recruitment</button></h3>
       </div>
       {{/org.recruitment.status}} {{^org.recruitment.status}}

@@ -4,11 +4,11 @@
   <div class="col-sm-12 col-md-offset-1 col-md-12 main">
     <div class="row">
       {{> sidebar}}
-      <div class="col-md-12">
+      <div class="col-md-12 col-sm-9 col-sm-offset-3">
         <h3>Promote Organization</h3>
         <hr>
       </div>
-      <form id="promo" class="form-horizontal">
+      <form id="promo" class="form-horizontal col-sm-offset-1">
         <div class="input-daterange" id="datepicker">
           <div class="col-md-6 form-group">
             <label for="inputEmail3" class="col-sm-4 control-label">Start Date</label>
@@ -23,7 +23,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-offset-4 col-md-6">
+        <div class="col-md-offset-4 col-md-6 col-sm-offset-5 col-sm-6">
           <div class="col-md-12 form-group">
             <div class="col-sm-12">
               <button id="submit" class="btn btn-primary btn-block">Send request</button>
@@ -38,22 +38,22 @@
 <script src="js/bootstrap-datepicker.js"></script>
 <script>
   /*$(document).ready(function(){
-    $.ajax({
-      url: '/promote',
-      type: 'POST',
-      success: function(data) {
+          $.ajax({
+            url: '/promote',
+            type: 'POST',
+            success: function(data) {
 
-      },
-      error: function(err) {
-        console.log(err);
-      }
+            },
+            error: function(err) {
+              console.log(err);
+            }
 
-    })
-  });*/
+          })
+        });*/
 
   $('#datepicker').datepicker({
-    orientation:'top',
-    todayBtn:'linked  ',
+    orientation: 'top',
+    todayBtn: 'linked  ',
     autoclose: 'true',
     format: 'dd-mm-yyyy',
     minViewMode: 'days'
@@ -63,7 +63,7 @@
     event.preventDefault();
     var date = {};
 
-    if($("#start").val() === "" || $("#end").val() === ""){
+    if ($("#start").val() === "" || $("#end").val() === "") {
       swal("Error!", "Both Start and End Date need to be filled!", "error");
       return;
     }
