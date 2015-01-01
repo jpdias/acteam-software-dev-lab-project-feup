@@ -359,7 +359,7 @@ app.get('/events', function(req, res) {
           res.locals.events = data;
           res.locals.org = req.session.user;
           res.render(
-            'organization/myevents', {
+            'organization/events', {
               partials: {
                 header: 'common/header',
                 footer: 'common/footer',
