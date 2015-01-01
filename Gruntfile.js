@@ -41,6 +41,7 @@ module.exports = function(grunt) {
       }
     },
   });
+
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-mocha-test');
