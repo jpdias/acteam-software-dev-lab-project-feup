@@ -290,12 +290,12 @@ function editOrgImages(images, orgName, callback) {
 
 module.exports.editOrgImages = editOrgImages;
 
-function recoveryPass(email, callback) {
+function recoveryPass(email, host, callback) {
   Organization.findOne({
     "email": email
   }, function(err, user) {
     if (!err && user)
-      common.email(email, "Acteam Network", "Hello, Recovery Password Link: http://localhost:3000/recoverypassword?code=" + sha1(user.name + user.password) + "&email=" + user.email + " Acteam Group");
+      common.email(email, "Acteam Network", "Hello, Recovery Password Link: http://" + host + "/recoverypassword?code=" + sha1(user.name + user.password) + "&email=" + user.email + " Acteam Group");
     else
       callback(err);
   });
@@ -303,7 +303,7 @@ function recoveryPass(email, callback) {
     "email": email
   }, function(err, user) {
     if (!err && user)
-      common.email(email, "Acteam Network", "Hello, Recovery Password Link: http://localhost:3000/recovery?code=" + sha1(user.name + user.password) + "&email=" + user.email + " Acteam Group");
+      common.email(email, "Acteam Network", "Hello, Recovery Password Link: http://" + host + "/recovery?code=" + sha1(user.name + user.password) + "&email=" + user.email + " Acteam Group");
     else
       callback(err);
   });

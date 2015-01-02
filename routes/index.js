@@ -69,6 +69,7 @@ app.get('/loggedIn', function(req, res) {
 });
 
 function getHome(type, req, res) {
+
   var page;
   var partial;
   if (type === "user") {
@@ -554,7 +555,7 @@ app.get('/recovery', function(req, res) {
 });
 
 app.post('/recovery', function(req, res) {
-  dbop.recoveryPassword(req.body.email, function(err) {
+  dbop.recoveryPassword(req.body.email, req.headers.host, function(err) {
     if (err) {
       return res.send({
         success: false,

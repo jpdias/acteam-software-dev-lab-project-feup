@@ -67,7 +67,7 @@ function confirmaccount(req, res) {
 }
 
 function register(req, res) {
-  console.log(req.body.role);
+  //  console.log(req.body.role);
   var hash, temp;
   if (req.body.role === "user") {
     hash = sha1(req.body.password);
@@ -94,7 +94,7 @@ function register(req, res) {
       }
     });
   }
-  common.email(req.body.email, "Acteam Network", "Hello, Confirmation Link: http://localhost:3000/confirmaccount?code=" + sha1(req.body.email + req.body.name) + "&email=" + req.body.email + " Acteam Group");
+  common.email(req.body.email, "Acteam Network", "Hello, Confirmation Link: http://" + req.headers.host + "/confirmaccount?code=" + sha1(req.body.email + req.body.name) + "&email=" + req.body.email + " Acteam Group");
 }
 passport.use(new LocalStrategy(
   function(username, password, done) {
