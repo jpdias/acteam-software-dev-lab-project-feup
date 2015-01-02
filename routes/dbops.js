@@ -103,16 +103,40 @@ function getUsrEvents(userEmail, callback) {
   var currentTime = new Date();
   Event.find({
     "people.email": userEmail
-      /*,
-          "date.end": {
-            $gt: currentTime
-          }*/
   }, function(err, events) {
     callback(err, events);
   });
 }
 
 module.exports.getUserEvents = getUsrEvents;
+
+function getEventsApplications(eventname, callback) {
+  Event.findOne({
+    "name": eventname
+  }, function(err, events) {
+    callback(err, events.people);
+  });
+}
+
+module.exports.getEventsApp = getEventsApplications;
+
+function setEvApplyStatus(eventname, email, check, callback) {
+  Event.findOne({
+    "name": eventname
+  }, function(err, events) {
+    for (var i = 0, max = events.people.length; i < max; i++) {
+      if (events.people[i].email === email) {
+        status = check;
+        break;
+      }
+    }
+    events.save(function(err) {
+      callback(err, events);
+    });
+  });
+}
+
+module.exports.setEvApply = setEvApplyStatus;
 
 function getOrgEventsByDistrict(district, callback) {
   var currentTime = new Date();
@@ -590,8 +614,14 @@ module.exports.setpromo = setPromotionalReq;
 
 function getPromoOrgs(callback) {
   var currentTime = new Date();
-  Promoted.find().remove({"date.end": {$lt: currentTime}}, function(err){
-    Promoted.find({"isValidate" : true}, function(err, orgs) {
+  Promoted.find().remove({
+    "date.end": {
+      $lt: currentTime
+    }
+  }, function(err) {
+    Promoted.find({
+      "isValidate": true
+    }, function(err, orgs) {
       callback(err, orgs);
     });
   });
@@ -599,9 +629,12 @@ function getPromoOrgs(callback) {
 
 module.exports.getPromotedOrgs = getPromoOrgs;
 
-function ifOrgIsPromoted(email, callback){
-  Promoted.find({"org_email" : email, "isValidate" : true}, function(err, orgs) {
-    if(orgs.length == 0)
+function ifOrgIsPromoted(email, callback) {
+  Promoted.find({
+    "org_email": email,
+    "isValidate": true
+  }, function(err, orgs) {
+    if (orgs.length === 0)
       callback(err, false);
     else
       callback(err, true);

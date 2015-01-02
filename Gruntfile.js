@@ -28,7 +28,8 @@ module.exports = function(grunt) {
         command: [
           'git checkout deploy',
           'git merge master',
-          'git push heroku deploy',
+          'git push origin deploy',
+          'git push heroku',
           'git checkout master'
         ].join('&&')
       }
@@ -41,7 +42,6 @@ module.exports = function(grunt) {
       }
     },
   });
-
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-mocha-test');
