@@ -313,8 +313,6 @@ function recoveryPass(email, host, callback) {
 module.exports.recoveryPassword = recoveryPass;
 
 function resetpass(password, email, code, callback) {
-  console.log("hey" + email + password + code);
-
   Organization.findOne({
     "email": email
   }, function(err, user) {
@@ -366,8 +364,6 @@ function deleteaccount(user, callback) {
         callback(true);
     });
   }
-
-
 }
 module.exports.deleteacc = deleteaccount;
 
