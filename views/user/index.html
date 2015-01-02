@@ -5,15 +5,16 @@
     {{> sidebar}}
 
     <div class="col-sm-10 col-sm-offset-1 col-md-offset-1 col-md-10  main">
-      <ul class="timeline">
-        {{#events}}
+      {{#events}}
+      <ul class="timeline" style="padding-top: 0px; margin-top: -5px;">
+        {{/events}} {{#events}}
         <li>
-          <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i>
+          <div class="timeline-badge success"><i class="glyphicon glyphicon-check"></i>
           </div>
           <div class="timeline-panel event">
             <div class="timeline-heading">
               <h4 class="timeline-title eventname" data-id="{{org_email}}">{{name}}</h4>
-              <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i><time class="datestamp" datetime="{{date.end}}"><time></small>
+              <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> <time class="datestamp" datetime="{{date.end}}"><time></small>
               </p>
             </div>
             <div class="timeline-body">
@@ -22,14 +23,23 @@
             </div>
           </div>
         </li>
-        {{/events}}
+        {{/events}} {{#events}}
       </ul>
+      {{/events}} {{^events}}
+      <div class="alert alert-info text-center">
+        You <strong>do not</strong> have any events occurring in your area.
+      </div>
+      {{/events}}
     </div>
     {{> suggestedSidebar}}
   </div>
 </div>
 {{> scripts}}
 <script>
+  $.each($('.timeline li'), function() {
+    if ($(this).index() % 2 === 0)
+      $(this).addClass("timeline-inverted");
+  });
   $('.apply').click(function() {
     if ($(this)) {
       var tempname = $(this).closest('.event').find('.eventname').text();
