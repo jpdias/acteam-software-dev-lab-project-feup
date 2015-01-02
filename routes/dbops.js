@@ -57,7 +57,6 @@ function addNewMemberToOrg(member, orgName, callback) {
     "name": orgName
   }, function(err, org) {
     if (org) {
-      console.log("\n-------------------THIS ISN'T WORKING------------------------\n");
       if (!org.members.hasOwnProperty(member.email)) {
         org.members.push(member);
         org.save(function(err2) {
@@ -124,13 +123,17 @@ function setEvApplyStatus(eventname, email, check, callback) {
   Event.findOne({
     "name": eventname
   }, function(err, events) {
-    for (var i = 0, max = events.people.length; i < max; i++) {
+    console.log(check);
+    for (var i = 0; i < events.people.length; i++) {
       if (events.people[i].email === email) {
-        status = check;
+        events.people[i].status = check;
         break;
       }
     }
+
+    console.log(events);
     events.save(function(err) {
+      console.log(err);
       callback(err, events);
     });
   });
@@ -190,7 +193,7 @@ function addEventToOrg(event, orgName, callback) {
   }, function(err, org) {
     var newEvent = new Event(event);
 
-    if (org.length == 0) {
+    if (org.length === 0) {
       callback("Organization does not exist", event);
       return;
     }
@@ -199,7 +202,7 @@ function addEventToOrg(event, orgName, callback) {
       "name": newEvent.name
     }, function(err, events) {
 
-      if (events.length != 0) {
+      if (events.length !== 0) {
         callback("Event with same name", newEvent);
         return;
       }
@@ -643,12 +646,12 @@ function ifOrgIsPromoted(email, callback) {
   Promoted.find({
     "org_email": email,
   }, function(err, orgs) {
-    console.log(orgs);
+    //  console.log(orgs);
     if (orgs.length === 0) {
-      console.log("FALSE, IS NOT PROMOTED");
+      //  console.log("FALSE, IS NOT PROMOTED");
       callback(err, false);
     } else {
-      console.log("TRUE, IS PROMOTED");
+      //  console.log("TRUE, IS PROMOTED");
       callback(err, true);
     }
   });

@@ -1065,3 +1065,21 @@ app.post("/setpromostatus", function(req, res) {
     }
   }
 });
+
+app.post('/eventapplystatus', function(req, res) {
+  if (req.session.user) {
+    if (req.session.user.role === "organization") {
+      //  console.log(req.body);
+      dbop.setEvApply(req.body.name, req.body.email, req.body.check, function(err, data) {
+        if (err)
+          res.send({
+            "success": "false"
+          });
+        else
+          res.send({
+            "success": "true"
+          });
+      });
+    }
+  }
+});

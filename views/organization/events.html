@@ -54,9 +54,7 @@
                           </td>
                           <td>{{email}}</td>
                           <td>
-                            <button data-button="{{email}}" type="button" class="deni btn btn-sm btn-success"><span class="glyphicon glyphicon-remove"></span>
-                            </button>
-                            <button data-button="{{email}}" type="button" class="appr btn btn-sm btn-danger"><span class="glyphicon glyphicon-ok"></span>
+                            <button data-id="{{name}}" data-button="{{email}}" type="button" class="appr btn btn-sm btn-block btn-success">Approve <span class="glyphicon glyphicon-ok"></span>
                             </button>
                           </td>
                         </tr>
@@ -165,22 +163,24 @@
   });
 
   $('.appr').on('click', function() {
-    acceptDeny(true, $(this).attr('data-button'));
+    acceptDeny($(this).attr('data-id'), true, $(this).attr('data-button'));
   });
   $('.deni').on('click', function() {
-    acceptDeny(false, $(this).attr('data-button'));
+    acceptDeny($(this).attr('data-id'), false, $(this).attr('data-button'));
   });
 
-  function acceptDeny(status, mail) {
+  function acceptDeny(eventname, status, mail) {
     var dados;
-    if (true) {
+    if (status) {
       dados = {
-        accept: true,
+        name: eventname,
+        check: true,
         email: mail
       };
     } else {
       dados = {
-        accept: false,
+        name: eventname,
+        check: false,
         email: mail
       };
     }

@@ -18,14 +18,15 @@
 <script>
   $(function() {
     $.post('/userevents', {
-      userEmail: '{{email}}s'
+      userEmail: '{{email}}'
     }, function(result) {
       console.log(result);
       if (result.length == 0) {
         $('div.alert-info').css('display', '');
       } else {
         for (var i = 0; i < result.length; i++) {
-          $('#eventsPanel').append('<div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title">' + result[i].name + '</h3></div><div class="panel-body">' + result[i].description + '</div></div>');
+          $('#eventsPanel').append('<div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title">' + result[i].name + '</h3></div><div class="panel-body"><p>' + result[i].description + '</p><p>' + result[i].address.address +
+            " | " + result[i].address.municipality + " | " + result[i].address.district + '</p></div></div>');
         }
       }
     }).fail(function() {
