@@ -39,6 +39,38 @@
                       <h5>Applications</h5>
                     </button>
                   </div>
+                  <div class="details col-md-12">
+                    <table class="table table-hover" style="display:none">
+                      <thead>
+                        <tr>
+                          <th>Details</th>
+                          <th>Email</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>{{#people}} {{^status}}
+                        <tr>
+                          <td> <a href="/profileuser?email={{email}}" type="button" class="text-left btn btn-sm btn-primary">Open Profile</a>
+                          </td>
+                          <td>{{email}}</td>
+                          <td>
+                            <button data-button="{{email}}" type="button" class="deni btn btn-sm btn-success"><span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                            <button data-button="{{email}}" type="button" class="appr btn btn-sm btn-danger"><span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                          </td>
+                        </tr>
+                        {{/status}} {{#status}}
+                        <tr>
+                          <td> <a href="/profileuser?email={{email}}" type="button" class="text-left btn btn-sm btn-primary">Open Profile</a>
+                          </td>
+                          <td>{{email}}</td>
+                          <td>Approved</td>
+                        </tr>
+                        {{/status}}{{/people}}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
               {{/events}}
@@ -127,5 +159,59 @@
     var temp = new Date($(this).attr('datetime'));
     $(this).text(temp.getDay() + "/" + temp.getMonth() + "/" + temp.getFullYear());
   });
+
+  $('.appliances').on('click', function() {
+    $(this).parent().next().children().show();
+  });
+
+  $('.appr').on('click', function() {
+    acceptDeny(true, $(this).attr('data-button'));
+  });
+  $('.deni').on('click', function() {
+    acceptDeny(false, $(this).attr('data-button'));
+  });
+
+  function acceptDeny(status, mail) {
+    var dados;
+    if (true) {
+      dados = {
+        accept: true,
+        email: mail
+      };
+    } else {
+      dados = {
+        accept: false,
+        email: mail
+      };
+    }
+
+    $.ajax({
+      url: '/eventapplystatus',
+      type: 'POST',
+      data: dados,
+      success: function(data) {
+        if (data.success) {
+          swal({
+              title: "Done!",
+              text: "Action completed!",
+              type: "success",
+              confirmButtonColor: "#AEDEF4",
+              confirmButtonText: "Ok!",
+              closeOnConfirm: false
+            },
+            function() {
+              location.reload();
+            });
+
+        } else
+          swal("Error!", "Something has gone wrong.", "error");
+      },
+      error: function(xhr, desc, err) {
+        console.log(xhr);
+        console.log("Desc: " + desc + "\nErr:" + err);
+      }
+
+    })
+  }
 </script>
 {{> footer}}
