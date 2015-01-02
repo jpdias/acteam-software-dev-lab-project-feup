@@ -4,9 +4,12 @@
   <div class="col-sm-12 col-md-offset-1 col-md-12 main">
     <div class="row">
       {{> sidebar}}
-      <div class="col-md-12 col-sm-9 col-sm-offset-3">
+      <div class="col-md-12 col-sm-9 col-sm-offset-3" id="header-text">
         <h3>Promote Organization</h3>
         <hr>
+      </div>
+      <div class="alert alert-info" style="text-align:center;display:none;">
+        This organization <strong>is already</strong> being promoted.
       </div>
       <form id="promo" class="form-horizontal col-sm-offset-1">
         <div class="input-daterange" id="datepicker">
@@ -37,19 +40,29 @@
 {{> scripts}}
 <script src="js/bootstrap-datepicker.js"></script>
 <script>
-  /*$(document).ready(function(){
-          $.ajax({
-            url: '/promote',
-            type: 'POST',
-            success: function(data) {
+  $(document).ready(function() {
+    $.ajax({
+      url: '/ispromoted',
+      type: 'GET',
+      success: function(data) {
+        if (data.success === "true") {
+          console.log("THIS ORG IS ALREADY PROMOTED!");
+          $('div.alert-info').css('display', '');
+          $('#promo').css('display', 'none');
+          $('#header-text').css('display', 'none');
+        } else {
+          console.log("THIS ORG IS NOT PROMOTED!");
+          $('div.alert-info').css('display', 'none');
+          $('#promo').css('display', '');
+          $('#header-text').css('display', '');
+        }
+      },
+      error: function(err) {
+        console.log(err);
+      }
 
-            },
-            error: function(err) {
-              console.log(err);
-            }
-
-          })
-        });*/
+    })
+  });
 
   $('#datepicker').datepicker({
     orientation: 'top',
@@ -83,11 +96,10 @@
               confirmButtonColor: "#AEDEF4",
               confirmButtonText: "Ok!",
               closeOnConfirm: true
+            },
+            function() {
+              location.reload();
             }
-            /*,
-                        function() {
-                          location.reload();
-                        }*/
           );
         } else
           swal("Error!", "Something has gone wrong.", "error");

@@ -1008,6 +1008,32 @@ app.post("/promote", function(req, res) {
   }
 });
 
+app.get("/ispromoted", function(req, res) {
+  if (req.session.user) {
+    if (req.session.user.role === "organization") {
+      dbop.ifOrganizationIsPromoted(req.session.user.email, function(err, isPromoted) {
+        if (err) {
+          res.send({
+            "success": "false"
+          });
+        } else {
+          if (isPromoted) {
+            console.log("True, Is Promoted");
+            res.send({
+              "success": "true"
+            });
+          } else {
+            console.log("False, Is Not Promoted");
+            res.send({
+              "success": "false"
+            });
+          }
+        }
+      });
+    }
+  }
+});
+
 app.get("/promoreq", function(req, res) {
   if (req.session.user) {
     if (req.session.user.role === "admin") {

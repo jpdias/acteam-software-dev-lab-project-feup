@@ -189,16 +189,28 @@ function addEventToOrg(event, orgName, callback) {
     "email": orgName
   }, function(err, org) {
     var newEvent = new Event(event);
-    //console.log(newEvent);
-    newEvent.save(function(err) {
-      if (err) {
-        console.log("FAIL");
-        console.log(err);
-        callback(err, event);
-      } else {
-        console.log("Success");
-        callback(err, event);
+
+    if (org.length == 0) {
+      callback("Organization does not exist", event);
+      return;
+    }
+
+    Event.find({
+      "name": newEvent.name
+    }, function(err, events) {
+
+      if (events.length != 0) {
+        callback("Event with same name", newEvent);
+        return;
       }
+
+      newEvent.save(function(err) {
+        if (err) {
+          callback(err, event);
+        } else {
+          callback(err, event);
+        }
+      });
     });
   });
 }
@@ -432,8 +444,6 @@ function approveOrganizationAccount(data, callback) {
 
 module.exports.approveOrgAcc = approveOrganizationAccount;
 
-
-
 function deleteOrganizationAccount(data, callback) {
   Organization.findOne({
     "email": data.email,
@@ -632,12 +642,15 @@ module.exports.getPromotedOrgs = getPromoOrgs;
 function ifOrgIsPromoted(email, callback) {
   Promoted.find({
     "org_email": email,
-    "isValidate": true
   }, function(err, orgs) {
-    if (orgs.length === 0)
+    console.log(orgs);
+    if (orgs.length === 0) {
+      console.log("FALSE, IS NOT PROMOTED");
       callback(err, false);
-    else
+    } else {
+      console.log("TRUE, IS PROMOTED");
       callback(err, true);
+    }
   });
 }
 
