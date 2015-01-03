@@ -824,18 +824,21 @@ app.post('/deleteOrgAcc', function(req, res) {
 });
 
 app.get('/recruitment', function(req, res) {
-  if (req.session.user.role === "organization") {
-    res.locals.org = req.session.user;
-    res.render('organization/recruitment', {
-      partials: {
-        header: 'common/header',
-        sidebar: 'organization/sidebar',
-        footer: 'common/footer',
-        scripts: 'common/scripts'
-      }
-    });
+  if (req.session.user) {
+    if (req.session.user.role === "organization") {
+      res.locals.org = req.session.user;
+      res.render('organization/recruitment', {
+        partials: {
+          header: 'common/header',
+          sidebar: 'organization/sidebar',
+          footer: 'common/footer',
+          scripts: 'common/scripts'
+        }
+      });
+    } else
+      common.errPermission(req, res);
   } else
-    common.errNotFound(req, res);
+    common.errPermission(req, res);
 });
 
 app.post('/recruitmentstage', function(req, res) {
