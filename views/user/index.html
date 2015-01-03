@@ -36,10 +36,6 @@
 </div>
 {{> scripts}}
 <script>
-  $.each($('.timeline li'), function() {
-    if ($(this).index() % 2 === 0)
-      $(this).addClass("timeline-inverted");
-  });
   $('.apply').click(function() {
     if ($(this)) {
       var tempname = $(this).closest('.event').find('.eventname').text();
@@ -82,9 +78,34 @@
         });
     }
   });
+
+  var ul = $(".timeline");
+  var arr = $.makeArray(ul.children("li"));
+  //new Date(year, month, day, hours, minutes, seconds, milliseconds)
+  arr.sort(function(a, b) {
+    var textA = $(a).find(".datestamp");
+    var textB = $(b).find(".datestamp");
+    //  console.log(textA);
+    var date1 = new Date($(textA).attr('datetime'));
+    var date2 = new Date($(textB).attr('datetime'));
+    //  console.log(date1);
+    if (date1 < date2) return -1;
+    if (date1 > date2) return 1;
+    return 0;
+  });
+  ul.empty();
+  $.each(arr, function() {
+    ul.append(this);
+  });
+
   $('.datestamp').each(function() {
     var temp = new Date($(this).attr('datetime'));
-    $(this).text(temp.getDay() + "/" + temp.getMonth() + "/" + temp.getFullYear());
+
+    $(this).text(temp.getDate() + '/' + (temp.getMonth() + 1) + '/' + temp.getFullYear());
+  });
+  $.each($('.timeline li'), function() {
+    if ($(this).index() % 2 === 0)
+      $(this).addClass("timeline-inverted");
   });
 </script>
 {{> footer}}
