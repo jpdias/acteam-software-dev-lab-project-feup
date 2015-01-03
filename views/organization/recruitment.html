@@ -28,7 +28,7 @@
             <div class="col-md-8">{{letter}}</div>
             <div class="col-md-4">
               <button data-button="{{email}}" type="button" class="accept btn btn-sm btn-block btn-success">Accept</button>
-              <button data-button="{{email}}" type="button" class="recuse btn btn-sm btn-block btn-danger">Recuse</button>
+              <button data-button="{{email}}" type="button" class="recuse btn btn-sm btn-block btn-danger">Refuse</button>
             </div>
           </div>
         </div>
@@ -149,7 +149,7 @@
             },
             success: function(data) {
               if (data.action === "end" || data.action === "started") {
-                swal("Done!", "You started a recruitment.", "success");
+                swal("Done!", "You stopped the recruitment.", "success");
                 location.reload();
 
               } else
