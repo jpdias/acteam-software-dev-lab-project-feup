@@ -110,7 +110,7 @@
               action: "start"
             },
             success: function(data) {
-              if (data.action === "started") {
+              if (data.action === "end" || data.action === "started") {
                 swal("Done!", "You started a recruitment.", "success");
                 location.reload();
               } else
@@ -146,8 +146,9 @@
               action: "end"
             },
             success: function(data) {
-              if (data.action === "end") {
+              if (data.action === "end" || data.action === "started") {
                 swal("Done!", "You started a recruitment.", "success");
+                location.reload();
 
               } else
                 swal("Error!", "Something has gone wrong.", "error");

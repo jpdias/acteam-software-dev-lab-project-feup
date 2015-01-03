@@ -864,7 +864,7 @@ app.post('/recruitmentstage', function(req, res) {
           req.session.user.recruitment.status = !req.session.user.recruitment.status;
           req.session.save(function(err) {});
           res.send({
-            "action": 'started'
+            "action": 'end'
           });
         }
       });
