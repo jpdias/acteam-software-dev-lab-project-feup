@@ -9,9 +9,13 @@
         <!-- Modal -->
         <div class="col-md-12">
           <h3>Want to create a new event?
+
               <button class="btn btn-primary btn-md" data-toggle="modal" data-target="#newEventModal">
+
                New Event
+
               </button>
+
           </h3>
         </div>
         <div class="col-md-12">
@@ -26,8 +30,10 @@
                   </div>
                   <div class="col-md-4 text-center">
                     <h5>Start Date:<br>
+
                        <time class="datestamp" datetime="{{date.start}}"><time></h5>
                     <h5>End Date:<br>
+
                        <time class="datestamp" datetime="{{date.end}}"><time></h5>
                   </div>
                   <div class="col-md-8">
@@ -155,7 +161,7 @@
 <script>
   $('.datestamp').each(function() {
     var temp = new Date($(this).attr('datetime'));
-    $(this).text(temp.getDay() + "/" + temp.getMonth() + "/" + temp.getFullYear());
+    $(this).text(temp.getDate() + '/' + (temp.getMonth() + 1) + '/' + temp.getFullYear());
   });
 
   $('.appliances').on('click', function() {

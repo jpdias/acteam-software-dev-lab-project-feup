@@ -219,7 +219,7 @@
 <script>
   $('.datestamp').each(function() {
     var temp = new Date($(this).attr('datetime'));
-    $(this).text(temp.getDay() + "/" + temp.getMonth() + "/" + temp.getFullYear());
+    $(this).text(temp.getDate() + '/' + (temp.getMonth() + 1) + '/' + temp.getFullYear());
   });
   $(document).ready(function() {
     $('#autoplay').lightSlider({
