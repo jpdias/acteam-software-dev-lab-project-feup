@@ -854,7 +854,7 @@ app.post('/recruitmentstage', function(req, res) {
           });
         }
       });
-    } else if (req.body.action === "end") {
+    } else {
       dbop.changeRecruit(req.session.user, function(err, result) {
         if (err)
           res.send({
@@ -864,15 +864,10 @@ app.post('/recruitmentstage', function(req, res) {
           req.session.user.recruitment.status = !req.session.user.recruitment.status;
           req.session.save(function(err) {});
           res.send({
-            "action": 'started'
+            "action": 'end'
           });
         }
       });
-      res.send({
-        'action': 'end'
-      });
-    } else {
-      res.send();
     }
   } else
     common.errPermission(req, res);

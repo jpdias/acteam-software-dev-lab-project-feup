@@ -27,8 +27,12 @@
           <div class="panel-body">
             <div class="col-md-8">{{letter}}</div>
             <div class="col-md-4">
-              <button id="accept" data-button="{{email}}" type="button" class="btn btn-sm btn-block btn-success">Accept</button>
-              <button id="recuse" data-button="{{email}}" type="button" class="btn btn-sm btn-block btn-danger">Refuse</button>
+              <<<<<<< HEAD <button id="accept" data-button="{{email}}" type="button" class="btn btn-sm btn-block btn-success">Accept</button>
+                <button id="recuse" data-button="{{email}}" type="button" class="btn btn-sm btn-block btn-danger">Refuse</button>
+                =======
+                <button data-button="{{email}}" type="button" class="accept btn btn-sm btn-block btn-success">Accept</button>
+                <button data-button="{{email}}" type="button" class="recuse btn btn-sm btn-block btn-danger">Recuse</button>
+                >>>>>>> 87368707a211327e754011a32b4bfd819e65fee1
             </div>
           </div>
         </div>
@@ -81,10 +85,10 @@
 
     })
   }
-  $("#accept").on("click", function() {
+  $(".accept").on("click", function() {
     recruitAct(true, $(this).attr('data-button'));
   });
-  $("#recuse").on("click", function() {
+  $(".recuse").on("click", function() {
     recruitAct(false, $(this).attr('data-button'));
   });
 
@@ -110,7 +114,7 @@
               action: "start"
             },
             success: function(data) {
-              if (data.action === "started") {
+              if (data.action === "end" || data.action === "started") {
                 swal("Done!", "You started a recruitment.", "success");
                 location.reload();
               } else
@@ -126,39 +130,42 @@
       });
   });
   $("#endRec").on("click", function() {
-    swal({
-        title: "Close recruitment",
-        text: "You will end the recruitment stage!",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Confirm",
-        cancelButtonText: "Cancel",
-        closeOnConfirm: false,
-        closeOnCancel: false
-      },
-      function(isConfirm) {
-        if (isConfirm) {
-          $.ajax({
-            url: '/recruitmentstage',
-            type: 'POST',
-            data: {
-              action: "end"
-            },
-            success: function(data) {
-              if (data.action === "end") {
-                swal("Done!", "You ended the recruitment stage.", "success");
+        swal({
+            title: "Close recruitment",
+            text: "You will end the recruitment stage!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Confirm",
+            cancelButtonText: "Cancel",
+            closeOnConfirm: false,
+            closeOnCancel: true
+          },
+          function(isConfirm) {
+            if (isConfirm) {
+              $.ajax({
+                  url: '/recruitmentstage',
+                  type: 'POST',
+                  data: {
+                    action: "end"
+                  },
+                  success: function(data) { << << << < HEAD
+                    if (data.action === "end") {
+                      swal("Done!", "You ended the recruitment stage.", "success"); === === =
+                      if (data.action === "end" || data.action === "started") {
+                        swal("Done!", "You started a recruitment.", "success");
+                        location.reload(); >>> >>> > 87368707 a211327e754011a32b4bfd819e65fee1
 
-              } else
-                swal("Error!", "Something has gone wrong.", "error");
-            },
-            error: function(xhr, desc, err) {
-              console.log(xhr);
-              console.log("Desc: " + desc + "\nErr:" + err);
-            }
-          })
-        }
-      });
-  });
+                      } else
+                        swal("Error!", "Something has gone wrong.", "error");
+                    },
+                    error: function(xhr, desc, err) {
+                      console.log(xhr);
+                      console.log("Desc: " + desc + "\nErr:" + err);
+                    }
+                  })
+              }
+            });
+        });
 </script>
 {{> footer}}
