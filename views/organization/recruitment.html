@@ -27,8 +27,8 @@
           <div class="panel-body">
             <div class="col-md-8">{{letter}}</div>
             <div class="col-md-4">
-              <button id="accept" data-button="{{email}}" type="button" class="btn btn-sm btn-block btn-success">Accept</button>
-              <button id="recuse" data-button="{{email}}" type="button" class="btn btn-sm btn-block btn-danger">Recuse</button>
+              <button data-button="{{email}}" type="button" class="accept btn btn-sm btn-block btn-success">Accept</button>
+              <button data-button="{{email}}" type="button" class="recuse btn btn-sm btn-block btn-danger">Recuse</button>
             </div>
           </div>
         </div>
@@ -81,10 +81,10 @@
 
     })
   }
-  $("#accept").on("click", function() {
+  $(".accept").on("click", function() {
     recruitAct(true, $(this).attr('data-button'));
   });
-  $("#recuse").on("click", function() {
+  $(".recuse").on("click", function() {
     recruitAct(false, $(this).attr('data-button'));
   });
 
