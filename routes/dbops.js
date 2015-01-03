@@ -74,25 +74,14 @@ module.exports.addNewMemberToOrganization = addNewMemberToOrg;
 
 function getOrgEvents(orgEmail, callback) {
   var currentTime = new Date();
-  if (orgEmail === "") {
-    Event.find({
-      "people.email": "jpdias@live.com",
-      "date.end": {
-        $gt: currentTime
-      }
-    }, function(err, events) {
-      callback(err, events);
-    });
-  } else {
-    Event.find({
-      "org_email": orgEmail,
-      "date.end": {
-        $gt: currentTime
-      }
-    }, function(err, events) {
-      callback(err, events);
-    });
-  }
+  Event.find({
+    "org_email": orgEmail,
+    "date.end": {
+      $gt: currentTime
+    }
+  }, function(err, events) {
+    callback(err, events);
+  });
 }
 
 
