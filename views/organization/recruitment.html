@@ -28,7 +28,7 @@
             <div class="col-md-8">{{letter}}</div>
             <div class="col-md-4">
               <button id="accept" data-button="{{email}}" type="button" class="btn btn-sm btn-block btn-success">Accept</button>
-              <button id="recuse" data-button="{{email}}" type="button" class="btn btn-sm btn-block btn-danger">Recuse</button>
+              <button id="recuse" data-button="{{email}}" type="button" class="btn btn-sm btn-block btn-danger">Refuse</button>
             </div>
           </div>
         </div>
@@ -147,7 +147,7 @@
             },
             success: function(data) {
               if (data.action === "end") {
-                swal("Done!", "You started a recruitment.", "success");
+                swal("Done!", "You ended the recruitment stage.", "success");
 
               } else
                 swal("Error!", "Something has gone wrong.", "error");
