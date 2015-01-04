@@ -36,47 +36,49 @@
 </div>
 {{> scripts}}
 <script>
-  $('.apply').click(function() {
-    if ($(this)) {
-      var tempname = $(this).closest('.event').find('.eventname').text();
-      var orgmail = $(this).closest('.event').find('.eventname').data("id");
-      console.log(tempname)
-      swal({
-          title: "Confirmation",
-          text: "You will apply to this event.",
-          type: "info",
-          showCancelButton: true,
-          confirmButtonColor: "#2ecc71",
-          confirmButtonText: "Yes, apply!",
-          closeOnConfirm: false
-        },
-        function() {
+  $(document).ready(function() {
+    $('.apply').click(function() {
+      if ($(this)) {
+        var tempname = $(this).closest('.event').find('.eventname').text();
+        var orgmail = $(this).closest('.event').find('.eventname').data("id");
+        console.log(tempname)
+        swal({
+            title: "Confirmation",
+            text: "You will apply to this event.",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#2ecc71",
+            confirmButtonText: "Yes, apply!",
+            closeOnConfirm: false
+          },
+          function() {
 
-          var datasend = {
-            name: tempname,
-            org_email: orgmail,
-            user_email: user
-          };
-          console.log(datasend);
-          $.ajax({
-            url: '/eventapply',
-            type: 'POST',
-            data: datasend,
-            success: function(data) {
-              if (data.success)
-                swal("Done!", "You are now part of this event.", "success");
-              else
-                swal("Ups!", "You have already applied to this event.", "error");
-            },
-            error: function(xhr, desc, err) {
-              console.log(xhr);
-              console.log("Desc: " + desc + "\nErr:" + err);
-            }
+            var datasend = {
+              name: tempname,
+              org_email: orgmail,
+              user_email: user
+            };
+            console.log(datasend);
+            $.ajax({
+              url: '/eventapply',
+              type: 'POST',
+              data: datasend,
+              success: function(data) {
+                if (data.success)
+                  swal("Done!", "You are now part of this event.", "success");
+                else
+                  swal("Ups!", "You have already applied to this event.", "error");
+              },
+              error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Desc: " + desc + "\nErr:" + err);
+              }
 
-          })
+            })
 
-        });
-    }
+          });
+      }
+    });
   });
 
   var ul = $(".timeline");
